@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<SolverDefinition 
+<SolverDefinition
 	xmlns="www.iric.net/SolverDefinition/1.0"
-	name="Nays2DH" 
-	caption="Nays2DH iRIC.4x 1.0 64bit" 
+	name="Nays2DH"
+	caption="Nays2DH iRIC.4x 1.0 64bit"
 	version="1.6.008"
 	copyright="Yasuyuki SHIMIZU and Hiroshi TAKEBAYASHI"
 	release="2022.7.13"
@@ -455,6 +455,20 @@
 						<Definition conditionType="constant" valueType="real" option="false" default="1"/>
 					</Item>
 					<Item name="j_vege" caption="Use the data of vegetation height in the cells ?">
+						<Definition conditionType="constant" valueType="integer" option="true" default="0">
+							<Enumerations>
+								<Enumeration value="0" caption="No"/>
+								<Enumeration value="1" caption="Yes"/>
+							</Enumerations>
+						</Definition>
+					</Item>
+				</Items>
+			</Content>
+		</Tab>
+		<Tab name="soft_vegetation" caption="SoftVegetation">
+			<Content>
+				<Items>
+					<Item name="j_soft_vege" caption="Use the data of soft vegetation height in the cells ?">
 						<Definition conditionType="constant" valueType="integer" option="true" default="0">
 							<Enumerations>
 								<Enumeration value="0" caption="No"/>
@@ -1015,7 +1029,7 @@
 				</Items>
 			</Content>
 		</Tab>
-		
+
 		<Tab name="output_variables" caption="+Output variables">
 			<GroupBox caption="Flow">
 				<Item name="jop_vort" caption="Vorticity">
@@ -1159,7 +1173,7 @@
 				</Item>
 			</GroupBox>
 		</Tab>
-		
+
 	</CalculationCondition>
 	<GridRelatedCondition>
 			<!-- RMCD changed Bed Elevation to Elevation for consistency in MD_SWMS -->
@@ -1190,6 +1204,14 @@
 			</Definition>
 		</Item>
 		<Item name="vege_height" caption="Height of Vegetation (m)">
+			<Definition position="cell" valueType="real" default="0">
+			</Definition>
+		</Item>
+		<Item name="soft_vege_N" caption="Number of Vegetation (N)">
+			<Definition position="cell" valueType="real" default="0">
+			</Definition>
+		</Item>
+		<Item name="soft_vege_F" caption="Force of Vegetation (F/N)">
 			<Definition position="cell" valueType="real" default="0">
 			</Definition>
 		</Item>

@@ -8,7 +8,7 @@ module common_hh
 	integer,parameter :: strMax = 250
 	integer :: im, jm, mm, nm_cell
 	integer nx, ny, nym, nobst, jt1, jt2, jrep, j_qbqs, lmax, j_qbs	&
-		,j_bedload, j_collaps, j_qsu, j_qb_vec, j_zb, j_vege, j_qbup, edition	&
+		,j_bedload, j_collaps, j_qsu, j_qb_vec, j_zb, j_vege, j_soft_vege, j_qbup, edition	&
 		, j_sf, j_mix_dis, j_mix_dis_dep
 	real(8) :: time
 	real(8) :: dxi, det, g, hmin, hmin2, tsc,	chl, width, skp
@@ -172,7 +172,7 @@ end module common_cmkep
 module common_cmcf
 	implicit none
 		! cf: âÕè∞íÔçRåWêîÅAre: ÉåÉCÉmÉãÉYêîÅAvege_el: êAê∂ÇÃçÇÇ≥
-	real(8),dimension(:,:),allocatable :: cf, re, cd_veg, vege_el, vege_h
+	real(8),dimension(:,:),allocatable :: cf, re, cd_veg, cd_soft_veg, vege_el, vege_h
 end module common_cmcf
 
 !--------------------------------------------------
@@ -394,7 +394,7 @@ contains
 		allocate( xi_x0(0:i,0:j), xi_y0(0:i,0:j),et_x0(0:i,0:j), et_y0(0:i,0:j),	 sj0(0:i,0:j), hsxx(0:i,0:j) )
 		allocate( yk(0:i,0:j),ykn(0:i,0:j), yep(0:i,0:j),yepn(0:i,0:j), gkx(0:i,0:j), gky(0:i,0:j), gex(0:i,0:j),gey(0:i,0:j) )
 		allocate( ph(0:i,0:j),pkv(0:i,0:j),pev(0:i,0:j),strain(0:i,0:j) )
-		allocate( cf(0:i,0:j), re(0:i,0:j), cd_veg(0:i,0:j), vege_el(0:i,0:j), vege_h(0:i,0:j) )
+		allocate( cf(0:i,0:j), re(0:i,0:j), cd_veg(0:i,0:j), cd_soft_veg(0:i,0:j), vege_el(0:i,0:j), vege_h(0:i,0:j) )
 		allocate( y_dis(0:i,0:j), y_plus(0:i,0:j) )
 		allocate( snu(0:i,0:j), snu_x(0:i,0:j),	snu0(0:i,0:j), snu0_x(0:i,0:j),	snuk(0:i,0:j),snuk_x(0:i,0:j) )
 		allocate( a_chunk(2,0:i), sk_chunk(2,0:i) )
@@ -527,7 +527,7 @@ contains
 		xi_x0=0.d0; xi_y0=0.d0; et_x0=0.d0; et_y0=0.d0; sj0=0.d0; hsxx=0.d0
 		yk=0.d0; ykn=0.d0; yep=0.d0; yepn=0.d0; gkx=0.d0; gky=0.d0; gex=0.d0; gey=0.d0
 		ph=0.d0; pkv=0.d0; pev=0.d0; strain=0.d0
-		cf=0.d0; re=0.d0; cd_veg=0.d0
+		cf=0.d0; re=0.d0; cd_veg=0.d0; cd_soft_veg=0.d0
 		y_dis=0.d0; y_plus=0.d0
 		snu=0.d0; snu_x=0.d0; snu0=0.d0; snu0_x=0.d0; snuk=0.d0; snuk_x=0.d0
 		a_chunk=0.d0; sk_chunk=0.d0
@@ -2813,7 +2813,7 @@ module hcal_m
 
 		integer :: lcount
 		real(8) :: errmax, err, alh, qc_ave, hs_ave
-		real(8) :: hs_up, v_up, ux_up, uy_up, vv_up, c_xi, c_veg, f_xi 				&
+		real(8) :: hs_up, v_up, ux_up, uy_up, vv_up, c_xi, c_veg, c_soft_veg, f_xi 				&
 					, dhdxi, dhdet, p_xi, hs_vp, u_vp, ux_vp, uy_vp, vv_vp, c_et 	&
 					, f_et, p_et, eta_t_x, div, hsta, serr, hcal_m 					&
 					, c_xi_shear, c_et_shear, hl, hr, hd, hu, h_veg		&
@@ -2862,10 +2862,11 @@ module hcal_m
 
 						c_xi_shear = g * sn_up(i,j)**2 / hs_up**1.33333d0
 						c_veg = ( cd_veg(i,j) + cd_veg(i+1,j) ) * 0.5d0
+						c_soft_veg = ( cd_soft_veg(i,j) + cd_veg(i+1,j) ) * 0.5d0
 						h_veg = ( vege_h(i,j)+vege_h(i+1,j) )*0.5d0
 						h_veg = min( h_veg, hs_up )
 												
-						c_xi_shear = c_xi_shear + c_veg*h_veg/hs_up
+						c_xi_shear = c_xi_shear + c_veg*h_veg/hs_up + c_soft_veg
 
 						f_xi = - c_xi_shear * vv_up
 
@@ -10367,7 +10368,7 @@ Program Shimizu
   !
   integer(4), dimension(:,:), pointer :: obst4, fm4, mix_cell
   real(8)   , dimension(:,:), pointer :: x8, y8, z8, hs8, zb8
-  real(8)   , dimension(:,:), pointer :: vege4, roughness4, vegeh
+  real(8)   , dimension(:,:), pointer :: vege4, softVegeNum, softVegeForce, roughness4, vegeh
   integer(4) ni4,nj4,iobst4
   real(8) hmin8
   
@@ -10434,6 +10435,8 @@ Program Shimizu
      allocate (roughness4(ni4-1, nj4-1))
      allocate (vegeh     (ni4-1, nj4-1))
      allocate (mix_cell  (ni4-1, nj4-1))
+	 allocate (softVegeNum  (ni4-1, nj4-1))
+	 allocate (softVegeForce  (ni4-1, nj4-1))
      
      call cg_iric_read_grid_real_node(fid,'Elevation', z8, ier)
      call cg_iric_read_grid_real_node(fid,'Elevation_zb', zb8, ier)
@@ -10441,6 +10444,8 @@ Program Shimizu
      call cg_iric_read_grid_integer_cell(fid,'Fix_movable', fm4, ier)
      call cg_iric_read_grid_real_cell(fid,'vege_density', vege4, ier)
      call cg_iric_read_grid_real_cell(fid,'vege_height', vegeh, ier)
+	 call cg_iric_read_grid_real_cell(fid,'soft_vege_N', softVegeNum, ier)
+     call cg_iric_read_grid_real_cell(fid,'soft_vege_F', softVegeForce, ier)
      call cg_iric_read_grid_real_cell(fid,'roughness_cell', roughness4, ier)
      call cg_iric_read_grid_integer_cell(fid,'mix_cell', mix_cell, ier)
 
@@ -10681,6 +10686,12 @@ Program Shimizu
      j_fill  = 0
      hdry    = 0.01d0
      ti_fill = 100.d0
+
+   !
+   ! ----- Parameters for SoftVegatation -----
+   !
+
+     CALL cg_iric_read_integer(fid,'j_soft_vege', j_soft_vege, ier)
 
    !
    ! --- Other Parameters and Constants -----
@@ -10931,6 +10942,7 @@ Program Shimizu
        ! ----- set vegetation condition -----
          
          cd_veg(i,j) = vege4(i,j)*c_tree*0.5d0
+         cd_soft_veg(i,j) = softVegeNum(i,j)*softVegeForce(i,j)*0.5d0
          !
       end do
    end do
