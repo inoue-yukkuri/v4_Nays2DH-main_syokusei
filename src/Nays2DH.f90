@@ -107,7 +107,7 @@ end module common_cmave
 module common_cmsr
 	implicit none
 		! sr: 流線の曲率
-	real(8),dimension(:,:),allocatable :: sr, cos_t, sin_t 
+	real(8),dimension(:,:),allocatable :: sr, cos_t, sin_t
 end module common_cmsr
 
 !--------------------------------------------------
@@ -184,7 +184,7 @@ end module common_cmyp
 !--------------------------------------------------
 module common_cmsnu
 	implicit none
-		! snu: 渦動粘性係数(セル中央)、snu_x:snuの格子点の値 
+		! snu: 渦動粘性係数(セル中央)、snu_x:snuの格子点の値
 	real(8),dimension(:,:),allocatable :: snu,snu_x,snu0,snu0_x, snuk,snuk_x
 end module common_cmsnu
 
@@ -303,7 +303,7 @@ module supplying_sediment
 	implicit none
 	real(8), dimension(:,:), allocatable :: c_se
 
-end module 
+end module
 
 module secondary_flow
 	implicit none
@@ -587,14 +587,14 @@ contains
 		allocate( sch_t(0:im), ss_x_t(0:im) )
 		allocate( sch_t2(0:jm), ss_x_t2(0:jm) )
 		allocate( deav(0:im,0:jm) )
-		
+
 		sch = 0.d0;		ss_x = 0.d0
 		sch_t = 0.d0;	ss_x_t = 0.d0
 		sch_t2 = 0.d0;	ss_x_t2 = 0.d0
 		deav = 0.d0
 
 	end subroutine alloc_avgeo_temp_variables
-	
+
 	subroutine avgeo(slope,bheight)
 		use mix
 		implicit none
@@ -986,7 +986,7 @@ contains
 
 	subroutine gcoefs(iout)
 		implicit none
-		
+
 		integer :: i,j
 
 		real(8), parameter :: pi = 3.141592d0
@@ -1388,7 +1388,7 @@ contains
 	!--------------------------------------------------------------------
 	subroutine bound_ke(yk,yep)
 		implicit none
-		
+
 		integer :: i,j
 		real(8),intent(inout) :: yk(0:im,0:jm),yep(0:im,0:jm)
 		!
@@ -1491,10 +1491,10 @@ contains
 
 	subroutine boundi_scalar( ff )
 		implicit none
-		
+
 		integer :: i, j
 		real(8), dimension(0:im,0:jm), intent(inout) :: ff
-		
+
 		if( jrep==1 ) then
 !$omp do private(i,j)
 			do j=1,ny
@@ -1512,15 +1512,15 @@ contains
 				ff(nx+1,j) = ff(nx,j)
 			end do
 		end if
-		
+
 	end subroutine boundi_scalar
 
 	subroutine boundj_scalar( ff )
 		implicit none
-		
+
 		integer :: i, j
 		real(8), dimension(0:im,0:jm), intent(inout) :: ff
-		
+
 !$omp do private(i)
 		do i=1,nx
 			ff(i,   0) = 0.d0
@@ -1535,7 +1535,7 @@ contains
 				end if
 			end do
 		end if
-		
+
 	end subroutine boundj_scalar
 
 	subroutine bound_up( ff )
@@ -1568,7 +1568,7 @@ end module bound_m
 !
 !----------------------------------------------------------------------------------------------------
 module initl_m
-  
+
   use common_hh
   use common_cmuv
   use common_cmhq
@@ -1601,7 +1601,7 @@ contains
 
   subroutine alloc_initl_temp_variables
     implicit none
-    
+
     allocate( h_a(0:im), s_center(0:im) )
     allocate( a_a(0:im), al_a(0:im), sie(0:im) )
     allocate( h_a_t(0:im), s_center_t(0:im) )
@@ -1609,17 +1609,17 @@ contains
     allocate( h_a_t2(0:jm), s_center_t2(0:jm) )
     allocate( a_a_t2(0:jm), al_a_t2(0:jm), sie_t2(0:jm) )
     allocate( uti(0:im,0:jm) )
-    
+
     h_a=0.d0; uti=0.d0; s_center=0.d0; a_a=0.d0; al_a=0.d0; sie=0.d0
     h_a_t=0.d0;  s_center_t=0.d0;  a_a_t=0.d0;  al_a_t=0.d0;  sie_t=0.d0
     h_a_t2=0.d0; s_center_t2=0.d0; a_a_t2=0.d0; al_a_t2=0.d0; sie_t2=0.d0
-  
+
   end subroutine alloc_initl_temp_variables
-  
+
   subroutine initl(qp,qp_t,hnx,us0,snu_0,ye00,yk00,h0 &
        ,i_flow,slope,slope_t,h_slope,h_slope_t,x_bk &
        ,h_slope_1,h_slope_2,h_slope_12t)		!h101019 conf
-    
+
     implicit none
     integer :: i,j
 
@@ -1668,7 +1668,7 @@ contains
        do i = nx-1, 1, -1
           if(j_conf.eq.0) then		!h101019
              dxf  = ( ds(i+1,nym) + ds(i,nym) ) * 0.5d0
-          else 
+          else
              if(i.le.i_t2) then
                 dxf = ( ds(i+1,nym_m)+ds(i,nym_m))* 0.5d0
              else
@@ -2291,7 +2291,7 @@ contains
           end if
        end do
     end if
-    
+
     !
     qc(0)  = qp
     qc_t(0)  = qp_t		!h101019 conf
@@ -2362,7 +2362,7 @@ contains
     !
     do i = 1, nx
        do j = 1, ny
-          yk( i,j) = yk00 
+          yk( i,j) = yk00
           yep( i,j) = ye00
           ykn(i,j) = yk00
           yepn(i,j) = ye00
@@ -2381,7 +2381,7 @@ module uvpcal_m
   !-----------------------------------------------------------------------
 	subroutine uvpcal(u,v,up,vp,hs)
 		implicit none
-    
+
 		integer :: i,j
 
 		real(8),dimension(0:im,0:jm),intent(in)    :: u, v, hs
@@ -2407,14 +2407,14 @@ end module     uvpcal_m
 !
 !----------------------------------------------------------------------------------------------------
 module uxuycal_m
-  
+
 	use common_hh
 	use common_cmxy
   contains
   !----------------------------------------------
 	subroutine uxuycal(up,vp,ux,uy)
 		implicit none
-    
+
 		integer :: i,j
 		real(8),dimension(0:im,0:jm),intent(in)    ::  up, vp
 		real(8),dimension(0:im,0:jm),intent(inout) ::  ux, uy
@@ -2432,21 +2432,21 @@ end module     uxuycal_m
 
 !----------------------------------------------------------------------------------------------------
 module voltexcal_m
-  
+
 	use common_hh
 	use common_cmxy
-  
+
 	real(8),dimension(:,:),allocatable :: dudy, dvdx
 
   contains
 
 	subroutine alloc_voltexcal_temp_variables
 		implicit none
-    
+
 		allocate( dudy(0:im,0:jm), dvdx(0:im,0:jm) )
-    
+
 		dudy = 0.d0;	dvdx = 0.d0
-  
+
 	end subroutine alloc_voltexcal_temp_variables
 
 	subroutine voltexcal(u,v,vol)
@@ -2478,7 +2478,7 @@ module voltexcal_m
 								*(xi_r(i,j)+xi_r(i+1,j)) / (et_r_vp(i,j)+et_r_vp(i+1,j) )
 			end do
 		end do
-    !   
+    !
 !$omp do private(i,j)
 		do j=0,ny
 			do i=1,nx-1
@@ -2486,7 +2486,7 @@ module voltexcal_m
 			end do
 		end do
     !
-    
+
 		if( jrep==0 ) then
 !$omp do private(j)
 			do j=0,ny
@@ -2510,7 +2510,7 @@ end module     voltexcal_m
 
 !----------------------------------------------------------------------------------------------------
 module uxxyycal_m
-  
+
   use common_hh
   use common_cmxxyy
   use common_cmconf1
@@ -2523,7 +2523,7 @@ contains
     implicit none
 
     allocate( u_grid(0:im,0:jm), v_grid(0:im,0:jm) )
-    
+
     u_grid = 0.d0;	v_grid = 0.d0
 
   end subroutine alloc_uxxyycal_temp_variables
@@ -2544,7 +2544,7 @@ contains
       if( j_conf==3 ) then
          if( i>=i_t1.and.i<=i_t2 ) v_grid(i,0) = (v(i,0)+v(i+1,0))*0.5d0
       end if
-      
+
       u_grid(i,ny) = u(i,ny)
       v_grid(i,ny) = 0.d0
       if( j_conf==2 ) then
@@ -2567,19 +2567,19 @@ contains
           uy(i,j) = (-et_x0(i,j)*u_grid(i,j)+xi_x0(i,j)*v_grid(i,j)) / sj0(i,j)
        end do
     end do
-    
+
   end subroutine uxxyycal
 end module     uxxyycal_m
 
 !----------------------------------------------------------------------------------------------------
 module hsxxcal_m
-  
+
   use common_hh
 contains
 
   subroutine hsxxcal(eta,z,hs,hsxx)
     implicit none
-    
+
     integer :: i,j
 
     real(8),dimension(0:im,0:jm),intent(in)    :: eta, hs
@@ -2636,7 +2636,7 @@ module func_fixed_bed
 	use common_cmsui
 	use common_cmave
 	use mix
-  
+
   contains
 
 	subroutine phical
@@ -2644,7 +2644,7 @@ module func_fixed_bed
 		integer :: i, j
 
 	! --- calculate the thickness of movable bed --- !
-		
+
 !$omp do private(i,j)
 		do j=1,ny
 			do i=1,nx
@@ -2661,14 +2661,14 @@ module func_fixed_bed
 			phi(i, 0) = 1.d0
 			phi(i,ny+1) = 1.d0
 		end do
-	
+
 	end subroutine phical
 
 end module func_fixed_bed
 
 !----------------------------------------------------------------------------------------------------
 module taustacal_m
-  
+
   use common_hh
   use common_cmtst
   use common_cmhq
@@ -2677,13 +2677,13 @@ module taustacal_m
   use common_cmsn
   use mix
 contains
-  
+
   subroutine taustacal_uni(snu00)
     implicit none
 
     integer :: i,j
     real(8), intent(in) :: snu00
-    
+
 !$omp do private(i,j)
     do j = 1, ny
        do i = 1, nx
@@ -2701,13 +2701,13 @@ contains
     end do
 
   end subroutine taustacal_uni
-  
+
   subroutine taustacal_mix(snu00)
     implicit none
 
     integer :: i, j, k
     real(8) :: snu00, us_2, xi_ega
-    
+
 !$omp do private(i,j)
     do j = 1, ny
        do i = 1, nx
@@ -2742,12 +2742,12 @@ contains
 	end do
 !
   end subroutine taustacal_mix
-  
+
 end module     taustacal_m
 
 !----------------------------------------------------------------------------------------------------
 module hcal_v_m
-  
+
 	use common_hh
 	use common_cmhq
 	use common_cmxy
@@ -2760,7 +2760,7 @@ module hcal_v_m
 	subroutine hcal_v(qp,qc_ave,hs_ave)
 		implicit none
 		integer :: i,j
-    
+
 		real(8) :: qp, qc_ave, hs_ave, dh
 
 !$omp single
@@ -2783,8 +2783,8 @@ module hcal_v_m
 end module     hcal_v_m
 
 !----------------------------------------------------------------------------------------------------
+!修正中
 module hcal_m
-
 	use common_hh
 	use common_cmuv
 	use common_cmhq
@@ -2801,11 +2801,13 @@ module hcal_m
 	use uvpcal_m
 	use uxuycal_m
 	use bound_m
+	use taustacal_m
+	integer, dimension(:,:), allocatable :: soft_veg_condition
+	integer :: condition
 
   contains
-
 	!---------------------------------------------------------
-  
+
 	subroutine hcal( errmax, err, lcount, alh, qc_ave, hs_ave )
 		implicit none
 
@@ -2813,26 +2815,30 @@ module hcal_m
 
 		integer :: lcount
 		real(8) :: errmax, err, alh, qc_ave, hs_ave
-		real(8) :: hs_up, v_up, ux_up, uy_up, vv_up, c_xi, c_veg, f_xi 				&
-					, dhdxi, dhdet, p_xi, hs_vp, u_vp, ux_vp, uy_vp, vv_vp, c_et 	&
-					, f_et, p_et, eta_t_x, div, hsta, serr, hcal_m 					&
-					, c_xi_shear, c_et_shear, hl, hr, hd, hu, h_veg		&
-					, hss, hsn, zs, zn, hse, hsw, ze, zw
+		real(8) :: hs_up, v_up, ux_up, uy_up, vv_up, c_xi, c_veg, f_xi &
+					, dhdxi, dhdet, p_xi, hs_vp, u_vp, ux_vp, uy_vp, vv_vp, c_et &
+					, f_et, p_et, eta_t_x, div, hsta, serr, hcal_m &
+					, c_xi_shear, c_et_shear, hl, hr, hd, hu, h_veg &
+					, hss, hsn, zs, zn, hse, hsw, ze, zw &
+					, soft_veg_theta_values(nx,ny), soft_veg_FD_values(nx,ny), &
+					soft_veg_k_values(nx,ny), soft_veg_shear_values(nx,ny)
+		real(8), dimension(nx,ny) :: usta
 
-    !---------------------------------------------------------
-    
-!$omp do private(i,j)
+		!---------------------------------------------------------
+		! 初期化および計算準備
+		!---------------------------------------------------------
+	!$omp do private(i,j)
 		do j=1,ny
 			do i=1,nx
 				whs(i,j) = hs(i,j)
 			end do
 		end do
-    
+
 		do l=1,lmax
 			call uvpcal( yun, yvn, up, vp, hs )
 			call uxuycal( up, vp, ux, uy )
 
-!$omp do private( i, j )
+	!$omp do private( i, j )
 			do j=0,ny+1
 				do i=0,nx+1
 					wu(i,j) = yun(i,j)
@@ -2840,19 +2846,13 @@ module hcal_m
 				end do
 			end do
 
-!$omp do private( i, j, hs_up, v_up, ux_up, uy_up, vv_up, c_xi, c_xi_shear, c_veg, h_veg, f_xi, dhdxi, dhdet, p_xi, hr, hl,hss,hsn,zs,zn)
+	!$omp do private( i, j, hs_up, v_up, ux_up, uy_up, vv_up, c_xi, c_xi_shear, c_veg, h_veg, f_xi, dhdxi, dhdet, p_xi, hr, hl,hss,hsn,zs,zn)
 			do j=1, ny
 				do i=1, nx-1
 					hs_up = ( hs(i,j) + hs(i+1,j) ) * 0.5d0
 					if( hs_up<=hmin ) then
 						yun(i,j) = 0.d0
 						q_xi(i,j) = 0.d0
-!					else if( hs(i+1,j)<=hmin.and.hn(i+1,j)>=hn(i,j) ) then
-!						yun(i,j) = 0.d0
-!						q_xi(i,j) = 0.d0
-!					else if(hs(i  ,j) <= hmin.and.hn(i  ,j) >= hn(i+1,j)) then
-!						yun(i,j) = 0.d0
-!						q_xi(i,j) = 0.d0
 					else
 						v_up  = ( wv(i,j)+wv(i,j-1)+wv(i+1,j)+wv(i+1,j-1))*.25d0
 						ux_up = ( ux(i,j) + ux(i+1,j) ) * 0.5d0
@@ -2860,12 +2860,16 @@ module hcal_m
 						vv_up = dsqrt( ux_up**2 + uy_up**2 )
 						c_xi = -(alpha(1,i,j)*wu(i,j)**2 + alpha(2,i,j)*wu(i,j)*v_up+alpha(3,i,j)*v_up**2)
 
+						condition = soft_veg_condition(i,j)
+						! compute_vegetation_resistanceの呼び出し
+						call compute_vegetation_resistance(vv_up, vv_vp, usta(i,j), soft_veg_shear_values(i,j), condition)
+
 						c_xi_shear = g * sn_up(i,j)**2 / hs_up**1.33333d0
 						c_veg = ( cd_veg(i,j) + cd_veg(i+1,j) ) * 0.5d0
 						h_veg = ( vege_h(i,j)+vege_h(i+1,j) )*0.5d0
 						h_veg = min( h_veg, hs_up )
-												
-						c_xi_shear = c_xi_shear + c_veg*h_veg/hs_up
+
+						c_xi_shear = c_xi_shear + c_veg*h_veg/hs_up + soft_veg_shear_values(i,j)
 
 						f_xi = - c_xi_shear * vv_up
 
@@ -2877,34 +2881,8 @@ module hcal_m
 								hs(i+1,j) <= hmin2.and.hn(i  ,j) < eta(i+1,j) ) ) then
 							dhdxi = 0.d0
 						else
-   							dhdxi = ( -hn(i,j)+hn(i+1,j) )*r_dxi
+							dhdxi = ( -hn(i,j)+hn(i+1,j) )*r_dxi
 						end if
-
-!						if( j==1 ) then
-!							hr = (hn(i+1,j)+hn(i,j))*0.5d0
-!						else if( hs(i,j-1)<=hmin2 .and. hs(i+1,j-1)<=hmin2 ) then
-!							hr = (hn(i+1,j)+hn(i,j))*0.5d0
-!						else if( hs(i,j-1)<=hmin2 ) then
-!							hr = hn(i+1,j-1)
-!						else if( hs(i+1,j-1)<=hmin2 ) then
-!							hr = hn(i,j-1)
-!						else
-!							hr = (hn(i,j-1)+hn(i+1,j-1))*0.5d0
-!						end if
-
-!						if( j==ny ) then
-!							hl = (hn(i,j)+hn(i+1,j))*0.5d0
-!						else if( hs(i,j+1)<=hmin2 .and. hs(i+1,j+1)<=hmin2 ) then
-!							hl = (hn(i,j)+hn(i+1,j))*0.5d0
-!						else if( hs(i,j+1)<=hmin2 ) then
-!							hl = hn(i+1,j+1)
-!						else if( hs(i+1,j+1)<=hmin2 ) then
-!							hl = hn(i,j+1)
-!						else
-! 							hl = (hn(i,j+1)+hn(i+1,j+1))*0.5d0
-!						end if
-
-!						dhdet = (hl-hr)*r_det*0.5d0
 
 						if( j==1 ) then
 							hss = ( hs(i,j  )+hs(i+1,j  ) )*0.5d0
@@ -2934,28 +2912,18 @@ module hcal_m
 
 						yun(i,j) = (yu(i,j)+(c_xi+p_xi)*dt)/(1.d0-f_xi*dt)
 
-!						if(hs(i  ,j) <= hmin.and.yun(i,j) > 0.d0) yun(i,j) = 0.d0
-!						if(hs(i+1,j) <= hmin.and.yun(i,j) < 0.d0) yun(i,j) = 0.d0
-
 						q_xi(i,j)=yun(i,j)*(hs(i,j)+hs(i+1,j)) / (sj(i,j)+sj(i+1,j))
 					end if
 				end do
 			end do
-       !
-
-!$omp do private( i, j, hs_vp, u_vp, ux_vp, uy_vp, vv_vp, c_et, c_et_shear, c_veg, h_veg, f_et, dhdxi, dhdet, p_et, hu, hd, eta_t_x,hse,hsw,ze,zw)
+		!
+	!$omp do private( i, j, hs_vp, u_vp, ux_vp, uy_vp, vv_vp, c_et, c_et_shear, c_veg, h_veg, f_et, dhdxi, dhdet, p_et, hu, hd, eta_t_x,hse,hsw,ze,zw)
 			do j = 1, ny-1
 				do i = 1, nx
 					hs_vp = ( hs(i,j) + hs(i,j+1) ) * 0.5d0
 					if(     hs_vp <= hmin) then
 						yvn(i,j) = 0.d0
 						q_et(i,j)=0.d0
-!					else if(hs(i,j+1) <= hmin.and.hn(i,j+1) >= hn(i,j  )) then
-!						yvn(i,j) = 0.d0
-!						q_et(i,j)=0.d0
-!					else if(hs(i,j  ) <= hmin.and.hn(i,j  ) >= hn(i,j+1)) then
-!						yvn(i,j) = 0.d0
-!						q_et(i,j)=0.d0
 					else
 						u_vp  = (wu(i-1,j)+wu(i,j)+wu(i-1,j+1)+wu(i,j+1))*0.25d0
 						ux_vp = ( ux(i,j) + ux(i,j+1) ) * 0.5d0
@@ -2967,7 +2935,7 @@ module hcal_m
 						c_veg = ( cd_veg(i,j) + cd_veg(i,j+1) ) * 0.5d0
 						h_veg = ( vege_h(i,j)+vege_h(i,j+1) )*0.5d0
 						h_veg = min( h_veg, hs_vp )
-						c_et_shear = c_et_shear + c_veg*h_veg/hs_vp
+						c_et_shear = c_et_shear + c_veg*h_veg/hs_vp + soft_veg_shear_values(i,j)
 
 						f_et = - c_et_shear * vv_vp
 
@@ -2982,79 +2950,26 @@ module hcal_m
 							dhdet = ( -hn(i,j)+hn(i,j+1) )*r_det
 						end if
 
-						if( i==1 ) then
-							hsw = ( hs(i  ,j)+hs(i  ,j+1) )*0.5d0
-							hse = ( hs(i+1,j)+hs(i+1,j+1) )*0.5d0
-							zw = ( eta(i  ,j)+eta(i  ,j+1) )*0.5d0
-							ze = ( eta(i+1,j)+eta(i+1,j+1) )*0.5d0
-						else if( i==nx ) then
-							hsw = ( hs(i-1,j)+hs(i-1,j+1) )*0.5d0
-							hse = ( hs(i  ,j)+hs(i  ,j+1) )*0.5d0
-							zw = ( eta(i-1,j)+eta(i-1,j+1) )*0.5d0
-							ze = ( eta(i  ,j)+eta(i  ,j+1) )*0.5d0
-						else
-							hsw = ( hs(i-1,j)+hs(i-1,j+1) )*0.5d0
-							hse = ( hs(i+1,j)+hs(i+1,j+1) )*0.5d0
-							zw = ( eta(i-1,j)+eta(i-1,j+1) )*0.5d0
-							ze = ( eta(i+1,j)+eta(i+1,j+1) )*0.5d0
-						end if
-
-						if(  ( zw>ze .and. hsw<=hmin2 .and. zw>hse+ze ) &
-            				.or. ( ze>zw .and. hse<=hmin2 .and. ze>hsw+zw ) ) then
-            			dhdxi = 0.d0
-            		else
-            			dhdxi = ( (hse+ze) - (hsw+zw) )*r_dxi*0.5d0
-            		end if
-
-!						if( i==1 ) then
-!							hu = (hn(i,j)+hn(i,j+1))*0.5d0
-!						else if( hs(i-1,j)<=hmin2 .and. hs(i-1,j+1)<=hmin2 ) then
-!							hu = (hn(i,j)+hn(i,j+1))*0.5d0
-!						else if( hs(i-1,j)<=hmin2 ) then
-!							hu = hn(i-1,j+1)
-!						else if( hs(i-1,j+1)<=hmin2 ) then
-!							hu = hn(i-1,j)
-!						else
-!							hu = (hn(i-1,j+1)+hn(i-1,j))*0.5d0
-!						end if
-
-!						if( i==nx ) then
-!							hd = (hn(i,j)+hn(i,j+1))*0.5d0
-!						else if( hs(i+1,j)<=hmin2 .and. hs(i+1,j+1)<=hmin2 ) then
-!							hd = (hn(i,j)+hn(i,j+1))*0.5d0
-!						else if( hs(i+1,j)<=hmin2 ) then
-!							hd = hn(i+1,j+1)
-!						else if( hs(i+1,j+1)<=hmin2 ) then
-!							hd = hn(i+1,j)
-!						else
-!							hd = (hn(i+1,j+1)+hn(i+1,j))*0.5d0
-!						end if
-
-!						dhdxi = (hd-hu)*r_dxi*0.5d0
-
 						p_et = - g * ( beta(3,i,j) * dhdxi + beta(4,i,j) * dhdet )
 
 						yvn(i,j) = (yv(i,j)+(c_et+p_et)*dt)/(1.d0-f_et*dt)
 
-!						if(hs(i,j  ) <= hmin.and.yvn(i,j) > 0.d0) yvn(i,j) = 0.d0
-!						if(hs(i,j+1) <= hmin.and.yvn(i,j) < 0.d0) yvn(i,j) = 0.d0
-
 						eta_t_x   = ( eta_t(i-1,j) + eta_t(i,j) ) * 0.5d0
 						q_et(i,j) = ( yvn(i,j)+eta_t_x )                     &
-  									* ( hs( i,j)+hs(i,j+1))/(sj(i,j)+sj(i,j+1))
+									* ( hs( i,j)+hs(i,j+1))/(sj(i,j)+sj(i,j+1))
 					end if
 				end do
 			end do
-       !
+		!
 			call bound_u( yun )
 			call bound_u( q_xi )
 			call bound_v( yvn )
 			call bound_v( q_et )
-       !
-!$omp single
+		!
+	!$omp single
 			err = 0.d0
 
-!!$omp do reduction( +:err ) private( i, j, div, hsta, serr )
+	!$omp do reduction( +:err ) private( i, j, div, hsta, serr )
 			do j = 1, ny
 				do i = 1, nx-1
 					if( ijo_in(i,j) == 1 ) goto 201
@@ -3075,22 +2990,22 @@ module hcal_m
 					201 continue
 				end do
 			end do
-!$omp end single
+	!$omp end single
 
 			if( err < errmax ) exit
 
 		end do
 
-!$omp single
+	!$omp single
 		lcount = l
-    !
-    ! ----- cal. of qc and q_ave ------
-    !
+		!
+		! ----- cal. of qc and q_ave ------
+		!
 		qc_ave = 0.d0
 		hs_ave = 0.d0
-!!$omp end single
+	!$omp end single
 
-!!$omp do reduction( +:qc_ave )
+	!$omp do reduction( +:qc_ave )
 		do i=1,nx-1
 			qc(i) = 0.d0
 			do j=1,ny
@@ -3099,28 +3014,116 @@ module hcal_m
 			end do
 			qc_ave = qc_ave + qc(i)
 		end do
-!!$omp end single
-    !
-    ! ------ cal. of hs_ave ------
-    !
-!!$omp do reduction( +:hs_ave )
+	!$omp end single
+		!
+		! ------ cal. of hs_ave ------
+		!
+	!$omp do reduction( +:hs_ave )
 		do j=1,ny
 			do i=1,nx
 				hs_ave = hs_ave + hs(i,j)
 			end do
 		end do
 
-!!$omp single
+	!$omp single
 		qc_ave = qc_ave / dble(nx-1)
 		hs_ave = hs_ave / dble(nx*ny)
-!$omp end single
+	!$omp end single
 
 	end subroutine hcal
-end module     hcal_m
+
+	subroutine compute_vegetation_resistance(vv_up, vv_vp, usta, soft_veg_shear, condition)
+		implicit none
+		double precision, intent(in) :: vv_up, vv_vp, usta
+		integer, intent(in) :: condition
+		double precision, intent(out) :: soft_veg_shear
+		double precision :: pi, g, rho, C_D, C_DL, A_1, l, d, C_SL, soft_veg_num
+		double precision :: soft_veg_theta, soft_veg_FD, soft_veg_k
+
+		! conditionが0の場合、soft_veg_shearを0に設定し、処理を終了
+		if (condition == 0) then
+			soft_veg_shear = 0.0d0
+			return
+		end if
+
+	        ! 物理定数の共通定義
+        pi = 3.141592653589793d0
+        g = 9.8d0
+        rho = 1000d0
+        C_D = 1.0d0
+        C_DL = 0.095d0
+        C_SL = 0.015d0
+
+        if (condition == 1) then
+            ! ツルヨシ疎の定数を設定
+            A_1 = 0.070d0
+            l = 0.3d0
+            d = 0.01d0
+            soft_veg_num = 95d0
+        else if (condition == 2) then
+            ! ツルヨシ密の定数を設定
+            A_1 = 0.096d0
+            l = 0.3d0
+            d = 0.006d0
+            soft_veg_num = 50d0
+        end if
+
+		! soft_veg_thetaの計算
+		call soft_veg_theta(usta, soft_veg_theta)
+
+		! soft_veg_FDの計算
+		call soft_veg_FD(rho, C_D, C_DL, A_1, l, d, vv_up, vv_vp, soft_veg_theta, C_SL, soft_veg_FD)
+
+		! soft_veg_kの計算
+		call soft_veg_k(g, rho, vv_up, vv_vp, soft_veg_num, soft_veg_FD, soft_veg_k)
+
+		! soft_veg_shearの計算
+		call soft_veg_shear_force(g, vv_up, vv_vp, soft_veg_k, soft_veg_shear)
+
+	end subroutine compute_vegetation_resistance
+
+	subroutine soft_veg_theta(u, theta)
+		double precision, intent(in) :: u
+		double precision, intent(out) :: theta
+		double precision, parameter :: pi = 3.141592653589793d0
+		theta = ((pi / 2) - asin(0.2d0)) * ((u - 0.12d0)**2)
+		if (theta >= ((pi / 2) - asin(0.2d0))) then
+			theta = ((pi / 2) - asin(0.2d0))
+		elseif (u <= 0.12d0) then
+			theta = 0.0d0
+		end if
+	end subroutine soft_veg_theta
+
+	subroutine soft_veg_FD(rho, C_D, C_DL, A_1, l, d, u, v, theta, C_SL, F_D_value)
+		double precision, intent(in) :: rho, C_D, C_DL, A_1, l, d, u, v, theta, C_SL
+		double precision, intent(out) :: F_D_value
+		F_D_value = 0.5d0 * rho * (C_D + C_DL * A_1 / (2d0 * l * d)) * (u**2 + v**2) * cos(theta)**2 &
+					+ 0.5d0 * rho * C_SL * A_1 * (u**2 + v**2) / cos(theta)
+	end subroutine soft_veg_FD
+
+	subroutine soft_veg_k(g, rho, u, v, N, F_D, k)
+		double precision, intent(in) :: g, rho, u, v, F_D
+		integer, intent(in) :: N
+		double precision, intent(out) :: k
+		k = (g * rho * (u**2 + v**2) / (N * F_D))**0.5
+	end subroutine soft_veg_k
+
+	subroutine soft_veg_shear_force(g, u, v, k, value)
+		double precision, intent(in) :: g, u, v, k
+		double precision, intent(out) :: value
+		if (k**2 * (u**2 + v**2)**0.5 /= 0d0) then
+			value = g / (k**2 * (u**2 + v**2)**0.5)
+		else
+			value = 0d0
+		end if
+	end subroutine soft_veg_shear_force
+
+end module hcal_m
+
 
 !----------------------------------------------------------------------------------------------------
 module diffusion_m
-  
+
   use common_hh
   use common_cmuv
   use common_cmhq
@@ -3130,7 +3133,7 @@ module diffusion_m
   use common_cmsui
 
   real(8),dimension(:,:),allocatable :: uvis_x, uvis_y, vvis_x, vvis_y
-  
+
 contains
 
   subroutine alloc_diffusion_temp_variables
@@ -3277,7 +3280,7 @@ end module     diffusion_m
 
 !----------------------------------------------------------------------------------------------------
 module diffusion_c_m
-  
+
   use common_hh
   use common_cmxy
   use common_cmhq
@@ -3286,7 +3289,7 @@ module diffusion_c_m
   real(8),dimension(:,:),allocatable :: cvis_x, cvis_y
 
 contains
-  
+
   subroutine alloc_diffusion_c_temp_variables
     implicit none
 
@@ -3312,18 +3315,18 @@ contains
     	cvis_x( 0,j) = 0.d0
     	cvis_x(nx,j) = 0.d0
     end do
-    
+
 !$omp do private(i,j)
     do j=1,ny
        do i=1,nx-1
           if(hs(i,j) <= hmin.or.hs(i+1,j) <= hmin) then
              cvis_x(i,j) = 0.d0
-          else 
+          else
              cvis_x(i,j) = (snu(i,j)+snu(i+1,j))*.5d0/sigma*( -c(i,j)+c(i+1,j) )*r_dxi
           end if
        end do
     end do
-    
+
   !
   ! ------- cvix_y(i=1,nx,j=2,ny) ------
 !$omp do private(i)
@@ -3331,7 +3334,7 @@ contains
     	cvis_y(i, 0) = 0.d0
     	cvis_y(i,ny) = 0.d0
     end do
-    
+
 !$omp do private(i,j)
     do j=1,ny-1
        do i=1,nx
@@ -3365,7 +3368,7 @@ end module     diffusion_c_m
 !
 !----------------------------------------------------------------------------------------------------
 module gbound_m                                                   !j090219b
-  
+
   use common_hh
 contains
   ! -------------------------------------------------------------
@@ -3387,7 +3390,7 @@ end module     gbound_m
 
 !----------------------------------------------------------------------------------------------------
 module newgrd_m
-  
+
   use common_hh
   use gbound_m
   use common_cmsui
@@ -3428,7 +3431,7 @@ contains
     implicit none
 
     integer :: i,j
-    
+
     integer,dimension(0:im,0:jm),intent(in)    :: ijobst
     real(8),dimension(0:im,0:jm),intent(in)    :: yv , yvn
     real(8),dimension(0:im,0:jm),intent(inout) :: gvx, gvy
@@ -3509,7 +3512,7 @@ end module sus_profile
 
 !--------------------------------------------------------------------------------
 module upstream_c_m
-  
+
   use common_hh
   use common_cmconf1	!h101019 conf
   use sus_profile
@@ -3517,7 +3520,7 @@ contains
   !--------------------------------------------------------------------
   subroutine upstream_c(c,cb,wf,qsu,usta)
     implicit none
-    
+
     integer :: i,j
     real(8) :: wf, bet, alfx, alf
 
@@ -3562,7 +3565,7 @@ contains
   !--------------------------------------------------------------------
 	subroutine upstream_c_mix( ck, cbk, wfk, qsuk, usta, nk )
 		implicit none
-    
+
 		integer :: i, j, k
 		real(8) :: bet, alfx, alf
 
@@ -3616,7 +3619,7 @@ end module     upstream_c_m
 
 !--------------------------------------------------------------------------------
 module dcip2d_m
-  
+
   use common_hh
   use common_cmuv
   use common_cmgrd
@@ -3645,7 +3648,7 @@ contains
     dy1 = det
     dy2 = dy1*dy1
     dy3 = dy1*dy2
-    
+
   end subroutine alloc_advection_temp_variables
   ! ----------------------------------------------------------
   subroutine dcip2d_u( f, gx, gy )
@@ -3656,14 +3659,14 @@ contains
     real(8) :: et_x, xx, yy &
          , fis, fjs, a1, b1, c1, d1, e1, f1, g1, gxo, gyo, tmp, tmq
     integer :: isn, jsn, im1, jm1
-    
+
     real(8),dimension(0:im,0:jm),intent(inout) :: f, gx, gy
 
     !
 !$omp do private( i, j, et_x )
     do j=1,ny
        do i=1,nx-1
-          u(i,j) = yu(i,j) 
+          u(i,j) = yu(i,j)
           et_x   = ( eta_t(i,j) + eta_t(i,j-1) ) * 0.5d0
           v(i,j) = 0.25d0*(yv(i,j)+yv(i+1,j)+yv(i,j-1)+yv(i+1,j-1)) + et_x
        end do
@@ -3717,7 +3720,7 @@ contains
           gyn(i,j) = (3.d0*b1*yy+2.d0*(d1*xx+f1))*yy+(c1*xx+g1)*xx+gy(i,j)
        end do
     end do
-    
+
 !$omp do private( i, j, gxo, gyo )
 		do j=1,ny
 			do i=1,nx-1
@@ -3835,12 +3838,12 @@ contains
        do i=1,nx
           xx = -u(i,j)*dt
           yy = -v(i,j)*dt
-          isn = dsign(1.d0,u(i,j)) 
-          jsn = dsign(1.d0,v(i,j)) 
-          fis = dble(isn) 
+          isn = dsign(1.d0,u(i,j))
+          jsn = dsign(1.d0,v(i,j))
+          fis = dble(isn)
           fjs = dble(jsn)
-          im1 = i-isn            
-          jm1 = j-jsn            
+          im1 = i-isn
+          jm1 = j-jsn
           a1 = ((gx(im1,j)+gx(i,j))*dx1*fis &
                	-2.d0*(f(i,j)-f(im1,j)))/(dx3*fis)
           e1 = (3.d0*(f(im1,j)-f(i,j)) &
@@ -3861,7 +3864,7 @@ contains
           gyn(i,j) = (3.d0*b1*yy+2.d0*(d1*xx+f1))*yy+(c1*xx+g1)*xx+gy(i,j)
        end do
     end do
-    
+
 !$omp do private( i, j, gxo, gyo )
 		do j=1,ny-1
 			do i=1,nx
@@ -3874,7 +3877,7 @@ contains
 							+gyo*(-v(i,j-1)+v(i,j+1)))*0.5d0*dt*r_det
 			end do
 		end do
-    
+
   end subroutine dcip2d_v
   !
   ! ----------------------------------------------------------
@@ -3883,7 +3886,7 @@ contains
 
     integer :: i,j
     real(8) :: et_x, u_dfdx, v_dfdy
-    
+
     real(8),dimension(0:im,0:jm),intent(inout) :: f, gx, gy
 
     !
@@ -3975,12 +3978,12 @@ contains
        do i=1,nx
           xx= - u(i,j)*dt
           yy= - v(i,j)*dt
-          isn = dsign(1.d0,u(i,j)) 
-          jsn = dsign(1.d0,v(i,j)) 
-          fis = dble(isn) 
+          isn = dsign(1.d0,u(i,j))
+          jsn = dsign(1.d0,v(i,j))
+          fis = dble(isn)
           fjs = dble(jsn)
-          im1 = i-isn            
-          jm1 = j-jsn            
+          im1 = i-isn
+          jm1 = j-jsn
           a1 = ((gx(im1,j)+gx(i,j))*dx1*fis &
                -2.d0*(f(i,j)-f(im1,j)))/(dx3*fis)
           e1 = (3.d0*(f(im1,j)-f(i,j)) &
@@ -4077,7 +4080,7 @@ end module     dcip2d_m
 
 !--------------------------------------------------------------------------------
 module shift_m
-  
+
   use common_hh
 contains
   !-----------------------------------------------------------------------
@@ -4180,7 +4183,7 @@ end module      shift_m
 !
 !--------------------------------------------------------------------------------
 module dryck_m
-  
+
   use common_hh
 contains
   !------------------------------------------------------
@@ -4248,7 +4251,7 @@ contains
 
     real(8),dimension(0:im,0:jm),intent(inout) :: c, gx, gy
     real(8),dimension(0:im,0:jm),intent(in)    :: hs
-    
+
 !$omp do private(i,j)
     do j=1,ny
        do i=1,nx
@@ -4266,7 +4269,7 @@ end module     dryck_m
 !
 !--------------------------------------------------------------------------------
 module ndr_m
-  
+
   use common_hh
   use common_cmuv
   use common_cmsui
@@ -4303,7 +4306,7 @@ end module     ndr_m
 !
 !--------------------------------------------------------------------------------
 module srcal_m
-  
+
   use common_hh
   use common_cmxy
   use common_cmhq
@@ -4316,7 +4319,7 @@ contains
     integer :: i, j
 
     real(8) :: vv, vv3, duydxi, duxdxi, duydet, duxdet
-    
+
     real(8), intent(in) :: snst
     real(8),dimension(0:im,0:jm),intent(in)    :: ux, uy, up
     real(8),dimension(0:im,0:jm),intent(inout) :: sr
@@ -4392,26 +4395,26 @@ module vorticity_eq_m
 	use common_hh
 	use bound_m
 	implicit none
-	
+
 	integer, dimension(:,:), allocatable :: i_an
 	real(8), dimension(:,:), allocatable :: us_surf, un_surf
 	real(8), dimension(:,:), allocatable :: uxi_surf, uet_surf, uxi_bed, uet_bed
 	real(8), dimension(:,:), allocatable :: uxi_surf_up, uxi_bed_up, uet_surf_vp, uet_bed_vp
 	real(8), dimension(:,:), allocatable :: c_an, centrifugal, vorticity_source, diff_an
 	real(8), dimension(:,:), allocatable :: uxisuns, uxibunb, uetsuns, uetbunb
-	
+
   contains
-  
+
 	subroutine alloc_vorticity_eq_temp_variables
 		implicit none
-		
+
 		allocate( i_an(0:im,0:jm) )
 		allocate( us_surf(0:im,0:jm), un_surf(0:im,0:jm) )
 		allocate( uxi_surf(0:im,0:jm), uet_surf(0:im,0:jm), uxi_bed(0:im,0:jm), uet_bed(0:im,0:jm) )
 		allocate( uxi_surf_up(0:im,0:jm), uxi_bed_up(0:im,0:jm), uet_surf_vp(0:im,0:jm), uet_bed_vp(0:im,0:jm) )
 		allocate( c_an(0:im,0:jm), centrifugal(0:im,0:jm), vorticity_source(0:im,0:jm), diff_an(0:im,0:jm) )
 		allocate( uxisuns(0:im,0:jm), uxibunb(0:im,0:jm), uetsuns(0:im,0:jm), uetbunb(0:im,0:jm) )
-	
+
 	end subroutine alloc_vorticity_eq_temp_variables
 
 	subroutine vorticity_eq
@@ -4429,15 +4432,15 @@ module vorticity_eq_m
 
 		call boundi_scalar( an )
 		call boundj_scalar( an )
-		
+
 !$omp do private( i, j, xi1, xi, xi20, coss, sins, xi_1, xi_2, et_1, et_2 )
 		do j=1,ny
 			do i=1,nx
-			
+
 				if( vti(i,j)<=1e-5 .or. ijo_in(i,j)==1 ) then
 					coss = 0.d0
 					sins = 0.d0
-					
+
 					c_an(i,j) = -10.d0
 					i_an(i,j) = 0
 					us_surf(i,j) = 0.d0
@@ -4454,7 +4457,7 @@ module vorticity_eq_m
 				else
 					coss = ux(i,j)/vti(i,j)
 					sins = uy(i,j)/vti(i,j)
-					
+
 					i_an(i,j) = 1
 					xi1 = c_turb*vti(i,j)/usta(i,j)
 					xi = max(xi1-1.d0/3.d0,0.d0)
@@ -4481,7 +4484,7 @@ module vorticity_eq_m
 !										( (an(i+1,j)-2.d0*an(i,j)+an(i-1,j))*r_dxi**2.d0+		&
 !										  (an(i,j+1)-2.d0*an(i,j)+an(i,j-1))*r_det**2.d0 )
 				end if
-			
+
 			end do
 		end do
 
@@ -4497,7 +4500,7 @@ module vorticity_eq_m
 				uxi_bed_up (i,j) = (  uxi_bed(i,j)+  uxi_bed(i+1,j))*0.5d0*ijobst_u(i,j)
 			end do
 		end do
-		
+
 !$omp do private(i,j)
 		do j=1,ny-1
 			do i=1,nx
@@ -4505,7 +4508,7 @@ module vorticity_eq_m
 				uet_bed_vp  (i,j) = (  uet_bed(i,j)+  uet_bed(i,j+1))*0.5d0*ijobst_v(i,j)
 			end do
 		end do
-		
+
 !$omp do private(i)
 		do i=1,nx
 			uet_surf_vp(i, 0) = 0.d0
@@ -4546,7 +4549,7 @@ module vorticity_eq_m
 									 +(uet_bed_vp (i,j)-dabs(uet_bed_vp (i,j)))*un_bed (i,j+1)/sj(i,j+1) )*0.5d0
 			end do
 		end do
-		
+
 !$omp do private(i)
 		do i=1,nx
 			uetsuns(i, 0) = 0.d0
@@ -4584,7 +4587,7 @@ end module vorticity_eq_m
 
 !--------------------------------------------------------------------------------
 module qbcal_w_m
-  
+
   use common_hh
   use common_cmxy
   use common_cmxiet
@@ -4612,7 +4615,7 @@ contains
     allocate( ubxiti(0:im,0:jm), ubetti(0:im,0:jm), qbti(0:im,0:jm) )
 
     ubxiti=0.d0; ubetti=0.d0; qbti=0.d0
-    
+
   end subroutine alloc_qbcal_temp_variables
   ! ----------------------------------------------------------------------
   subroutine qbcal_w( ux, uy, hs, gamma, pi_bed, dsmt, tantc,j_bank &
@@ -4656,13 +4659,13 @@ contains
             ubetti(i,j) = ( ( et_x(i,j)*coss+et_y(i,j)*sins)*us_bed(i,j) &
                   			+ ( - et_x(i,j)*sins+et_y(i,j)*coss)*un_bed(i,j) ) / &
                   				( et_r(i,j) + et_r(i-1,j) ) * 2.d0
-                  				
+
             ubnvb(i,j) = un_bed(i,j)/us_bed(i,j)
 
             uxbed = coss*us_bed(i,j)-sins*un_bed(i,j)
             uybed = sins*us_bed(i,j)+coss*un_bed(i,j)
-				vb = dsqrt( uxbed**2.d0+uybed**2.d0 ) 
-	            
+				vb = dsqrt( uxbed**2.d0+uybed**2.d0 )
+
 	!			if( ubxiti(i,j)>0.d0 ) then
 	!				if( i==nx ) then
 	!					dzdxi = (-eta(i-1,j)+eta(i,j))*r_dxi*xi_r_up(i-1,j)
@@ -4676,7 +4679,7 @@ contains
 	!					dzdxi = (-eta(i-1,j)+eta(i,j))*r_dxi*xi_r_up(i-1,j)
 	!				end if
 	!			end if
-				
+
 	!			if( ubetti(i,j)<0.d0 ) then
 	!				if( j==1 ) then
 	!					dzdet = (-eta(i,j)+eta(i,j+1))*r_det*et_r_vp(i,j)
@@ -4688,7 +4691,7 @@ contains
 	!					dzdet = (-eta(i,j-1)+eta(i,j))*r_det*et_r_vp(i,j-1)
 	!				else
 	!					dzdet = (-eta(i,j)+eta(i,j+1))*r_det*et_r_vp(i,j)
-	!				end if			
+	!				end if
 	!			end if
 
 	!			theta_x(i,j) = datan(dzdxi)
@@ -4707,7 +4710,7 @@ contains
 						dzdxi = (-eta(i-1,j)+eta(i,j))*r_dxi
 					end if
 				end if
-				
+
 				if( ubetti(i,j)<0.d0 ) then
 					if( j==1 ) then
 						dzdet = (-eta(i,j)+eta(i,j+1))*r_det
@@ -4719,26 +4722,26 @@ contains
 						dzdet = (-eta(i,j-1)+eta(i,j))*r_det
 					else
 						dzdet = (-eta(i,j)+eta(i,j+1))*r_det
-					end if			
+					end if
 				end if
-							
+
 				theta_x(i,j) = datan(xi_x(i,j)*dzdxi+et_x(i,j)*dzdet)
 				theta_y(i,j) = datan(xi_y(i,j)*dzdxi+et_y(i,j)*dzdet)
-				
+
 				cos_bed(i,j) = uxbed / vb
 	         sin_bed(i,j) = uybed / vb
-	            
+
 				kc(i,j) = Dmax1(1d0+1d0/mu_s*((1d0/spec+1d0)*cos_bed(i,j)*dtan(theta_x(i,j))	&
 									+sin_bed(i,j)*dtan(theta_y(i,j))),0.5D0)
-	    		
+
 	    		btheta_y(i,j) = 1.d0/(1.d0+dtan(theta_x(i,j))**2.d0+dtan(theta_y(i,j))**2.d0)
 	    		btheta_x(i,j) = btheta_y(i,j)+dcos(theta_x(i,j))**2.d0/spec
-	    		
+
 	    		dzds(i,j) = (xi_x(i,j)*coss+xi_y(i,j)*sins)*dzdxi		&
 						   +(et_x(i,j)*coss+et_y(i,j)*sins)*dzdet
 				dzdn(i,j) = (-xi_x(i,j)*sins+xi_y(i,j)*coss)*dzdxi		&
 						   +(-et_x(i,j)*sins+et_y(i,j)*coss)*dzdet
-					   
+
           end if
        end do
     end do
@@ -4807,7 +4810,7 @@ contains
 	             end if
 	             qb_xi(i,j) = xr * ( uang &
 	                  - gamma / dsqrt(ts0) * ( xr*dzdxi + er*cost*dzdet ) )
-	                  
+
 	             if( phi(i,j)<1.d0 .or. phi(i+1,j)<1.d0 ) then
 	                if( qb_xi(i,j)>0.d0 ) then
 	                   qb = qbti(i,j)
@@ -4815,9 +4818,9 @@ contains
 	                   qb = qbti(i+1,j)
 	                end if
 	             end if
-	             
+
 	             qb_xi(i,j) = qb_xi(i,j)*qb
-	                  
+
 	             if(hs(i  ,j) <= hmin.and.qb_xi(i,j) > 0.d0) qb_xi(i,j)=0.d0
 	             if(hs(i+1,j) <= hmin.and.qb_xi(i,j) < 0.d0) qb_xi(i,j)=0.d0
 	          end if
@@ -4907,7 +4910,7 @@ contains
 	             end if
 	             qb_et(i,j) = er * ( uang &
 	                  - gamma / dsqrt(ts0) * (er*dzdet+xr*cost*dzdxi)) * bh_alpha
-	                  
+
 	             if( phi(i,j)<1.d0 .or. phi(i,j+1)<1.d0 ) then
 	                if( qb_et(i,j)>0.d0 ) then
 	                   qb = qbti(i,j)
@@ -4915,9 +4918,9 @@ contains
 	                   qb = qbti(i,j+1)
 	                end if
 	             end if
-	             
+
 	             qb_et(i,j) = qb_et(i,j)*qb
-	                  
+
 	             if(j >  1.and.(hs(i,j  ) <= hmin.and.qb_et(i,j) > 0.d0) ) then
 	                qb_et(i,j) = 0.d0
 	             end if
@@ -4962,7 +4965,7 @@ contains
         		end if
       	end do
     	end do
-    	
+
     else if( j_qb_vec==1 ) then
 
 !$omp do private(i,j,d_sed1,d_sed2,beta_a,qbn,coss,sins)
@@ -4978,7 +4981,7 @@ contains
     				beta_a = datan2(d_sed1,d_sed2)
     				qbxc(i,j) = qbti(i,j)*dcos(beta_a)
     				qbyc(i,j) = qbti(i,j)*dsin(beta_a)
-    				
+
 !            		coss = ux(i,j) / vti(i,j)
 !            		sins = uy(i,j) / vti(i,j)
 !					qbn = qbti(i,j)*(ubnvb(i,j)-gamma/dsqrt(tausta(i,j))*dzdn(i,j))
@@ -5019,7 +5022,7 @@ contains
 !$omp& et_x2,et_y2,sj_xi1,sj_et1,sj_xi2,sj_et2,ip1,im1,jp1,jm1)
     	do j=1,ny
     		do i=1,nx
-    		
+
 				if( ubxiti(i,j)<0.d0 ) then
 					ip1 = 1
 					im1 = 0
@@ -5027,7 +5030,7 @@ contains
 					ip1 = 0
 					im1 = 1
 				end if
-				
+
 				if( ubetti(i,j)<0.d0 ) then
 					jp1 = 1
 					jm1 = 0
@@ -5035,7 +5038,7 @@ contains
 					jp1 = 0
 					jm1 = 1
 				end if
-				
+
     			qbx_xi1 = (qbxc(i+ip1,j-jm1)+qbxc(i+ip1,j+jp1))*0.5d0
     			qby_xi1 = (qbyc(i+ip1,j-jm1)+qbyc(i+ip1,j+jp1))*0.5d0
     			xi_x1   = (xi_x(i+ip1,j-jm1)+xi_x(i+ip1,j+jp1))*0.5d0
@@ -5061,23 +5064,23 @@ contains
     			qbxi2 = (xi_x2*qbx_xi2+xi_y2*qby_xi2)/sj_xi2
     			qbet1 = (et_x1*qbx_et1+et_y1*qby_et1)/sj_et1
     			qbet2 = (et_x2*qbx_et2+et_y2*qby_et2)/sj_et2
-    			
+
     			if( j_conf==0 .or. j_bank==0 .or. i<=i_erosion_start .or. i>=nx-i_erosion_end) then
 	    			if( j==1  ) qbet2 = 0.d0
 	    			if( j==ny ) qbet1 = 0.d0
 	    		end if
-	    		
+
     			if( ijo_in(i,j)==0 ) then
     				dex(i,j) = -sj(i,j)*dt*dsmt*	&
     							( (qbxi1-qbxi2)*r_dxi+(qbet1-qbet2)*r_det )*csm
     			else
     				dex(i,j) = 0.d0
-    			end if   			
-    			
+    			end if
+
     		end do
     	end do
-    	
-    
+
+
     end if
 
     !
@@ -5088,7 +5091,7 @@ end module     qbcal_w_m
 !
 !--------------------------------------------------------------------------------
 module etacal_m
-  
+
   use common_hh
   use common_cmxy
   use common_cmave
@@ -5098,7 +5101,7 @@ module etacal_m
   use common_cmconf1
   use fixed_bed
 contains
-  
+
   subroutine etacal( qb_xi, qb_et, dsmt )
     implicit none
 
@@ -5215,10 +5218,10 @@ contains
 
     integer :: i,j
     real(8) :: dsmt, wf, dqbxi, dqbet
-    
+
     real(8),dimension(0:im,0:jm),intent(in) :: qb_xi, qb_et, qsu, cb
     !
-    
+
     if( j_qb_vec==0 ) then
 !$omp do private( i, j, dqbxi, dqbet )
 	    do j = 1, ny
@@ -5331,7 +5334,7 @@ end module     etacal_m
 
 !--------------------------------------------------------------------------------
 module bank_shift_m
-  
+
   use common_hh
   use common_cmxy
   use common_cmhq
@@ -5343,7 +5346,7 @@ module bank_shift_m
 
   integer(4), dimension(:,:),allocatable :: i_er
   real(8),dimension(:,:),allocatable :: er_y, ern
-  
+
 contains
 
   subroutine alloc_bank_shift_temp_variables
@@ -5423,7 +5426,7 @@ contains
        if(j_chunk == 1) then
           b_os=bh*r_tantc
           alpha_chunk=a_chunk(1,i)/(d_chunk*b_os)
-          sk_chunk(1,i)=f_chunk(alpha_chunk) 
+          sk_chunk(1,i)=f_chunk(alpha_chunk)
           der=1./(1.-slambda)*sk_chunk(1,i)*qb_et(i,0)*csm/bh*dt/er &
                +dz*r_tantc
        else
@@ -5435,7 +5438,7 @@ contains
              i_er(1,i)=1
              ier_er=ier_er+1
              dac=der*h_chunk-a_chunk(1,i)/t_chunk*dt
-             a_chunk(1,i)=a_chunk(1,i)+dac 
+             a_chunk(1,i)=a_chunk(1,i)+dac
              if(a_chunk(1,i) < 0.) a_chunk(1,i)=0.
           else
              i_er(1,i)=2
@@ -5557,7 +5560,7 @@ contains
   ! --------------------------------------------------------
   subroutine bkfill(j_fill,hdry,bheight,ndeposit,j_smooth,i_smooth)
     implicit none
-    
+
     integer :: i,j,m
 
     real(8) :: hdry, bheight, bh, dzfill, volfill, bfill, esum, e_ave &
@@ -5625,7 +5628,7 @@ contains
              end if
           end do
 250       continue
-       
+
           do j=ny,nym,-1
              if(hs(i,j) <= hdry) then
                 bh=(z0(i,ny)+z0(i-1,ny))*.5+bheight-eta(i,ny)
@@ -5782,7 +5785,7 @@ end subroutine usc
 subroutine wfcal(s,d,snu,wf,g)
   implicit none
   real(8) :: s, d, snu, wf, g
-  
+
   if(d > 0.001d0) then
      wf = 32.8d0*dsqrt(d*100.d0)*0.01d0
   else
@@ -5796,7 +5799,7 @@ subroutine us_avelog(us_e,vv,dis,rough)
 	implicit none
 	real(8),intent(in) :: vv, dis, rough
 	real(8),intent(out) :: us_e
-	
+
 	if( dis>rough ) then
 		us_e = vv/(6.d0+2.5d0*dlog(dis/rough))
 	else
@@ -5822,7 +5825,7 @@ end function alf
 !
 !--------------------------------------------------------------------------------
 module cbcal_m
-  
+
 	use common_hh
   use sus_profile
 contains
@@ -5848,17 +5851,17 @@ contains
 			end if
 		end do
 	end do
-	
+
   end subroutine cbcal
 
 ! --------------------------------------------------------------------
   subroutine cbcal_mix( ck, cbk, wfk, hs, usta, nk )
-	
+
 	implicit none
 
 	integer :: i, j, k
 	real(8) :: bet, alfx
-	
+
 	integer,intent(in) :: nk
 	real(8),dimension(nk),intent(in) :: wfk(nk)
 	real(8),dimension(0:im,0:jm),intent(in)    :: hs, usta
@@ -5905,14 +5908,14 @@ end module cbcal_m
 ! Kishi & Itakura
 !--------------------------------------------------------------------------------
 module qsucal_m
-  
+
 	use common_hh
 	use common_cmuvp
 	use common_cmhq
 	use common_cmtst
 	use fixed_bed
 	use supplying_sediment
-  
+
 	real(8), parameter :: sk = 0.008d0
 	real(8), parameter :: als = 0.14d0
 	real(8), parameter :: rw = 1.0d0
@@ -5923,7 +5926,7 @@ module qsucal_m
 	real(8), parameter :: a2 = -.1201676d0
 	real(8), parameter :: a3 = .937298d0
 	real(8), parameter :: pai = 3.141592d0
-  
+
   contains
 	!--------------------------------------------------------------------
 	subroutine qsucal(wf,rsgd)
@@ -5931,7 +5934,7 @@ module qsucal_m
 		integer :: i,j
 
 		real(8) :: wf, rsgd, ome, de
-    
+
     	if( j_qsu==0 ) then
 !$omp do private( i, j, ome )
 			do j = 1, ny
@@ -5964,7 +5967,7 @@ module qsucal_m
 
 	subroutine qsucal_mix( qsuk, tsk, tsck, p_m, tsci0, wfk, ddk, usta, hs, vti, nk )
 		implicit none
-		
+
 		integer :: i, j, k
 		real(8) :: ome, bsk, de
 
@@ -6044,7 +6047,7 @@ end module     qsucal_m
 
 !-----------------------------------------------------------------------
 module c_secondary_m
-  
+
   use common_hh
   use common_cmconf1	!h101019 conf
 
@@ -6054,10 +6057,10 @@ contains
 
   subroutine alloc_c_secondary_temp_variables
     implicit none
-    
+
     allocate( ctr(im,jm) )
     ctr = 0.d0
-    
+
   end subroutine alloc_c_secondary_temp_variables
   ! -------------------------------------------------------------
   subroutine c_secondary(c,u,hs,sr,theta)
@@ -6065,7 +6068,7 @@ contains
 
     integer :: i,j
     real(8) :: theta
-    
+
     real(8),dimension(0:im,0:jm),intent(inout) :: c
     real(8),dimension(0:im,0:jm),intent(in)    :: u, sr, hs
 
@@ -6096,22 +6099,22 @@ end module     c_secondary_m
 
 module c_transport_m
 	use common_hh
-	
+
 	implicit none
-	
+
 	double precision,dimension(:,:),allocatable :: quc, qvc, dcdxi, dcdet, source
-	
+
   contains
-  
+
     subroutine alloc_c_transport_temp_variables
       implicit none
-      
+
       allocate( quc(0:im,0:jm), qvc(0:im,0:jm) )
       allocate( dcdxi(0:im,0:jm), dcdet(0:im,0:jm) )
       allocate( source(0:im,0:jm) )
 
       quc = 0.d0;	qvc = 0.d0;	dcdxi = 0.d0;	dcdet = 0.d0;	source = 0.d0
-   
+
     end subroutine alloc_c_transport_temp_variables
 
     subroutine c_transport(wf,dsmt)
@@ -6232,10 +6235,10 @@ end module c_transport_m
 
 !-----------------------------------------------------------------------
 module ecoefs_m
-  
+
   real(8) gamma_c
 contains
-  
+
   subroutine ecoefs(phi0,h0,us0,wf,theta_cx)
     implicit none
     real(8), parameter :: skp = 0.4
@@ -6256,7 +6259,7 @@ contains
          +sb1*(eg*(g_f(4)-4.*g_f(3)+12.*g_f(2)-24.*g_f(1)+24.)-24.) &
          +sc1*(eg*(g_f(6)-6.*g_f(5)+30.*g_f(4)-120.*g_f(3)+360.*g_f(2)- &
          720.*g_f(1)+720.)-720.)+sd1*(eg-1.)
-         
+
          theta_cx=omg_c*6.*phi0/(a_c*skp)*(3./(3.-beta_c))**2 &
          * g_f(1) / (1.-dexp(-gamma_c))
   end subroutine ecoefs
@@ -6273,18 +6276,18 @@ end module     ecoefs_m
 
 !-----------------------------------------------------------------------
 module snucal_m
-  
+
   use common_hh
   use common_cmsui
   use common_cmcf
 contains
-  
+
   subroutine snucal(usta,hs,snu00,snu,snu_x)
     implicit none
 
     integer :: i,j
     real(8) :: snu00
-    
+
     real(8),dimension(0:im,0:jm),intent(in)    :: usta, hs
     real(8),dimension(0:im,0:jm),intent(inout) :: snu, snu_x
 
@@ -6314,7 +6317,7 @@ end module     snucal_m
 !-----------------------------------------------------------------------
 
 module hqtcal_m
-  
+
   use common_hh
   use common_cmhq
   use common_qhyd
@@ -6342,7 +6345,7 @@ contains
     qmax_t=maxval(q_ups_t)	!h101019 conf
     qmin = qmax/1000.d0
     qmin_t=qmax_t/1000.d0	!h101019 conf
-    
+
     !
     b_ups = 0.d0
     do j = 1, ny
@@ -6365,7 +6368,7 @@ contains
     if( slope < 1e-8 ) then
        if(h_down > -100.d0) then
           h00 = h_down   - emin(nx)
-       else 
+       else
           h00 = h_dse(0) - emin(nx)
        end if
        if(h00 < 1e-4) h00 = 1e-4
@@ -6375,7 +6378,7 @@ contains
     if(slope_up.lt.1e-8) then
        if(h_down.gt.-100.d0) then
           h00=h_down-emin(nx)
-       else 
+       else
           h00=h_dse(0)-emin(nx)
        end if
        if(h00.lt.1e-4) h00=1e-4
@@ -6411,7 +6414,7 @@ contains
        if(j_conf.eq.0) then		!h101019 conf
           jss1=1
           jss2=ny
-       else 
+       else
           jss1=j_m1+1
           jss2=j_m2
        end if
@@ -6479,7 +6482,7 @@ contains
           qcc=0.
           do i=i_t1+1,i_t2
              hs1=hh-eta(i,j_t2+js2)
-             
+
              if(hs1.gt.0. .and. ijo_in(i,j_t2+js2)==0 ) then
                 as=hs1*dn(i,j_t2+js2)
                 u0=1.d0/snmm(i,j_t2+js2)*hs1**(2.d0/3.d0)*dsqrt(slope_up_t)
@@ -6543,7 +6546,7 @@ contains
           h_dse(n) = hh + hplus
        elseif( j_wl == 0 ) then
           h_dse(n) = h_down
-			 
+
        end if
 103    continue
        if( j_wl/=1 ) then
@@ -6570,7 +6573,7 @@ contains
 		qmax		= q_main
 		qmax_t	= q_tri
 		qmin		= qmax*0.0001d0
-		qmin_t	= qmax_t*0.0001d0 
+		qmin_t	= qmax_t*0.0001d0
 !
 		b_ups = 0.d0
 		do j = 1, ny
@@ -6595,7 +6598,7 @@ contains
 !
 		nnym = (j_t2+j_t1)*0.5d0
 		nnxm = (i_t2+i_t1)*0.5d0
-		
+
 		if( j_conf==1 ) then
 			hsmax2_t = (snmm(1,nnym)*qmax_t/(chb_t(1)*dsqrt(slope_up_t)))**0.6d0*100.d0
 		else if( j_conf>=2 ) then
@@ -6607,11 +6610,11 @@ contains
 		if( j_conf==0 ) then
 			jss1 = 1
 			jss2 = ny
-		else 
+		else
 			jss1 = j_m1+1
 			jss2 = j_m2
 		end if
-		
+
 		emin(1) = 9999.d0
 		do j=1,ny
 			emin(1) = min( emin(1), eta(1,j) )
@@ -6620,14 +6623,14 @@ contains
 		if( q_main<=1e-6 ) then
 			h_main = emin(1)
 		else
-		
+
 			hmax1 = emin(1)+hsmax*100.d0
 			hmin1 = emin(1)
-			
+
 			do
 				hh    = (hmax1+hmin1)*0.5d0
 				qcc = 0.d0
-			
+
 				do j=jss1,jss2
 					hs1 = hh - eta(1,j)
 					if( hs1>hmin .and. ijo_in(1,j)==0 ) then
@@ -6637,17 +6640,17 @@ contains
 						qcc = qcc + qs
 					end if
 				end do
-			
+
 !				if( dabs(qcc-q_main)<qmin ) exit
 				if( dabs(qcc-q_main)<q_main*0.001d0 ) exit
-			
+
 				if( qcc>q_main ) then
 					hmax1 = hh
 				else
 					hmin1 = hh
 				end if
 			end do
-			
+
 			h_main = hh
 
 		end if
@@ -6655,22 +6658,22 @@ contains
 	! 上流端水位の計算（支川側）
 !
 		if( j_conf==1 ) then
-			
+
 			emin_t(1) = 99999.d0
 			do j=j_t1+1,j_t2
 				emin_t(1) = min( emin_t(1), eta(1,j) )
 			end do
-			
+
 			if( q_tri<=1e-6 ) then
 				h_tri = emin_t(1)
 			else
 				hmax1 = emin_t(1)+hsmax2_t*100.d0
 				hmin1 = emin_t(1)
-				
-				do 
+
+				do
 					hh = (hmax1+hmin1)*.5d0
 					qcc = 0.d0
-					
+
 					do j=j_t1+1,j_t2
 						hs1 = hh-eta(1,j)
 						if( hs1>hmin .and. ijo_in(1,j)==0 ) then
@@ -6680,37 +6683,37 @@ contains
 							qcc = qcc+qs
 						end if
 					end do
-						
+
 !					if( dabs(qcc-q_tri)<qmin_t ) exit
 					if( dabs(qcc-q_tri)<q_tri*0.001d0 ) exit
-					
+
 					if( qcc>q_tri ) then
 						hmax1 = hh
 					else
 						hmin1 = hh
 					end if
 				end do
-				
+
 				h_tri = hh
 			end if
 !
 		else if( j_conf>=2 ) then
-			
+
 			emin_t2(j_t2+js2) = 99999.d0
 			do i=i_t1+1,i_t2
 				emin_t2(j_t2+js2) = min( emin_t2(j_t2+js2), eta(i,j_t2+js2) )
 			end do
-		
+
 			if( q_tri<=1e-6 ) then
 				h_tri = emin_t2(j_t2+js2)
 			else
 				hmax1 = emin_t2(j_t2+js2)+hsmax2_t2*100.d0
 				hmin1 = emin_t2(j_t2+js2)
-								
+
 				do
 					hh = (hmax1+hmin1)*.5d0
 					qcc = 0.d0
-					
+
 					do i=i_t1+1,i_t2
 						hs1 = hh-eta(i,j_t2+js2)
 						if( hs1>hmin .and. ijo_in(i,j_t2+js2)==0 ) then
@@ -6720,17 +6723,17 @@ contains
 							qcc = qcc+qs
 						end if
 					end do
-					
+
 !					if( dabs(qcc-q_tri)<qmin_t ) exit
 					if( dabs(qcc-q_tri)<q_tri*0.001d0 ) exit
-					
+
 					if( qcc>q_tri ) then
 						hmax1 = hh
 					else
 						hmin1 = hh
 					end if
 				end do
-				
+
 				h_tri = hh
 			end if
 		end if
@@ -6741,7 +6744,7 @@ end module     hqtcal_m
 
 !-----------------------------------------------------------------------
 module upstream_m
-  
+
   use common_hh
   use common_cmuv
   use common_cmxy
@@ -6751,7 +6754,7 @@ module upstream_m
   use common_cmsn
   use common_cmsui
   use common_cmconf1
-  
+
   real(8),dimension(:),allocatable :: uinti, hsin
   real(8),dimension(:),allocatable :: uinti2, hsin2
 
@@ -6759,18 +6762,18 @@ contains
 
   subroutine alloc_upstream_temp_variables
     implicit none
-    
+
     allocate( uinti(0:jm), hsin(0:jm) )
     allocate( uinti2(0:im), hsin2(0:im) )
 
     uinti=0.d0; hsin=0.d0; uinti2=0.d0; hsin2=0.d0
-   
+
   end subroutine alloc_upstream_temp_variables
-  
+
   !----------------------------------------------------------------
   subroutine upstream(hin,hin_t,qin,qin_t,slope,slope_t,j_upv)	!h101019
     implicit none
-    
+
     integer :: i,j
 
     real(8) :: hin, hin_t, qin, qin_t, slope, slope_t, qc0, as, qdiff
@@ -6865,7 +6868,7 @@ contains
           qu(0,j)=qu(0,j)/qdiff
           q_xi(0,j)=yu(0,j)*hsin(j)/sj(1,j)
           yun(0,j)=yu(0,j)
-          qc_t(0)=qc_t(0)+qu(0,j)      
+          qc_t(0)=qc_t(0)+qu(0,j)
        end do
        !
     else if(j_conf.ge.2.and.qin_t.gt.0.) then
@@ -6892,7 +6895,7 @@ contains
        do i=i_t1+1,i_t2
           if(ijo_in(i,j_t2+js2).eq.0) then
              yv(i,j_t2)=uinti2(i)/qdiff*et_r_vp(i,j_t2)
-          else 
+          else
              yv(i,j_t2)=0.d0
           end if
           qv(i,j_t2)=qv(i,j_t2)/qdiff
@@ -6902,13 +6905,13 @@ contains
        end do
     end if
     !				!h101019 conf
-    
+
   end subroutine upstream
 end module     upstream_m
 
 !-----------------------------------------------------------------------
 module downstream_m
-  
+
   use common_hh
   use common_cmhq
   use common_cmxy
@@ -6920,7 +6923,7 @@ contains
 	 integer, intent(in) :: j_wl
     integer :: i,j
 
-    
+
     real(8),intent(in) :: hnx
 	 if(j_wl ==3)then
 		 do j=1, ny
@@ -6947,7 +6950,7 @@ end module     downstream_m
 
 !--------------------------------------------------------------------------------
 module snucal_ke_m
-  
+
   use common_hh
   use common_cmuv
   use common_cmyp
@@ -6957,11 +6960,11 @@ contains
   !----------------------------------------------------------------
   subroutine snucal_ke(hs,yk,yep,c_mu0,snu00,snu,snu_x)
     implicit none
-    
+
     integer :: i,j
 
     real(8) :: c_mu0, snu00
-    
+
     real(8),dimension(0:im,0:jm),intent(in)    :: hs, yk, yep
     real(8),dimension(0:im,0:jm),intent(inout) :: snu, snu_x
     !
@@ -6994,7 +6997,7 @@ end module     snucal_ke_m
 
 !--------------------------------------------------------------------------------
 module source_ke
-  
+
   use common_hh
   use common_cmkep
   use common_cmsui
@@ -7024,7 +7027,7 @@ contains
     implicit none
     integer :: i,j
     real(8) :: c_1e, c_2e
-    
+
     real(8),dimension(0:im,0:jm),intent(in)    :: yep, yk, hs
     real(8),dimension(0:im,0:jm),intent(inout) :: yepn
 
@@ -7044,19 +7047,19 @@ end module     source_ke
 
 !--------------------------------------------------------------------------------
 module ypcal_ini_m
-  
+
   use common_hh
   use common_cmxy
   use common_cmyp
   use common_cmsui
-  
+
   real(8),dimension(:,:),allocatable :: xref, yref
 
 contains
 
   subroutine alloc_ypcal_ini_variables
     implicit none
-    
+
     allocate( xref(0:im,0:jm), yref(0:im,0:jm) )
     xref = 0.d0;	yref = 0.d0
 
@@ -7065,7 +7068,7 @@ contains
   subroutine ypcal_ini(us0,h0,snu00,rho)
     implicit none
     integer :: i,j
-    
+
     real(8) :: us0, h0, snu00, rho, xp, yp, dis
     integer :: jj
 
@@ -7130,7 +7133,7 @@ end module     ypcal_ini_m
 
 !--------------------------------------------------------------------------------
 module ypcal_m
-  
+
   use common_hh
   use common_cmyp
   use common_cmsui
@@ -7154,7 +7157,7 @@ end module     ypcal_m
 
 !--------------------------------------------------------------------------------
 module wall_ke_m
-  
+
   use common_hh
   use common_cmyp
 
@@ -7185,7 +7188,7 @@ end module     wall_ke_m
 
 !--------------------------------------------------------------------------------
 module phkecal_m
-  
+
   use common_hh
   use common_cmuv
   use common_cmuvp
@@ -7216,7 +7219,7 @@ contains
              ph(    i,j) = 0.d0
              pkv(   i,j) = 0.d0
              pev(   i,j) = 0.d0
-          else 
+          else
              xi_r_0 = xi_r_up(i-1,j)+xi_r_up(i,j)
              et_r_0 = et_r_vp(i,j-1)+et_r_vp(i,j)
              dudx_d = ( -yu(i-1,j)+yu(i,j) )*r_dxi
@@ -7248,9 +7251,9 @@ end module     phkecal_m
 
 !--------------------------------------------------------------------------------
 module schange_m
-  
+
   use common_hh
-  
+
   real(8),dimension(:,:),allocatable :: xe, ye, xf, yf
   real(8),dimension(:),allocatable :: xct, yct, xct_o, yct_o &
          , s_o, s, xr, xl, yr, yl, xr_o, xl_o, yr_o, yl_o
@@ -7260,7 +7263,7 @@ contains
 
   subroutine alloc_schange_temp_variables
     implicit none
-    
+
     allocate( xe(0:im,0:jm), ye(0:im,0:jm), xf(0:im,0:jm), yf(0:im,0:jm) )
     allocate( xct(0:im), yct(0:im), xct_o(0:im), yct_o(0:im) )
     allocate( s_o(0:im), s(0:im), xr(0:im), xl(0:im), yr(0:im), yl(0:im) )
@@ -7270,7 +7273,7 @@ contains
     xe=0.d0; ye=0.d0; xf=0.d0; yf=0.d0; xct=0.d0; yct=0.d0; xct_o=0.d0; yct_o=0.d0
     s_o=0.d0; s=0.d0; xr=0.d0; xl=0.d0; yr=0.d0; yl=0.d0; xr_o=0.d0; xl_o=0.d0
     yr_o=0.d0; yl_o=0.d0; dbl=0.d0
-    
+
   end subroutine alloc_schange_temp_variables
   ! -----------------------------------------------------------
   subroutine schange(mtime,x,y,mave)
@@ -7368,7 +7371,7 @@ contains
        !
        do j = 0, ny, ny
           jfd = 0
-          do m = 0, nx-1 
+          do m = 0, nx-1
              call find1( xct(0), yct(0), xct(1), yct(1) &
                   , x(m,j), y(m,j), x(m+1,j), y(m+1,j), jfd, xk, yk )
              if( jfd > 0 ) goto 201
@@ -7573,7 +7576,7 @@ subroutine findits(xr1,yr1,xr2,yr2,xr3,yr3,xl1,yl1,xl2,yl2,jfd,jrl,jtr,xk,yk)
   real(8) :: xr1,yr1,xr2,yr2,xr3,yr3,xl1,yl1,xl2,yl2,xk,yk &
        , x1, x2, y1,y2,rs,cost,sint,c0,s0,r1,cost1,sint1,r2,cost2,sint2,t1,t2
   integer :: jrl,jtr
- 
+
   jfd=0
   !
   ! ------ line perpedicular to (r1--r3) passing r2 ----> line "L"
@@ -7675,7 +7678,7 @@ end subroutine kouten
 !--------------------------------------------------------------------------------
 subroutine s3n(x,y,xx,yy,n,nn)
   implicit none
-  
+
   integer :: i,j,k,n
 
   real(8) :: xxi, smj, smj1, yj,yj1,hj1,xj1,xj,hj2,hj3
@@ -7789,7 +7792,7 @@ end function f_chunk
 !
 module cell2grid_m
   use common_hh
-  
+
  contains
 
   ! ------------------------------------------------------------- !
@@ -7837,7 +7840,7 @@ module mix_m
   use common_hh
   use fixed_bed
   implicit none
-  
+
   real(8),dimension(:,:),allocatable :: ubxi, ubet, uang, dzdn
   real(8),dimension(:,:,:),allocatable :: qbti_mix
 
@@ -7848,14 +7851,14 @@ contains
   subroutine alloc_mix_temp_variables(nk)
     implicit none
     integer(4),intent(in) :: nk
-    
+
     allocate( ubxi(0:im,0:jm), ubet(0:im,0:jm) )
     allocate( uang(0:im,0:jm), dzdn(0:im,0:jm) )
     allocate( qbti_mix(0:im,0:jm,nk) )
 
 	allocate( quck(0:im,0:jm,nk), qvck(0:im,0:jm,nk) )
   	allocate( dcdxi_k(0:im,0:jm,nk), dcdet_k(0:im,0:jm,nk), sourcek(0:im,0:jm,nk) )
-    
+
     ubxi = 0.d0;	ubet = 0.d0
     uang = 0.d0;	dzdn = 0.d0
 
@@ -7863,7 +7866,7 @@ contains
 	dcdxi_k = 0.d0;	dcdet_k = 0.d0;	sourcek = 0.d0
 
     qbti_mix = 0.d0;
-   
+
   end subroutine alloc_mix_temp_variables
   ! --------------------------------------------------------------------
   subroutine mixini(snu00,dm0)
@@ -7909,7 +7912,7 @@ contains
           pmk0(k,0) = (pdist_m_100(k,0)-pdist_m_100(k-1,0))/100.d0
           dm0 = dm0+ddk(k)*pmk0(k,0)
        end do
-    
+
        do n=0,nm_cell
           do k=1,nk
              pmk0(k,n) = (pdist_m_100(k,n)-pdist_m_100(k-1,n))*0.01d0
@@ -7917,20 +7920,20 @@ contains
        end do
 
        if( j_mix_dis_dep==0 ) then
-          
+
           do n=0,nm_cell
              do k=1,nk
                 pdk0(k,n) = pmk0(k,n)
              end do
           end do
        else
-       
+
           do n=0,nm_cell
              do k=1,nk
                 pdk0(k,n) = (pdist_d_100(k,n)-pdist_d_100(k-1,n))*0.01d0
              end do
           end do
-       
+
        end if
 
     else
@@ -7941,33 +7944,33 @@ contains
           pmk0(k,0) = pdist_m_100(k,0)/100.d0
           dm0 = dm0+ddk(k)*pmk0(k,0)
        end do
-    
+
        do n=0,nm_cell
           do k=1,nk
              pmk0(k,n) = pdist_m_100(k,n)*0.01d0
           end do
        end do
-       
+
        if( j_mix_dis_dep==0 ) then
-       
+
           do n=0,nm_cell
              do k=1,nk
                 pdk0(k,n) = pmk0(k,n)
              end do
           end do
-       
+
        else
-       
+
           do n=0,nm_cell
              do k=1,nk
                 pdk0(k,n) = pdist_d_100(k,n)*0.01d0
              end do
           end do
-       
+
        end if
-       
+
     end if
-    
+
     do n=0,nm_cell
        p_tot = 0.d0
        do k=1,nk
@@ -7989,7 +7992,7 @@ contains
          end do
        end if
     end do
-    
+
     !
     do k=1,nk
        call usc(ddk(k),uci(k),spec,snu00,g)
@@ -8007,9 +8010,9 @@ contains
     real(8),intent(in) :: snu00
     integer :: i, j, k, n
     integer :: i_nbmin, j_nbmin, i_nbmax, j_nbmax, nbmax, nbmin
-    
+
     !  --- setting of the bottom elevation of movable bed --- !
-    
+
     do j=1,ny
     	do i=1,nx
     		if( ij_ero(i,j)==1 ) then
@@ -8023,11 +8026,11 @@ contains
 	    	end if
     	end do
     end do
-   
+
     !
     !  ---setting for mixture bed material ------
     !
-    
+
     nbmin = 999
     nbmax =-999
     do j=1,ny
@@ -8237,13 +8240,13 @@ contains
             ubet(i,j) = ( ( et_x(i,j)*coss+et_y(i,j)*sins)*us_bed(i,j) &
                   			+ ( - et_x(i,j)*sins+et_y(i,j)*coss)*un_bed(i,j) ) / &
                   				( et_r(i,j) + et_r(i-1,j) ) * 2.d0
-                  				
+
             ubnvb(i,j) = un_bed(i,j)/us_bed(i,j)
 
             uxbed = coss*us_bed(i,j)-sins*un_bed(i,j)
             uybed = sins*us_bed(i,j)+coss*un_bed(i,j)
-				vb = dsqrt( uxbed**2.d0+uybed**2.d0 ) 
-	            
+				vb = dsqrt( uxbed**2.d0+uybed**2.d0 )
+
 	!			if( ubxiti(i,j)>0.d0 ) then
 	!				if( i==nx ) then
 	!					dzdxi = (-eta(i-1,j)+eta(i,j))*r_dxi*xi_r_up(i-1,j)
@@ -8257,7 +8260,7 @@ contains
 	!					dzdxi = (-eta(i-1,j)+eta(i,j))*r_dxi*xi_r_up(i-1,j)
 	!				end if
 	!			end if
-				
+
 	!			if( ubetti(i,j)<0.d0 ) then
 	!				if( j==1 ) then
 	!					dzdet = (-eta(i,j)+eta(i,j+1))*r_det*et_r_vp(i,j)
@@ -8269,7 +8272,7 @@ contains
 	!					dzdet = (-eta(i,j-1)+eta(i,j))*r_det*et_r_vp(i,j-1)
 	!				else
 	!					dzdet = (-eta(i,j)+eta(i,j+1))*r_det*et_r_vp(i,j)
-	!				end if			
+	!				end if
 	!			end if
 
 	!			theta_x(i,j) = datan(dzdxi)
@@ -8288,7 +8291,7 @@ contains
 						dzdxi = (-eta(i-1,j)+eta(i,j))*r_dxi
 					end if
 				end if
-				
+
 				if( ubet(i,j)<0.d0 ) then
 					if( j==1 ) then
 						dzdet = (-eta(i,j)+eta(i,j+1))*r_det
@@ -8310,7 +8313,7 @@ contains
 !				else
 !					dzdxi = (-eta(i-1,j)+eta(i+1,j))*r_dxi*0.5d0
 !				end if
-				
+
 !				if( j==1 ) then
 !					dzdet = (-eta(i,j)+eta(i,j+1))*r_det
 !				else if( j==ny ) then
@@ -8321,7 +8324,7 @@ contains
 
 				theta_x(i,j) = datan(xi_x(i,j)*dzdxi+et_x(i,j)*dzdet)
 				theta_y(i,j) = datan(xi_y(i,j)*dzdxi+et_y(i,j)*dzdet)
-				
+
 				cos_bed(i,j) = uxbed / vb
 	         sin_bed(i,j) = uybed / vb
 
@@ -8329,7 +8332,7 @@ contains
 						   +(et_x(i,j)*coss+et_y(i,j)*sins)*dzdet
 				dzdn(i,j) = (-xi_x(i,j)*sins+xi_y(i,j)*coss)*dzdxi		&
 						   +(-et_x(i,j)*sins+et_y(i,j)*coss)*dzdet
-	       
+
 				kc(i,j) = Dmax1(1.d0+1.d0/mu_s*((1.d0/spec+1.d0)*cos_bed(i,j)*dtan(theta_x(i,j))	&
 									+sin_bed(i,j)*dtan(theta_y(i,j))),0.5D0)
 
@@ -8337,11 +8340,11 @@ contains
 
 	    		btheta_y(i,j) = 1.d0/(1.d0+dtan(theta_x(i,j))**2.d0+dtan(theta_y(i,j))**2.d0)
 	    		btheta_x(i,j) = btheta_y(i,j)+dcos(theta_x(i,j))**2.d0/spec
-					   
+
           end if
        end do
     end do
-    
+
 !$omp do private( i, j, k, us_e, ts_e )
 		do j=1,ny
 			do k=1,nk
@@ -8373,7 +8376,7 @@ contains
 				end do
 			end do
 		end do
-		
+
 	if( j_qb_vec==0 ) then
     !
     ! ------- qb_xi_mix -------------------------
@@ -8387,7 +8390,7 @@ contains
 				er = et_r(i,j)
 				dzdxi = (-eta(i,j)+eta(i+1,j))*r_dxi
 				cost = (cos_t(i+1,j)+cos_t(i,j))*.5d0
-          
+
 				if( j == 1 ) then
 					dzdet = ( -(eta(i,j)+eta(i+1,j))+(eta(i,j+1)+eta(i+1,j+1)) ) * 0.5d0 *r_det
 !					if(eta(i+1,j)>=b_elv(1,i+1).or.eta(i,j)>=b_elv(1,i)) dzdet = 0.d0
@@ -8418,12 +8421,12 @@ contains
 						qb_xi_mix(i,j,k) = 0.d0
 					else
 						qbxi = xi_r_up(i,j)*(uang(i,j)-gamma_m*dsqrt(tsci_up/tsi_up)*dzdn(i,j))
-						
+
 						qb_xi_mix(i,j,k) = ( (qbxi+dabs(qbxi))*qbti_mix(i  ,j,k)	&
 												  +(qbxi-dabs(qbxi))*qbti_mix(i+1,j,k) )*0.5d0
-				
+
 				!		qb_xi_mix(i,j,k) = xi_r_up(i,j)*qb*(uang(i,j)-gamma_m*dsqrt(tsci_up/tsi_up)*dzdn(i,j))
-						
+
 					end if
 				end do
 			end do
@@ -8448,7 +8451,7 @@ contains
 				end do
 			end do
 		end if
-    
+
     !
     ! ------- qb_et_mix -------------------------
     !
@@ -8536,10 +8539,10 @@ contains
 							else
 								qbet = er*(uang(i,j)-gamma_m*dsqrt(tsci_vp/tsi_vp) &
 										*(er*dzdet+xr*cost*dzdxi))*bh_alpha
-										
+
 								qb_et_mix(i,j,k) = ( (qbet+dabs(qbet))*qbti_mix(i,j  ,k)	&
 														  +(qbet-dabs(qbet))*qbti_mix(i,j+1,k) )*0.5d0
-						
+
 						!		qb_et_mix(i,j,k) = er*qb*(uang(i,j)-gamma_m*dsqrt(tsci_vp/tsi_vp) &
 						!									*(er*dzdet+xr*cost*dzdxi))*bh_alpha
 							end if
@@ -8558,7 +8561,7 @@ contains
 				end do
 			end do
 		end if
-   
+
    !
 		if(jrep == 1) then
 !$omp do private(j,k)
@@ -8593,14 +8596,14 @@ contains
 				end if
 			end do
 		end do
-    
+
 !$omp do private(i,j)
 		do j=1,ny
 			do i=0,nx
 				qb_xi(i,j) = 0.d0
 			end do
 		end do
-    
+
 !$omp do private(i,j,k)
 		do j=1,ny
 			do i=0,nx
@@ -8609,14 +8612,14 @@ contains
 				end do
 			end do
 		end do
-	
+
 !$omp do private(i,j)
 		do j=0,ny
 			do i=1,nx
 				qb_et(i,j) = 0.d0
 			end do
 		end do
-    
+
 !$omp do private(i,j,k)
 		do j=0,ny
 			do i=1,nx
@@ -8627,7 +8630,7 @@ contains
 		end do
 
 	else
-	
+
 !$omp do private(i,j,k,d_sed1,d_sed2,beta_a,coss,sins)
     	do j=1,ny
     		do k=1,nk
@@ -8678,7 +8681,7 @@ contains
 				qbykc(i,ny+1,k) = qbykc(i,ny,k)
 			end do
 		end do
-		
+
 !$omp do private(i,j,k)
 		do j=0,ny+1
 			do i=0,nx+1
@@ -8696,9 +8699,9 @@ contains
 !$omp& et_x2,et_y2,sj_xi1,sj_et1,sj_xi2,sj_et2,ip1,im1,jp1,jm1)
     	do j=1,ny
     		do i=1,nx
-    		
+
     			dex(i,j) = 0.d0
-    		
+
 				if( ubxi(i,j)<0.d0 ) then
 					ip1 = 1
 					im1 = 0
@@ -8706,7 +8709,7 @@ contains
 					ip1 = 0
 					im1 = 1
 				end if
-				
+
 				if( ubet(i,j)<0.d0 ) then
 					jp1 = 1
 					jm1 = 0
@@ -8727,9 +8730,9 @@ contains
     			et_x2   = (et_x(i-im1,j-jm1)+et_x(i+ip1,j-jm1))*0.5d0
     			et_y2   = (et_y(i-im1,j-jm1)+et_y(i+ip1,j-jm1))*0.5d0
     			sj_et2  = (  sj(i-im1,j-jm1)+  sj(i+ip1,j-jm1))*0.5d0
-    			
+
     			do k=1,nk
-				
+
 	    			qbx_xi1 = (qbxkc(i+ip1,j-jm1,k)+qbxkc(i+ip1,j+jp1,k))*0.5d0
 	    			qby_xi1 = (qbykc(i+ip1,j-jm1,k)+qbykc(i+ip1,j+jp1,k))*0.5d0
 	    			qbx_xi2 = (qbxkc(i-im1,j-jm1,k)+qbxkc(i-im1,j+jp1,k))*0.5d0
@@ -8743,12 +8746,12 @@ contains
 	    			qbxi2 = (xi_x2*qbx_xi2+xi_y2*qby_xi2)/sj_xi2
 	    			qbet1 = (et_x1*qbx_et1+et_y1*qby_et1)/sj_et1
 	    			qbet2 = (et_x2*qbx_et2+et_y2*qby_et2)/sj_et2
-	    			
+
 	    			if( j_conf==1 .or. j_bank==0 .or. i<=i_erosion_start .or. i>=nx-i_erosion_end) then
 		    			if( j==1  ) qbet2 = 0.d0
 		    			if( j==ny ) qbet1 = 0.d0
 		    		end if
-		    		
+
 	    			if( ijo_in(i,j)==0 ) then
 	    				dex_mix(i,j,k) = -sj(i,j)*dt*dsmt*	&
 	    								( (qbxi1-qbxi2)*r_dxi+(qbet1-qbet2)*r_det )*csm
@@ -8758,7 +8761,7 @@ contains
 	    		end do
     		end do
     	end do
-    
+
     end if
 !!$omp end single
 
@@ -8783,16 +8786,16 @@ contains
 		real(8),dimension(nk) :: p_m_new, p_t_new, p_d_new
 		real(8) :: sj_w, sj_e, sj_n, sj_s, sj_c
 		real(8) :: rsj_w, rsj_e, rsj_n, rsj_s
-   
+
 		p_m_new=0.d0; p_t_new=0.d0; p_d_new=0.d0
 		p_tot = 0.d0
-		
+
    ! -------------------------------------------------------------
    !
    ! ----- cal. of bed elevation changes -----
    !       河床高の変更の計算
    !
-   
+
 !!$omp single
 		if( j_qb_vec==0 ) then
 
@@ -8801,7 +8804,7 @@ contains
 			do j=1,ny
 				do i=1,nx
 					dex(i,j) = 0.d0
-						
+
 					sj_s = sj(i  ,j-1)
 					sj_w = sj(i-1,j  )
 					sj_c = sj(i  ,j  )
@@ -8842,7 +8845,7 @@ contains
 					end do
 				end do
 			end do
-      
+
 !$omp do private(i,j,k)
 			do j=1,ny
 				do i=nx-1,nx+1
@@ -8882,7 +8885,7 @@ contains
 				end do
 			end do
 		end if
-   
+
 		if( j_conf>=2 ) then
 			if( j_qbup==0 ) then
 !$omp do private(i,k)
@@ -8902,7 +8905,7 @@ contains
 				end do
 			end if
 		end if
- 
+
 !$omp do private(i,j,k)
 		do j=1,ny
 			do i=1,nx
@@ -8935,16 +8938,16 @@ contains
 		do j=1,ny
 			do i=1,nx
 				eta(i,j) = eta(i,j)+dex(i,j)
-				
+
 				if( phi(i,j)<1.d0 ) then
 					call sorting_fixed( i, j, nb_new, e_t_new, p_m_new, p_t_new, p_d_new, p_tot )
 				else
 					call sorting_movable( i, j, nb_new, e_t_new, p_m_new, p_t_new, p_d_new, p_tot )
 				end if
-				
+
 				e_t(i,j) = e_t_new
 				nb(i,j) = nb_new
-         
+
 				do k=1,nk
 					p_m(i,j,k) = p_m_new(k)
 					p_t(i,j,k) = p_t_new(k)
@@ -9040,15 +9043,15 @@ contains
 		real(8),dimension(nk) :: p_m_new, p_t_new, p_d_new
 		real(8) :: sj_w, sj_e, sj_n, sj_s, sj_c
 		real(8) :: rsj_w, rsj_e, rsj_n, rsj_s
-   
+
 		p_m_new=0.; p_t_new=0.; p_d_new=0.
-		
+
    ! -------------------------------------------------------------
    !
    ! ----- cal. of bed elevation changes -----
    !       河床高の変更の計算
    !
-   
+
 !!$omp single
    		if( j_qb_vec==0 ) then
 !$omp do private( i, j, k, dqbxi, dqbet		&
@@ -9056,7 +9059,7 @@ contains
 				do j=1,ny
 					do i=1,nx
 						dex(i,j) = 0.d0
-							
+
 						sj_s = sj(i  ,j-1)
 						sj_w = sj(i-1,j  )
 						sj_c = sj(i  ,j  )
@@ -9067,7 +9070,7 @@ contains
 						rsj_w = 2.d0/(sj_w+sj_c)
 						rsj_e = 2.d0/(sj_c+sj_e)
 						rsj_n = 2.d0/(sj_c+sj_n)
-							
+
 						if(hs(i,j) > hmin) then
 						do k=1,nk
 							dqbxi = (-qb_xi_mix(i-1,j,k)*rsj_w+qb_xi_mix(i,j,k)*rsj_e)*r_dxi
@@ -9105,7 +9108,7 @@ contains
 					end do
 				end do
 			end do
-      
+
 !$omp do private(i,j,k)
 			do j=1,ny
 				do i=nx-1,nx+1
@@ -9145,7 +9148,7 @@ contains
 				end do
 			end do
 		end if
-   
+
 		if( j_conf>=2 ) then
 			if( j_qbup==0 ) then
 !$omp do private(i,k)
@@ -9195,10 +9198,10 @@ contains
 				else
 					call sorting_movable( i, j, nb_new, e_t_new, p_m_new, p_t_new, p_d_new, p_tot )
 				end if
-				
+
 				e_t(i,j) = e_t_new
 				nb(i,j) = nb_new
-         
+
 				do k=1,nk
 					p_m(i,j,k) = p_m_new(k)
 					p_t(i,j,k) = p_t_new(k)
@@ -9286,10 +9289,10 @@ contains
 		integer,intent(out) :: nb_new
 		double precision,intent(out) :: e_t_new, p_tot
 		double precision,dimension(nk),intent(out) :: p_m_new, p_t_new, p_d_new
-		
+
 		integer :: k
 !		double precision :: p_tot
-		
+
 		!堆積
 		if( dex(i,j)>0.d0 ) then
 			if( e_t(i,j)+dex(i,j)<e_d ) then
@@ -9309,7 +9312,7 @@ contains
 					p_d_new(k) = p_t(i,j,k)*e_t(i,j)/e_d+(1.d0-e_t(i,j)/e_d)*p_m(i,j,k)
 				end do
 			end if
-			
+
 		!低下
 		else
 			if( e_t(i,j)+dex(i,j)>0.d0 ) then
@@ -9342,7 +9345,7 @@ contains
 				end if
 			end if
 		end if
-		
+
 		if( nb_new<0 ) then
 			write(*,*) 'Error !'		!この条件には入らないはず
 			write(*,*) 'The number of deposited layer is less than 0 at i=',i,'j=',j
@@ -9351,7 +9354,7 @@ contains
 			pause
 			stop
 		end if
-				
+
 		if( nb_new>nm ) then
 			write(*,*) 'The number of deposited layer exceeds the maximum number', nm,'at i=',i,'j=',j
 			write(*,*) 'Please change the thickness of deposited layer, &
@@ -9359,7 +9362,7 @@ contains
 			pause
 			stop
 		end if
-						
+
 		p_tot = 0.d0
 
 		do k=1,nk
@@ -9389,7 +9392,7 @@ contains
 		do k=1,nk
 			p_d_new(k) = p_d_new(k)/p_tot
 		end do
-		
+
 	end subroutine sorting_movable
 
 ! ---------------------------------------------------------------- !
@@ -9402,17 +9405,17 @@ contains
 		integer,intent(out) :: nb_new
 		double precision,intent(out) :: e_t_new, p_tot
 		double precision,dimension(nk),intent(out) :: p_m_new, p_t_new, p_d_new
-		
+
 		integer :: k
 		double precision :: emb_new
 
 		emb_new = emb(i,j)+dex(i,j)
 		nb_new = 0
-		
+
 		if( emb_new>e_m ) then
 			e_t_new = emb_new-e_m
 			emb_new = e_m
-			
+
 			do k=1,nk
 				p_m_new(k) = p_m(i,j,k)*(emb(i,j)-e_t_new)/emb_new+dex_mix(i,j,k)/emb_new
 				p_t_new(k) = p_m(i,j,k)
@@ -9420,7 +9423,7 @@ contains
 			end do
 		else if( emb_new<=0.d0 ) then
 			e_t_new = 0.d0
-			
+
 			do k=1,nk
 				p_m_new(k) = 0.d0
 				p_t_new(k) = p_m_new(k)		! ダミー
@@ -9428,21 +9431,21 @@ contains
 			end do
 		else
 			e_t_new = 0.d0
-			
+
 			do k=1,nk
 				p_m_new(k) = (emb(i,j)*p_m(i,j,k)+dex_mix(i,j,k))/emb_new
 				p_t_new(k) = p_m_new(k)		! ダミー
 				p_d_new(k) = p_t_new(k)		! ダミー
 			end do
 		end if
-				
+
 		p_tot = 0.d0
 
 		do k=1,nk
 			if( p_m_new(k)<=0.d0 ) p_m_new(k) = 0.d0
 			p_tot = p_tot+p_m_new(k)
 		end do
-		
+
 		if( p_tot>0.d0 ) then
 			do k=1,nk
 				p_m_new(k) = p_m_new(k)/p_tot
@@ -9477,7 +9480,7 @@ contains
 
 		integer :: i, j, k, n, i_noflux
 		real(8) :: dzc, ez, v_ck, wdis, depth, wdepth, wsj
-		
+
 		real(8),intent(in) :: dsmt
 
   ! ---- advection term of suspended sediment transport --- !
@@ -9555,32 +9558,32 @@ contains
 		do j=1,ny
 			do k=1,nk
 				do i=1,nx
-				
+
 					if( hs(i,j)>hmin.and.ijo_in(i,j)==0 ) then
-				
+
 					!	ez = (eta(i,j)-eta0(i,j))*p_m(k,i,j)
 					!	ez = e_m*p_m(i,j,k)
 					!	dzc = (qsuk(i,j,k)-wfk(k)*ycbk(i,j,k))*dt*dsmt
-					
+
 					!	if( dzc>ez ) then
 					!		qsuk(i,j,k) = ez/(dsmt*dt)+wfk(k)*ycbk(i,j,k)
 					!	end if
-						
+
 					!	v_ck = -(qsuk(i,j,k)-wfk(k)*ycbk(i,j,k))*dt
-						
+
 					!	if( yck(i,j,k)*hs(i,j)<v_ck ) then
 					!		ycbk(i,j,k) = (yck(i,j,k)*hs(i,j)/dt+qsuk(i,j,k))/wfk(k)
 					!	end if
-					
+
 !						ez = emb(i,j)*p_m(i,j,k)
 !						dzc = qsuk(i,j,k)*dt*dsmt
-!					
+!
 !						if( dzc>ez ) then
 !							qsuk(i,j,k) = ez/(dsmt*dt)
 !						end if
-!						
+!
 !						v_ck = wfk(k)*ycbk(i,j,k)*dt
-!						
+!
 !						if( yck(i,j,k)*whs(i,j)<v_ck ) then
 !							ycbk(i,j,k) = yck(i,j,k)*whs(i,j)/dt/wfk(k)
 !						end if
@@ -9624,7 +9627,7 @@ contains
 		implicit none
 
 		integer :: i, j, k
-		
+
 		if ( jrep==1 ) then
 !$omp do private(i,j,k)
 			do j=1,ny
@@ -9672,11 +9675,11 @@ module ebank_m
 
 	subroutine alloc_ebank_temp_variables
 		implicit none
-      
+
 		allocate( dzx(0:im,0:jm), dedn(0:im,0:jm), deds(0:im,0:jm) )
-      
+
 		dedn = 0.;  deds = 0.;
-      
+
 	end subroutine alloc_ebank_temp_variables
 
  ! ----------------------------------
@@ -9785,7 +9788,7 @@ module ebank_m
 					dzx(i,j) = dzx(i+nx-3,j)
 				end do
 			end do
-		
+
 			do i=nx-1,nx+1
 				do j=1,ny
 					dzx(i,j) = dzx(i-nx+3,j)
@@ -9797,7 +9800,7 @@ module ebank_m
 					dzx(i,j)=0.
 				end do
 			end do
-		
+
 			do j=1,ny
 				dzx(nx,j) = dzx(nx-1,j)
 			end do
@@ -9835,7 +9838,7 @@ module ebank_m
 		integer :: i, j, k, nb_new
 		real(8) :: dz1, dz2, e_t_new, p_tot
 		real(8),dimension(nk) :: p_m_new, p_t_new, p_d_new
-		
+
 		p_m_new = 0.d0; p_t_new = 0.d0; p_d_new = 0.d0
 
 		do j=1,ny
@@ -9962,7 +9965,7 @@ module ebank_m
 					end do
 				end do
 			end do
-		
+
 			do i=nx-1,nx+1
 				do j=1,ny
 					dex(i,j) = dex(i-nx+3,j)
@@ -9980,7 +9983,7 @@ module ebank_m
 					end do
 				end do
 			end do
-		
+
 			do j=1,ny
 				dex(nx,j) = dex(nx-1,j)
 				do k=1,nk
@@ -9992,16 +9995,16 @@ module ebank_m
 		do j=1,ny
 			do i=1,nx
 				eta(i,j) = eta(i,j)+dex(i,j)
-				
+
 				if( phi(i,j)<1.d0 ) then
 					call sorting_fixed( i, j, nb_new, e_t_new, p_m_new, p_t_new, p_d_new, p_tot )
 				else
 					call sorting_movable( i, j, nb_new, e_t_new, p_m_new, p_t_new, p_d_new, p_tot )
 				end if
-				
+
 				e_t(i,j) = e_t_new
 				nb(i,j) = nb_new
-         
+
 				do k=1,nk
 					p_m(i,j,k) = p_m_new(k)
 					p_t(i,j,k) = p_t_new(k)
@@ -10022,18 +10025,18 @@ module cross_sectional_output
 	use common_cmsui
 	use common_cmxy
 	implicit none
-	
-   
+
+
   contains
-  
+
 	subroutine cross_section_variables
 		implicit none
 		integer :: i,j,nnp,jss1,jss2
 		real(8) :: zmin
       double precision :: hmin10
-		
+
       hmin10 = 2. * hmin
-      
+
 !$omp do private( i, j, jss1, jss2, nnp )
 	    do i=0,nx
 	       z_ave_main(i) = 0.d0
@@ -10055,7 +10058,7 @@ module cross_sectional_output
 	          end if
 	       end do
 	       z_ave_main(i) = z_ave_main(i)/dble(nnp)
-	       
+
 	       nnp = 0
 	       do j=jss1,jss2
 	          if( ijobst(i,j)/=1.and.hsxx(i,j)>hmin10 ) then
@@ -10069,7 +10072,7 @@ module cross_sectional_output
 	         h_ave_main(i) = h_ave_main(i)/dble(nnp)
 	       end if
 	    end do
-	    
+
 	    if( j_conf==1 ) then
 !$omp do private( i, j, nnp )
 	       do i=0,i_t2
@@ -10085,7 +10088,7 @@ module cross_sectional_output
 	             end if
 	          end do
 	          z_ave_tri(i) = z_ave_tri(i)/dble(nnp)
-	          
+
 	          nnp = 0
 	          do j=j_t1,j_t2
 	             if( ijobst(i,j)/=1.and.hsxx(i,j)>hmin10 ) then
@@ -10099,7 +10102,7 @@ module cross_sectional_output
 	            h_ave_tri(i) = h_ave_tri(i)/dble(nnp)
 	          end if
 	       end do
-	       
+
 	    else if( j_conf>=2 ) then
 !$omp do private( i, j, nnp )
 	       do j=j_t1,j_t2,jxd
@@ -10115,7 +10118,7 @@ module cross_sectional_output
 	             end if
 	          end do
 	          z_ave_tri2(j) = z_ave_tri2(j)/dble(nnp)
-	          
+
 	          nnp = 0
 	          do i=i_t1,i_t2
 	             if( ijobst(i,j)/=1.and.hsxx(i,j)>hmin10 ) then
@@ -10128,10 +10131,10 @@ module cross_sectional_output
 	          else
 	            h_ave_tri2(j) = h_ave_tri2(j)/dble(nnp)
 	          end if
-	          
+
 	       end do
 	    end if
-	    
+
 !$omp do private( i, j, jss1, jss2 )
 	    do i=0,nx
 	       if( i<i_t1.or.j_conf>=2) then
@@ -10147,7 +10150,7 @@ module cross_sectional_output
 	          h_ave(i,j) = h_ave_main(i)
 	       end do
 	    end do
-	    
+
 	    if( j_conf==1 ) then
 !$omp do private(i,j)
 	       do i=0,i_t2
@@ -10157,7 +10160,7 @@ module cross_sectional_output
 	             h_ave(i,j) = h_ave_tri(i)
 	          end do
 	       end do
-	       
+
 	    else if( j_conf>=2 ) then
 !$omp do private(i,j)
 	       do j=j_t1+js1-js2,j_t2,jxd
@@ -10180,7 +10183,7 @@ end module cross_sectional_output
 		integer,intent(in) :: nk
 		real(8),dimension(0:im,0:jm,nk),intent(out) :: f_grid
 		real(8),dimension(0:im,0:jm,nk),intent( in) :: f_cen
-		
+
 		integer :: i,j,k
 
 !$omp single
@@ -10220,25 +10223,25 @@ end module cross_sectional_output
 				end do
 			end do
 		end do
-		
+
 	end subroutine center2grid_4
-	
+
 	subroutine vegetation_height
 		use common_hh
 		use common_cmxy
 		use common_cmcf
 		implicit none
-		
+
 		integer :: i, j
-		
+
 !$omp do private(i,j)
 		do j=1,ny
 			do i=1,nx
 				vege_h(i,j) = vege_el(i,j)-eta(i,j)
 				vege_h(i,j) = max( vege_h(i,j), 0.d0 )
 			end do
-		end do	
-	
+		end do
+
 	end subroutine vegetation_height
 
 !--------------------------------------------------------------------------------
@@ -10353,31 +10356,31 @@ Program Shimizu
        , ktifill, iofrg, ndeposit, ierr_tmp, nx2, ny2, nk2, lcount, ndry, iier, i_erosion_end
 
   integer :: n_parallel
-  
+
   character(50) :: mix_label, cm
 
-  
+
 !  CHARACTER (LEN=3), EXTERNAL :: get_extension !rmcd iRIC
-  
+
   !ccccccccccccccccccccccccccccccccccccccccccccccccccccccc
   !
-  !       Array for gridFile 
+  !       Array for gridFile
   !
   !ccccccccccccccccccccccccccccccccccccccccccccccccccccccc
   !
-  integer(4), dimension(:,:), pointer :: obst4, fm4, mix_cell
+  integer(4), dimension(:,:), pointer :: obst4, soft_veg_condition, fm4, mix_cell
   real(8)   , dimension(:,:), pointer :: x8, y8, z8, hs8, zb8
   real(8)   , dimension(:,:), pointer :: vege4, roughness4, vegeh
   integer(4) ni4,nj4,iobst4
   real(8) hmin8
-  
+
   ! for cngs i/0
   INTEGER :: FID, IER
   CHARACTER (LEN=3) :: fext  ! For file extension query.
   REAL(8) :: qptemp
   REAL(8), DIMENSION(:), ALLOCATABLE :: xtmp, ytmp, ytmp2
   INTEGER :: tmpint
-  
+
   ! For Hot Stat
   integer :: i_re_flag_i, i_re_flag_o, n_rest, i_tmp_count
   real(8) :: opt_tmp(0:9)
@@ -10400,7 +10403,7 @@ Program Shimizu
   g     = 9.81d0
   skp   = 0.41d0
   snu00 = 1e-6
-  
+
   lcount = 0
 
   !	Add iargc for gfortran, g95
@@ -10427,17 +10430,19 @@ Program Shimizu
      allocate (z8(ni4,nj4))
      allocate (zb8(ni4,nj4))
      allocate (hs8(ni4,nj4))
-     
+
      allocate (obst4(     ni4-1, nj4-1))
+     allocate (soft_veg_condition(     ni4-1, nj4-1))
      allocate (fm4(       ni4-1, nj4-1))
      allocate (vege4(     ni4-1, nj4-1))
      allocate (roughness4(ni4-1, nj4-1))
      allocate (vegeh     (ni4-1, nj4-1))
      allocate (mix_cell  (ni4-1, nj4-1))
-     
+
      call cg_iric_read_grid_real_node(fid,'Elevation', z8, ier)
      call cg_iric_read_grid_real_node(fid,'Elevation_zb', zb8, ier)
      call cg_iric_read_grid_integer_cell(fid,'Obstacle', obst4, ier)
+     call cg_iric_read_grid_integer_cell(fid,'soft_veg_poligon', soft_veg_condition, ier)
      call cg_iric_read_grid_integer_cell(fid,'Fix_movable', fm4, ier)
      call cg_iric_read_grid_real_cell(fid,'vege_density', vege4, ier)
      call cg_iric_read_grid_real_cell(fid,'vege_height', vegeh, ier)
@@ -10447,10 +10452,10 @@ Program Shimizu
      CALL CG_IRIC_READ_INTEGER(fid,'i_sec_hour', i_sec_hour, ier)
 
      CALL CG_IRIC_READ_INTEGER(fid,'edition', edition, ier)
-     
+
    ! ---- Parameters for Confluence -----
    !
-     
+
      CALL CG_IRIC_READ_INTEGER(fid,'j_conf', j_conf, ier)
    !
    !  j_conf = 0 合流点無し
@@ -10507,7 +10512,7 @@ Program Shimizu
      CALL cg_iric_read_real(fid,'h_down', h_down, ier)
    !
    !   h_dwown = 下流端水位の値(上記j_wl=0の時のみ有効)
-   
+
      CALL CG_IRIC_READ_INTEGER(fid,'j_slope', j_slope, ier)
    !
    !   上記j_wl=1の時等流計算に用いる勾配を
@@ -10534,7 +10539,7 @@ Program Shimizu
    !
      CALL cg_iric_read_real(fid,'upv_slope', upv_slope, ier)
      CALL cg_iric_read_real(fid,'upv_slope_t', upv_slope_t, ier)
-   !                       
+   !
    !   上記j_upv=1でj_upv_slope=1の場合に与える勾配 = upv_slope
    !   支川側の勾配 = upv_slope_t
    !
@@ -10550,13 +10555,13 @@ Program Shimizu
      CALL cg_iric_read_real(fid,'h_slope', h_slope, ier)
      CALL cg_iric_read_real(fid,'h_slope_t', h_slope_t, ier)
    !
-   !  上記i_flow=0のときの初期水面勾配  
-   !  上記i_flow=0のときの支川の初期水面勾配  
+   !  上記i_flow=0のときの初期水面勾配
+   !  上記i_flow=0のときの支川の初期水面勾配
 
      CALL cg_iric_read_real(fid,'x_bk', x_bk, ier)
    !
    !  上記i_flow=1のときの勾配変化点の下流からの距離 x_bk
-   !   
+   !
      CALL cg_iric_read_real(fid,'h_slope_1', h_slope_1, ier)
      CALL cg_iric_read_real(fid,'h_slope_2', h_slope_2, ier)
      CALL cg_iric_read_real(fid,'h_slope_12t', h_slope_12t, ier)
@@ -10568,14 +10573,14 @@ Program Shimizu
    ! ---- Parameters for Bed Material  -----
    !
      CALL CG_IRIC_READ_REAL(fid,'diam', diam, ier)
-     
+
      CALL CG_IRIC_READ_REAL(fid,'tantc', tantc, ier)
 
      diam    = diam/1000.d0
      r_tantc = 1.d0 / tantc
 
    ! ---- Parameters for sediment transport -----
-   !  
+   !
    !  j_qbqs    : sediment transport type, 0: bedload, 1: bedload+suspended load
    !  j_bedload : bedload transport formula for uniform sediment
    !              0: M.P.M, 1: Ashida & Michiue's
@@ -10611,7 +10616,7 @@ Program Shimizu
      CALL CG_IRIC_READ_INTEGER(fid,'j_cip', j_cip, ier)
      CALL cg_iric_read_real(fid,'snst', snst, ier)
      call cg_iric_read_integer(fid,'j_sf', j_sf, ier)
-     
+
      if( j_snu==1 ) then
      	CALL cg_iric_read_real(fid,'a_snu', a_snu, ier)
      	CALL cg_iric_read_real(fid,'b_snu', b_snu, ier)
@@ -10619,13 +10624,13 @@ Program Shimizu
      	a_snu = 1.d0
      	b_snu = 0.d0
      end if
-     
+
 	! ---- Parameter for parallel computation ----
 
 		CALL CG_IRIC_READ_INTEGER(fid,'n_parallel', n_parallel, ier)
-     
+
     ! n_parallel = 2
-     
+
    !
    ! ------ Parameters for Bank Erosion ------
    !
@@ -10646,7 +10651,7 @@ Program Shimizu
      t_chunk=10.d0
      d_chunk=0.1d0
      h_chunk=0.1d0
-     
+
    !
    ! ---- Parameters for Bank Smoothing -----
    !
@@ -10668,7 +10673,7 @@ Program Shimizu
    ! ----- Parameters for Vegatation -----
    !
      CALL cg_iric_read_real(fid,'c_tree', c_tree, ier)
-     
+
      CALL cg_iric_read_integer(fid,'j_vege', j_vege, ier)
 
    !
@@ -10719,18 +10724,18 @@ Program Shimizu
            end if
         end do
      end do
-     
+
    ! ----- Parameters for supplying sediment transport rate from the upstream end ------ !
-   
+
      call CG_IRIC_READ_INTEGER(fid,'j_qbup', j_qbup, ier)
-     
+
      if( j_qbup==0 ) then
         cse = 1.d0
      else
         call CG_IRIC_READ_REAL(fid,'cse', cse, ier)
         cse = cse*0.01d0
      end if
-   
+
    !
    ! ----- Parameters for mixture model -----
    !
@@ -10741,22 +10746,22 @@ Program Shimizu
      call CG_IRIC_READ_REAL(fid,'e_d', e_d, ier)
      call CG_IRIC_READ_REAL(fid,'e_thick', e_thick, ier)
      call CG_IRIC_READ_INTEGER(fid,'nm', nm, ier)
-     
+
      if( j_qbs==0 ) then
      	j_mix = 0
      end if
-     
+
      if( j_mix==0 ) then
      	e_m = diam			! とりあえず
      end if
-     
+
      if( j_mix==1 ) then
        nm_cell = 9
      end if
      !
 
    ! ------ Morphological factor ------ !
-   
+
      if( edition==0 ) then
         csm = 1.d0
      else
@@ -10771,7 +10776,7 @@ Program Shimizu
 		jop_zmin = 0
 		jop_zave = 0
 		jop_have = 0
-		
+
 		if( j_qbs==0 ) then
 			jop_dz = 1
 			jop_fb = 1
@@ -10784,28 +10789,28 @@ Program Shimizu
 			jop_fb = 0
 			jop_sh = 0
 			jop_qb = 0
-			
+
 			if( j_qbqs==0 ) then
 				jop_sc = 1
 			else
 				jop_sc = 0
 			end if
-			
+
 			if( j_mix==0 ) then
 				jop_md = 1
 			else
 				jop_md = 0
 			end if
 		end if
-		
+
 	else
-	
+
 		call CG_IRIC_READ_INTEGER(fid,'jop_vort', jop_vort, ier)
 		call CG_IRIC_READ_INTEGER(fid,'jop_fr'  , jop_fr  , ier)
 		call CG_IRIC_READ_INTEGER(fid,'jop_zmin', jop_zmin, ier)
 		call CG_IRIC_READ_INTEGER(fid,'jop_zave', jop_zave, ier)
 		call CG_IRIC_READ_INTEGER(fid,'jop_have', jop_have, ier)
-		
+
 		if( j_qbs==0 ) then
 			jop_dz = 1
 			jop_fb = 1
@@ -10815,11 +10820,11 @@ Program Shimizu
 			jop_md = 1
 		else
 			jop_dz = 0
-			
+
 			call CG_IRIC_READ_INTEGER(fid,'jop_fb', jop_fb, ier)
 			call CG_IRIC_READ_INTEGER(fid,'jop_sh', jop_sh, ier)
 			call CG_IRIC_READ_INTEGER(fid,'jop_qb', jop_qb, ier)
-			
+
 			if( j_qbqs==0 ) then
 				jop_sc = 1
 			else
@@ -10831,13 +10836,13 @@ Program Shimizu
 			else
 				call CG_IRIC_READ_INTEGER(fid,'jop_md', jop_md, ier)
 			end if
-			
+
 		end if
-	
+
 	end if
 
      call CG_IRIC_READ_INTEGER(fid,'j_zb', j_zb, ier)
-     
+
      if( j_zb==0 ) then
      	do j=1,nj4
      		do i=1,ni4
@@ -10876,10 +10881,10 @@ Program Shimizu
 
    dxi = 1.d0 / dble(nx)
    det = 1.d0 / dble(ny)
-    
+
    r_dxi = 1.d0/dxi
    r_det = 1.d0/det
-    
+
    call alloc_avgeo_temp_variables
    call alloc_gcoefs_temp_variables
    call alloc_initl_temp_variables
@@ -10924,24 +10929,24 @@ Program Shimizu
        ! ----- set fixed bed cells -----
 
          ij_ero(i,j) = fm4(i,j)
-         
+
          	! 0: movable bed, 1: fixed bed
 
        !
        ! ----- set vegetation condition -----
-         
+
          cd_veg(i,j) = vege4(i,j)*c_tree*0.5d0
          !
       end do
    end do
-   
+
    !
    if(icelck == 0) then
       iobst4=0
    else
       iobst4=1
    end if
-   !      
+   !
    ijobst = 0
    do i = 1, nx
       do j = 1, ny
@@ -10980,10 +10985,10 @@ Program Shimizu
        stop
     end if
     !
-    
+
     hplus = 0.
     !
-    !   Add some value as hplus if initial delpth becomes 0 
+    !   Add some value as hplus if initial delpth becomes 0
     !   then set hplus=****.
     !   j_drg = 0 .... roughness is calculated from bed material
     !   j_drg = 1 .... roughness is given
@@ -11028,7 +11033,7 @@ Program Shimizu
        DEALLOCATE(xtmp, STAT = ier)
        DEALLOCATE(ytmp, STAT = ier)
        DEALLOCATE(ytmp2, STAT = ier)
-       
+
        if(j_conf/=0) then
           CALL CG_IRIC_READ_FUNCTIONALSIZE(fid,'discharge_t',tmpint,ier)
 
@@ -11041,7 +11046,7 @@ Program Shimizu
           allocate(xtmp(tmpint),ytmp(tmpint))
           CALL CG_IRIC_READ_functional(fid,'discharge_t',xtmp,ytmp,ier)
           DO I= 0,nq
-             
+
              q_ups_t(i) = ytmp(i+1)
           ENDDO
           DEALLOCATE(xtmp, STAT = ier)
@@ -11074,9 +11079,9 @@ Program Shimizu
   ! ------- read the initial grain size distribution --------
   !
     if( j_mix == 1) then
-       
+
        if( j_mix_dis==0 ) then
-    
+
           CALL CG_IRIC_READ_FUNCTIONALSIZE(fid,'mixfile_pp',tmpint,ier)
           allocate(xtmp(tmpint),ytmp(tmpint))
 !         CALL CG_IRIC_READ_FUNCTIONAL(fid,'mixfile_pp',xtmp,ytmp,ier)
@@ -11089,28 +11094,28 @@ Program Shimizu
           ENDIF
 
           call cg_iric_read_functionalwithname(fid,'mixfile_pp', 'diameter_k', xtmp, ier)
-       
+
           do k=0,nk
              ddist_mm(k) = xtmp(k+1)
           end do
-       
+
           do n=0,nm_cell
              write(cm,'(i1)') n
              mix_label = 'pp'//trim(cm)
-          
+
              call cg_iric_read_functionalwithname(fid,'mixfile_pp', mix_label, ytmp, ier)
-          
+
              do k=0,nk
                 pdist_m_100(k,n) = ytmp(k+1)
              end do
-                    
+
           end do
-       
+
           DEALLOCATE(xtmp, STAT = ier)
           DEALLOCATE(ytmp, STAT = ier)
-          
+
           if( j_mix_dis_dep==1 ) then
-             
+
              CALL CG_IRIC_READ_FUNCTIONALSIZE(fid,'mixfile_pp_d',tmpint,ier)
              allocate(xtmp(tmpint),ytmp(tmpint))
 
@@ -11119,26 +11124,26 @@ Program Shimizu
                 write(*,*) "The sediment size class (number of class and each diameter) must be same in both layers."
                 stop
              end if
-       
+
              do n=0,nm_cell
                 write(cm,'(i1)') n
                 mix_label = 'pp'//trim(cm)
-          
+
                 call cg_iric_read_functionalwithname(fid,'mixfile_pp_d', mix_label, ytmp, ier)
-          
+
                 do k=0,nk
                    pdist_d_100(k,n) = ytmp(k+1)
                 end do
-                    
+
              end do
-       
+
              DEALLOCATE(xtmp, STAT = ier)
              DEALLOCATE(ytmp, STAT = ier)
-             
+
           end if
-          
+
        else
-       
+
           CALL CG_IRIC_READ_FUNCTIONALSIZE(fid,'mixfile_fr',tmpint,ier)
           allocate(xtmp(tmpint),ytmp(tmpint))
 !         CALL CG_IRIC_READ_FUNCTIONAL(fid,'mixfile_fr',xtmp,ytmp,ier)
@@ -11151,28 +11156,28 @@ Program Shimizu
           ENDIF
 
           call cg_iric_read_functionalwithname(fid,'mixfile_fr', 'diameter_k', xtmp, ier)
-       
+
           do k=1,nk
              ddist_mm(k) = xtmp(k)
           end do
-       
+
           do n=0,nm_cell
              write(cm,'(i1)') n
              mix_label = 'fraction'//trim(cm)
-          
+
              call cg_iric_read_functionalwithname(fid,'mixfile_fr', mix_label, ytmp, ier)
-          
+
              do k=1,nk
                 pdist_m_100(k,n) = ytmp(k)
              end do
-                    
+
           end do
-       
+
           DEALLOCATE(xtmp, STAT = ier)
           DEALLOCATE(ytmp, STAT = ier)
 
           if( j_mix_dis_dep==1 ) then
-             
+
              CALL CG_IRIC_READ_FUNCTIONALSIZE(fid,'mixfile_fr_d',tmpint,ier)
              allocate(xtmp(tmpint),ytmp(tmpint))
 
@@ -11181,24 +11186,24 @@ Program Shimizu
                 write(*,*) "The sediment size class (number of class and each diameter) must be same in both layers."
                 stop
              end if
-       
+
              do n=0,nm_cell
                 write(cm,'(i1)') n
                 mix_label = 'fraction'//trim(cm)
-          
+
                 call cg_iric_read_functionalwithname(fid,'mixfile_fr_d', mix_label, ytmp, ier)
-          
+
                 do k=0,nk
                    pdist_d_100(k,n) = ytmp(k)
                 end do
-                    
+
              end do
-       
+
              DEALLOCATE(xtmp, STAT = ier)
              DEALLOCATE(ytmp, STAT = ier)
-             
+
           end if
-          
+
        end if
           !
     else
@@ -11209,13 +11214,13 @@ Program Shimizu
        call mixini(snu00,dm0)
        call alloc_mix_temp_variables(nk)
        sn_g    = dm0**(1.d0/6.d0) / 6.8d0 / dsqrt(g)
-       
+
        do j=1,ny
           do i=1,nx
              flg_mix(i,j) = mix_cell(i,j)
           end do
        end do
-       
+
     end if
 
     allocate( cc_m(0:im,0:jm,nk) )
@@ -11228,7 +11233,7 @@ Program Shimizu
           snmm( i,j) = sn_g
        end do
     end do
-    
+
     do j=1,ny
        do i=1,nx
           snmm(i,j)=roughness4(i,j)
@@ -11264,9 +11269,9 @@ Program Shimizu
           end if
        end do
     end do
-    
+
   ! ---- The rate of sediment transport to an equilibrium state ---- !
-  
+
     do j=1,ny
     	do i=1,nx
     		if( i==1 ) then
@@ -11276,7 +11281,7 @@ Program Shimizu
     		end if
     	end do
     end do
-    
+
     if( j_conf>=2 ) then
        do i=i_t1+1,i_t2
           c_se(i,j_t2+js2) = cse
@@ -11331,9 +11336,9 @@ Program Shimizu
    		end if
    	end do
    end do
-   
+
     !  --- calculate the elevation of fixed bed at cell center --- !
-    
+
     do j=1,ny
     	do i=1,nx
     		eta_zb(i,j) = ( zb(i-1,j-1)+zb(i,j-1)+zb(i-1,j)+zb(i,j) )*0.25d0
@@ -11352,7 +11357,7 @@ Program Shimizu
     !
     call hsxxcal(eta0, z0, hs, hsxx)
     !
-    
+
     if( j_wl == 0.and.h_down < -10. ) then
        write(*,*) 'Downstream Water Surface Value is Wrong!!!'            !j090219e
        stop
@@ -11393,7 +11398,7 @@ Program Shimizu
     else
        h0 = ( snmm(nx,nym) * qp / ( width * dsqrt(slope) ) )**(3.d0/5.d0)
     end if
-    
+
     u0   = 1.d0 / snmm(nx,nym) * h0**(2.d0/3.d0) * dsqrt(slope)
     us0  = dsqrt( g * h0 * slope )
     fr0  = u0 / dsqrt( g * h0 )
@@ -11411,7 +11416,7 @@ Program Shimizu
     tsc     = usci**2 / ( spec * g * diam )
     theta_b = datan(slope)
     tan_tb  = dtan(theta_b)
-    cos_tb  = dcos(theta_b) 
+    cos_tb  = dcos(theta_b)
     mu_s = 0.7d0	!0.84d0
     mu_k = 0.7d0	!0.56d0
     gamma = dsqrt( tsc / (mu_s*mu_k) )
@@ -11438,18 +11443,18 @@ Program Shimizu
 
   ! ------ Initial Condition -----
     !
-    !   Cal. of time series of upstream water surface elevation 
+    !   Cal. of time series of upstream water surface elevation
     !   by uniform flow calculation.
     !c	!h101019 conf  &  initl <-> hqtcal
-    
+
     call hqtcal( nq, slope, slope_up, slope_up_t, hplus, j_wl, h_down, sn_g )
     !
     hnx = h_dse(0)
-    
+
     call initl( qp, qp_t, hnx, us0, snu_0, ye00, yk00, h0 &
          ,i_flow, slope, slope_t, h_slope, h_slope_t, x_bk &
          , h_slope_1, h_slope_2, h_slope_12t )	!h101019 conf
-    
+
     call bound_u(yu )
     call bound_v(yv )
     call bound_u(yun)
@@ -11508,9 +11513,9 @@ Program Shimizu
        read(501) ((vort(i,j),i=0,nx2+1),j=0,ny2+1)
        if(j_mix == 1) then
           read(501) nk2
-          
+
           if( nk2/=nk ) write(*,*) "The number of grain size class is different between grid file and temporary file!"
-          
+
           read(501) (((yck(i,j,k),i=0,nx2+1),j=0,ny2+1),k=1,nk2)
           read(501) ((e_t(i,j),i=1,nx2),j=1,ny2)
           read(501) (((p_m(i,j,k),i=1,nx2),j=1,ny2),k=1,nk2)
@@ -11573,7 +11578,7 @@ Program Shimizu
 !2000 continue
 
 !$omp single
-    
+
     !-------------------------------------------
     if( time <= 0.d0 ) then
         h_input   = h_ups( 0)
@@ -11621,7 +11626,7 @@ Program Shimizu
         if( j_qbup==1 ) then
            call upstream_h( q_input, q_input_t, slope, slope_up, slope_up_t, sn_g, h_input, h_input_t )
         end if
-        
+
         call upstream( h_input, h_input_t, q_input, q_input_t, slope_up, slope_up_t, j_upv )
         call downstream(j_wl, hnx)
      end if
@@ -11666,7 +11671,7 @@ Program Shimizu
         		   end do
         	   end do
          end if
-        
+
 !$omp do private(i,j)
          do j=1,ny
         	   do i=1,nx
@@ -11677,7 +11682,7 @@ Program Shimizu
         		   end if
         	   end do
          end do
-        
+
          call cell2grid( fr_c, fr_g )
          call cell2grid( tausta, ts_g )
 			call cell2grid( usta, us_g )
@@ -11699,7 +11704,7 @@ Program Shimizu
             qbxx(nx,ny) = qbxc(nx,ny)
             qbyy(nx,ny) = qbyc(nx,ny)
 !$omp end single
-             
+
 !$omp do private(j)
             do j=1,ny-1
                qbxx( 0,j) = ( qbxc( 1,j)+qbxc( 1,j+1) )*0.5d0
@@ -11707,7 +11712,7 @@ Program Shimizu
                qbxx(nx,j) = ( qbxc(nx,j)+qbxc(nx,j+1) )*0.5d0
                qbyy(nx,j) = ( qbyc(nx,j)+qbyc(nx,j+1) )*0.5d0
             end do
-           
+
 !$omp do private(i)
             do i=1,nx-1
                qbxx(i, 0) = ( qbxc(i, 1)+qbxc(i+1, 1) )*0.5d0
@@ -11715,7 +11720,7 @@ Program Shimizu
                qbxx(i,ny) = ( qbxc(i,ny)+qbxc(i+1,ny) )*0.5d0
                qbyy(i,ny) = ( qbyc(i,ny)+qbyc(i+1,ny) )*0.5d0
             end do
-           
+
 !$omp do private(i,j)
             do j=1,ny-1
                do i=1,nx-1
@@ -11723,15 +11728,15 @@ Program Shimizu
                   qbyy(i,j) = ( qbyc(i,j)+qbyc(i+1,j)+qbyc(i,j+1)+qbyc(i+1,j+1) )*0.25d0
                end do
             end do
-           
+
          end if
-        
+
          call cross_section_variables
-        
+
          if( j_mix==1 ) then
 			   call center2grid_4(yck, cc_m, nk)
 		   end if
-		
+
 		   call cell2grid( phi, phi_g )
 
 !$omp barrier
@@ -11739,19 +11744,19 @@ Program Shimizu
 !$omp single
 
          if( time>=t_out_start ) then
-        
+
         	   qptemp = qp
-            call cg_iric_write_sol_start(fid,ier)   
+            call cg_iric_write_sol_start(fid,ier)
         	   CALL Write_CGNS(fid,time,qptemp,im,jm		&
             		,x,y,uxx,uyy,hsxx,z,z0,zb_g,voltex,c_g,dmn,phi_g,fr_g		&
               		, rho, us_g, ts_g,z_ave,z_min,h_ave,qbxx,qbyy,cc_m,nk,j_mix)
             call cg_iric_write_sol_end(fid,ier)
-            
+
          end if
-        
+
          !
          ! ------ CRT Output ------------------------
-        
+
          if( time < t_out_start ) then
             if(j_conf.eq.0) then		!h101019 conf
                write(*,'(f10.3,2f10.4,i4)')    time,q_input,hnx,lcount
@@ -11894,9 +11899,9 @@ Program Shimizu
 	 else
 	 	call taustacal_mix( snu00 )
 	 end if
-	 
+
 	 call phical
-	 
+
      !--------------------------------------------
      call ypcal( usta, h0, snu00 ,rho )
      call phkecal( c_k0, c_e0, c_mu0, c_2e )
@@ -11962,16 +11967,16 @@ Program Shimizu
            		call cbcal_mix( yck, ycbk, wfk, hs, usta, nk )
            		if( jrep==0 ) call upstream_c_mix( yck, ycbk, wfk, qsuk, usta, nk )
            		call c_transport_mix( dsmt )
-           		call bound_c_mix           		
+           		call bound_c_mix
            end if
         end if
         !-------------------------------------------
         if( j_qbs==1 ) then
-        
+
            call srcal( ux, uy, up, sr, snst )
-           
+
            if( j_sf==1 ) call vorticity_eq
-           
+
            if( time > ster ) then
               if( j_mix == 0 ) then
                  call qbcal_w    ( ux,uy,hs,gamma,pi_bed,dsmt,tantc,j_bank 			&
@@ -12004,7 +12009,7 @@ Program Shimizu
                     call ebank_mix( tantc, dtanmax )
                  end if
               end if
-              
+
               if(j_bank == 1) then
                  call pshift( r_tantc, qb_et, slambda, dermax, j_chunk &
                       ,i_erosion_start, i_erosion_end, j_smooth, i_smooth, iier )
@@ -12023,7 +12028,7 @@ Program Shimizu
      end if
      !-------------------------------------------
      call hshift( hn, h )
-     
+
 !$omp do private(i,j)
      do j=1,ny
         do i=1,nx
@@ -12057,7 +12062,7 @@ END PROGRAM Shimizu
 
 !--------------------------------------------------------------------------------
 ! output for cgns file
-!--------------------------------------------------------------------------------  
+!--------------------------------------------------------------------------------
 subroutine write_cgns(fid,time,disch,im,jm,x,y,u,v,hs,z		&
 						,z0,zb,vort,c,dmn,phi,fr &
 						,rho, usta, ts,zave,zmin,have,qbx,qby,cc_m,nk,j_mix)
@@ -12069,7 +12074,7 @@ subroutine write_cgns(fid,time,disch,im,jm,x,y,u,v,hs,z		&
   real(8),dimension(0:im,0:jm),intent(in) :: u, v, hs, z, z0, zb, vort, qbx, qby
   real(8),dimension(0:im,0:jm),intent(in) :: x, y, dmn, c, fr, usta, ts, zmin, zave, have, phi
   real(8),dimension(0:im,0:jm,nk),intent(in) :: cc_m
-  
+
   INTEGER :: NX, NY
   INTEGER :: BID, ZID, IER, iret
   INTEGER :: i, j, k
@@ -12079,10 +12084,10 @@ subroutine write_cgns(fid,time,disch,im,jm,x,y,u,v,hs,z		&
   REAL*8, ALLOCATABLE, DIMENSION(:,:) :: zmin1, zave1, have1
   INTEGER, ALLOCATABLE, DIMENSION(:,:) :: IBC
   character(40) :: c_label, cm
-  
+
   nx=im
   ny=jm
-  
+
   CALL CG_IRIC_WRITE_SOL_TIME(fid,time, IER)
   CALL CG_IRIC_WRITE_SOL_BASEITERATIVE_REAL(fid,'Discharge(m3s-1)', disch, IER)
 
@@ -12168,13 +12173,13 @@ subroutine write_cgns(fid,time,disch,im,jm,x,y,u,v,hs,z		&
 	!  	do k=1,nk
 	!		write(cm,'(i1)') k
 	!		c_label = 'SuspendedSedimentConcentration'//trim(cm)
-					
+
 			do j=1,ny
 				do i=1,nx
 					ssc(i,j) = 0.d0
 				end do
 			end do
-				
+
 			do j=1,ny
 				do k=1,nk
 					do i=1,nx
@@ -12182,12 +12187,12 @@ subroutine write_cgns(fid,time,disch,im,jm,x,y,u,v,hs,z		&
 					end do
 				end do
 			end do
-					
+
 	!		CALL cg_iRIC_Write_Sol_Node_Real(fid,c_label,ssc,IER)
 	!	end do
-		
+
 		CALL cg_iRIC_Write_Sol_Node_Real(fid,"SuspendedSedimentConcentration",ssc,IER)
-		
+
 	  end if
   end if
 
