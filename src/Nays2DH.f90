@@ -29,28 +29,28 @@ end module flag_op
 !--------------------------------------------------
 module common_cmuv
 	implicit none
-		! yu: xi•ûŒü—¬‘¬Ayvn:eta•ûŒü—¬‘¬
+		! yu: xiæ–¹å‘æµé€Ÿã€yvn:etaæ–¹å‘æµé€Ÿ
 	real(8),dimension(:,:),allocatable :: yu, yun, yv, yvn, wu, wv
 end module common_cmuv
 
 !--------------------------------------------------
 module common_cmc
 	implicit none
-		! yc: •‚—V»”Z“xAycb: ’ê–Ê‚Ì”Z“x
+		! yc: æµ®éŠç ‚æ¿ƒåº¦ã€ycb: åº•é¢ã®æ¿ƒåº¦
 	real(8),dimension(:,:),allocatable :: yc, ycn, ycb
 end module common_cmc
 
 !--------------------------------------------------
 module common_cmuvp
 	implicit none
-		! up, vp: ƒZƒ‹’†‰›‚Ì—¬‘¬(ˆê”ÊÀ•W)Aux, uyFƒZƒ‹’†‰›‚ÌƒfƒJƒ‹ƒg—¬‘¬
+		! up, vp: ã‚»ãƒ«ä¸­å¤®ã®æµé€Ÿ(ä¸€èˆ¬åº§æ¨™)ã€ux, uyï¼šã‚»ãƒ«ä¸­å¤®ã®ãƒ‡ã‚«ãƒ«ãƒˆæµé€Ÿ
 	real(8),dimension(:,:),allocatable :: up, vp, ux, uy
 end module common_cmuvp
 
 !--------------------------------------------------
 module common_cmhq
 	implicit none
-		! h: …ˆÊAhs: …[
+		! h: æ°´ä½ã€hs: æ°´æ·±
 	real(8),dimension(:,:),allocatable :: h, hn, hs, whs
 	real(8),dimension(:),allocatable :: qc, qc_t, qc_t2
 end module common_cmhq
@@ -58,7 +58,7 @@ end module common_cmhq
 !--------------------------------------------------
 module common_cmgrd
 	implicit none
-		! gux, guy, gvx, gvy: CIP‚Ég‚¤—¬‘¬Œù”z(du_xi/dxi, du_xi/det)
+		! gux, guy, gvx, gvy: CIPã«ä½¿ã†æµé€Ÿå‹¾é…(du_xi/dxi, du_xi/det)
 	real(8),dimension(:,:),allocatable :: gux, guy, gvx, gvy, gcx, gcy
 end module common_cmgrd
 
@@ -68,14 +68,14 @@ module common_cmxy
 	real(8),dimension(:,:),allocatable :: x, y, z, eta, ds, dn
 	real(8),dimension(:,:),allocatable :: sj,xi_x,xi_y,et_x, et_y, xi_r, et_r, xi_r_up, et_r_vp
 	real(8),dimension(:,:),allocatable :: z0
-		! zb: Šiq“_‚ÌŒÅ’è°‚‚³Aeta_zb: ƒZƒ‹’†‰›‚Ìzb
+		! zb: æ ¼å­ç‚¹ã®å›ºå®šåºŠé«˜ã•ã€eta_zb: ã‚»ãƒ«ä¸­å¤®ã®zb
 	real(8),dimension(:,:),allocatable :: zb_g, zb, eta_zb
 end module common_cmxy
 
 !--------------------------------------------------
 module common_cmxiet
 	implicit none
-		! up, vp‚Íu‚Æv‚Ì’è‹`“_‚Ì’l
+		! up, vpã¯uã¨vã®å®šç¾©ç‚¹ã®å€¤
 	real(8),dimension(:,:),allocatable :: xi_x_up,xi_y_up
 	real(8),dimension(:,:),allocatable :: et_x_up,et_y_up,xi_x_vp, xi_y_vp, et_x_vp, et_y_vp
 end module common_cmxiet
@@ -83,21 +83,21 @@ end module common_cmxiet
 !--------------------------------------------------
 module common_cmtst
 	implicit none
-		! vti: …[•½‹Ï—¬‘¬‚Ìâ‘Î’l
+		! vti: æ°´æ·±å¹³å‡æµé€Ÿã®çµ¶å¯¾å€¤
 	real(8),dimension(:,:),allocatable :: vti, tausta, qsu, usta
 end module common_cmtst
 
 !--------------------------------------------------
 module common_cmuxy
 	implicit none
-		! uxx, uyy: ƒfƒJƒ‹ƒgÀ•W‚Ì—¬‘¬(Šiq“_)Aqbxx, qbyy: ƒfƒJƒ‹ƒgÀ•W‚Ì‘|—¬»—Ê(Šiq“_)
+		! uxx, uyy: ãƒ‡ã‚«ãƒ«ãƒˆåº§æ¨™ã®æµé€Ÿ(æ ¼å­ç‚¹)ã€qbxx, qbyy: ãƒ‡ã‚«ãƒ«ãƒˆåº§æ¨™ã®æƒæµç ‚é‡(æ ¼å­ç‚¹)
 	real(8),dimension(:,:),allocatable :: uxx, uyy, qbxx, qbyy
 end module common_cmuxy
 
 !--------------------------------------------------
 module common_cmave
 	implicit none
-		! eave: ‰¡’f–Ê‚Ì•½‹Ï•W‚
+		! eave: æ¨ªæ–­é¢ã®å¹³å‡æ¨™é«˜
 	real(8),dimension(:)  ,allocatable :: eave, chb, emin, emax
 	real(8),dimension(:,:),allocatable :: eta0
 	real(8),dimension(:,:),allocatable :: b_elv(:,:)
@@ -106,26 +106,26 @@ end module common_cmave
 !--------------------------------------------------
 module common_cmsr
 	implicit none
-		! sr: —¬ü‚Ì‹È—¦
+		! sr: æµç·šã®æ›²ç‡
 	real(8),dimension(:,:),allocatable :: sr, cos_t, sin_t
 end module common_cmsr
 
 !--------------------------------------------------
 module common_cmqb
 	implicit none
-		! qb_xi, qb_et: ˆê”ÊÀ•W‚Ì‘|—¬»—Ê
-		! kc: ‘|—¬»ˆÚ“®‚É‘Î‚·‚éŒù”z•â³‚ÌŒW”
+		! qb_xi, qb_et: ä¸€èˆ¬åº§æ¨™ã®æƒæµç ‚é‡
+		! kc: æƒæµç ‚ç§»å‹•ã«å¯¾ã™ã‚‹å‹¾é…è£œæ­£ã®ä¿‚æ•°
 	real(8),dimension(:,:),allocatable :: qb_xi,qb_et
 	real(8),dimension(:,:),allocatable :: kc, btheta_x, btheta_y, cos_bed, sin_bed
 	real(8),dimension(:,:),allocatable :: theta_x, theta_y, qbxc, qbyc
-		! dzds, dzdn : å—¬‚Æ‰¡’f•ûŒü‚ÌŒù”z
+		! dzds, dzdn : ä¸»æµã¨æ¨ªæ–­æ–¹å‘ã®å‹¾é…
 	real(8),dimension(:,:),allocatable :: dzds, dzdn, ubnvb
 end module common_cmqb
 
 !--------------------------------------------------
 module common_cmet
 	implicit none
-		! eta_t: eta•ûŒü‚ÌŠiq‚ÌˆÚ“®‘¬“x
+		! eta_t: etaæ–¹å‘ã®æ ¼å­ã®ç§»å‹•é€Ÿåº¦
 	real(8),dimension(:,:),allocatable :: eta_t
 end module common_cmet
 
@@ -157,21 +157,21 @@ end module common_qhyd
 !--------------------------------------------------
 module common_cmke
 	implicit none
-		! yk: —‚êƒGƒlƒ‹ƒM[Aep: Uˆí—¦
+		! yk: ä¹±ã‚Œã‚¨ãƒãƒ«ã‚®ãƒ¼ã€ep: æ•£é€¸ç‡
 	real(8),dimension(:,:),allocatable :: yk,ykn, yep,yepn, gkx, gky, gex, gey
 end module common_cmke
 
 !--------------------------------------------------
 module common_cmkep
 	implicit none
-		! k-eƒ‚ƒfƒ‹‚Ì¶¬€‚È‚Ç
+		! k-eãƒ¢ãƒ‡ãƒ«ã®ç”Ÿæˆé …ãªã©
 	real(8),dimension(:,:),allocatable :: ph, pkv, pev, strain
 end module common_cmkep
 
 !--------------------------------------------------
 module common_cmcf
 	implicit none
-		! cf: ‰Í°’ïRŒW”Are: ƒŒƒCƒmƒ‹ƒY”Avege_el: A¶‚Ì‚‚³
+		! cf: æ²³åºŠæŠµæŠ—ä¿‚æ•°ã€re: ãƒ¬ã‚¤ãƒãƒ«ã‚ºæ•°ã€vege_el: æ¤ç”Ÿã®é«˜ã•
 	real(8),dimension(:,:),allocatable :: cf, re, cd_veg, vege_el, vege_h
 end module common_cmcf
 
@@ -184,14 +184,14 @@ end module common_cmyp
 !--------------------------------------------------
 module common_cmsnu
 	implicit none
-		! snu: ‰Q“®”S«ŒW”(ƒZƒ‹’†‰›)Asnu_x:snu‚ÌŠiq“_‚Ì’l
+		! snu: æ¸¦å‹•ç²˜æ€§ä¿‚æ•°(ã‚»ãƒ«ä¸­å¤®)ã€snu_x:snuã®æ ¼å­ç‚¹ã®å€¤
 	real(8),dimension(:,:),allocatable :: snu,snu_x,snu0,snu0_x, snuk,snuk_x
 end module common_cmsnu
 
 !--------------------------------------------------
 module common_cmchunk
 	implicit none
-		! ‰ÍŠİZHŒn‚Ìƒpƒ‰ƒ[ƒ^(2014/3/19“_‚Åg‚Á‚Ä‚È‚¢)
+		! æ²³å²¸æµ¸é£Ÿç³»ã®ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿(2014/3/19æ™‚ç‚¹ã§ä½¿ã£ã¦ãªã„)
 	real(8),dimension(:,:),allocatable :: a_chunk, sk_chunk
 	real(8) :: t_chunk, d_chunk,  h_chunk
 end module common_cmchunk
@@ -199,14 +199,14 @@ end module common_cmchunk
 !--------------------------------------------------
 module common_cmab
 	implicit none
-		! ‰^“®•û’ö®’†‚ÌÀ•W•ÏŠ·‚Åo‚Ä‚­‚é€‚ÌŒW”
+		! é‹å‹•æ–¹ç¨‹å¼ä¸­ã®åº§æ¨™å¤‰æ›ã§å‡ºã¦ãã‚‹é …ã®ä¿‚æ•°
 	real(8),dimension(:,:,:),allocatable :: alpha, beta
 end module common_cmab
 
 !--------------------------------------------------
 module common_cmdnx
 	implicit none
-		! dnx, dsy: Šiq’†‰›ŠÔ‚Ì‹——£(j, i)
+		! dnx, dsy: æ ¼å­ä¸­å¤®é–“ã®è·é›¢(j, i)
 	real(8),dimension(:,:),allocatable :: dnx, dsy
 end module common_cmdnx
 
@@ -219,14 +219,14 @@ end module common_cmquv
 !--------------------------------------------------
 module common_cmqxe
 	implicit none
-		! q_xi, q_et: xi‚Æet•ûŒü‚Ìˆê”ÊÀ•W‚Ì—¬—Ê
+		! q_xi, q_et: xiã¨etæ–¹å‘ã®ä¸€èˆ¬åº§æ¨™ã®æµé‡
 	real(8),dimension(:,:),allocatable :: q_xi, q_et
 end module common_cmqxe
 
 !--------------------------------------------------
 module common_cmdex
 	implicit none
-		! dex: 1ƒXƒeƒbƒv‚Ì‰Í°•Ï“®—Ê
+		! dex: 1ã‚¹ãƒ†ãƒƒãƒ—ã®æ²³åºŠå¤‰å‹•é‡
 	real(8),dimension(:,:),allocatable :: dex
 end module common_cmdex
 
@@ -245,22 +245,22 @@ end module common_output
 !--------------------------------------------------
 module mix
 	implicit none
-		! nk: —±ŒaŠK‘w‚Ì”(1`)
+		! nk: ç²’å¾„éšå±¤ã®æ•°(1ï½)
 	integer :: j_mix, nk, nm
-		! nb: ŠeƒZƒ‹‚Ì‘ÍÏ‘w‚Ì”
+		! nb: å„ã‚»ãƒ«ã®å †ç©å±¤ã®æ•°
 	integer,dimension(:,:),allocatable :: nb, flg_mix
-		! e_d: ‘ÍÏ‘wŒúAe_thick: ˆÚ“®‘wŒúAe_m: ŒğŠ·‘wŒú
+		! e_d: å †ç©å±¤åšã€e_thick: ç§»å‹•å±¤åšã€e_m: äº¤æ›å±¤åš
 	real(8) :: e_d, e_thick, e_m
-		! ddk: Še—±ŒaƒTƒCƒYAtsci: Õ•ÁŒø‰Ê‚ğl—¶‚µ‚È‚¢‚Æ‚«‚Ì–³ŸŒ³ŒÀŠE‘|—¬—Í
+		! ddk: å„ç²’å¾„ã‚µã‚¤ã‚ºã€tsci: é®è”½åŠ¹æœã‚’è€ƒæ…®ã—ãªã„ã¨ãã®ç„¡æ¬¡å…ƒé™ç•ŒæƒæµåŠ›
 	real(8),dimension(:),allocatable :: ddist_mm, rdsgi, uci, tsci0, ddk, sum_f, wfk
 	real(8),dimension(:,:),allocatable :: pdist_m_100, pmk0
 	real(8),dimension(:,:),allocatable :: pdist_d_100, pdk0
-		! e_t: ‘JˆÚ‘wŒúAdm_t: ‘JˆÚ‘w‚Ì’†‰›—±ŒaAdm_m: ŒğŠ·‘w‚Ì’†‰›—±ŒaAtscm: ’†‰›—±Œa‚É‘Î‚·‚éŒÀŠE–³ŸŒ³‘|—¬—Í
+		! e_t: é·ç§»å±¤åšã€dm_t: é·ç§»å±¤ã®ä¸­å¤®ç²’å¾„ã€dm_m: äº¤æ›å±¤ã®ä¸­å¤®ç²’å¾„ã€tscm: ä¸­å¤®ç²’å¾„ã«å¯¾ã™ã‚‹é™ç•Œç„¡æ¬¡å…ƒæƒæµåŠ›
 	real(8),dimension(:,:),allocatable :: eta_base, e_t, dm_t, dm_m, dmxx, tscm
-		! p_m, p_t, p_d: ŒğŠ·‘wA‘JˆÚ‘wA‘ÍÏ‘w‚ÌŠe—±Œa‚Ì‘¶İ—¦
+		! p_m, p_t, p_d: äº¤æ›å±¤ã€é·ç§»å±¤ã€å †ç©å±¤ã®å„ç²’å¾„ã®å­˜åœ¨ç‡
 	real(8),dimension(:,:,:),allocatable :: dex_mix, qb_xi_mix, qb_et_mix, p_m, p_t, dm_d
 	real(8),dimension(:,:,:),allocatable :: qbxkc, qbykc
-		! tsk: Še—±Œa‚Ì–³ŸŒ³‘|—¬—ÍAtsck: Še—±Œa‚Ì–³ŸŒ³ŒÀŠE‘|—¬—Í
+		! tsk: å„ç²’å¾„ã®ç„¡æ¬¡å…ƒæƒæµåŠ›ã€tsck: å„ç²’å¾„ã®ç„¡æ¬¡å…ƒé™ç•ŒæƒæµåŠ›
 	real(8),dimension(:,:,:),allocatable :: tsk, tsck, usck
 	real(8),dimension(:,:,:,:),allocatable :: p_d
 
@@ -2178,7 +2178,7 @@ contains
        end do
     end if
     !
-    ! ------ áŠQ•¨ƒZƒ‹‚Ì•â³ ------
+    ! ------ éšœå®³ç‰©ã‚»ãƒ«ã®è£œæ­£ ------
     !  Main channel
     do i = 1, nx-1
        if(j_conf.eq.0) then		!h101104 conf
@@ -2314,17 +2314,17 @@ contains
     end do
     if(j_conf == 1) then		!h101104 conf
        do j = j_t1, j_t2
-          qu(  i_t1,j) = qu(  i_t1-1,j)		!h101104 conf1‰º—¬’[
+          qu(  i_t1,j) = qu(  i_t1-1,j)		!h101104 conf1ä¸‹æµç«¯
           q_xi(i_t1,j) = q_xi(i_t1-1,j)
           yu(  i_t1,j) = yu(  i_t1-1,j)
           uti( i_t1,j) = uti( i_t1-1,j)
        end do
     else if(j_conf >= 2) then
-       qu(  j_t1,j) = qu(  j_t1+jxd,j)		!h101104 conf23‰º—¬’[
+       qu(  j_t1,j) = qu(  j_t1+jxd,j)		!h101104 conf23ä¸‹æµç«¯
        q_xi(j_t1,j) = q_xi(j_t1+jxd,j)
        yu(  j_t1,j) = yu(  j_t1+jxd,j)
        uti( j_t1,j) = uti( j_t1+jxd,j)
-       qu(  j_t2,j) = qu(  j_t2-jxd,j)		!h101104 conf23ã—¬’[
+       qu(  j_t2,j) = qu(  j_t2-jxd,j)		!h101104 conf23ä¸Šæµç«¯
        q_xi(j_t2,j) = q_xi(j_t2-jxd,j)
        yu(  j_t2,j) = yu(  j_t2-jxd,j)
        uti( j_t2,j) = uti( j_t2-jxd,j)
@@ -2585,7 +2585,7 @@ contains
     real(8),dimension(0:im,0:jm),intent(in)    :: eta, hs
     real(8),dimension(0:im,0:jm),intent(inout) :: z  , hsxx
     !
-			!	—Ìˆæ‚ÌŠp‚Ìê‡
+			!	é ˜åŸŸã®è§’ã®å ´åˆ
 
 		hsxx( 0, 0) = hs( 1, 1)
 		hsxx(nx, 0) = hs(nx, 1)
@@ -2597,7 +2597,7 @@ contains
 		z( 0,ny) = eta( 1,ny)
 		z(nx,ny) = eta(nx,ny)
 
-			!	—Ìˆæ‚Ì•Ó‚Ìê‡
+			!	é ˜åŸŸã®è¾ºã®å ´åˆ
 
 !$omp do private(i)
 		do i=1,nx-1
@@ -2615,7 +2615,7 @@ contains
 			z(nx,j) = (eta(nx,j)+eta(nx,j+1))*0.5d0
 		end do
 
-			!	—Ìˆæ“à•”‚Ìê‡
+			!	é ˜åŸŸå†…éƒ¨ã®å ´åˆ
 
 !$omp do private(i,j)
 		do j=1,ny-1
@@ -2783,7 +2783,7 @@ module hcal_v_m
 end module     hcal_v_m
 
 !----------------------------------------------------------------------------------------------------
-!C³’†
+!ä¿®æ­£ä¸­
 module hcal_m
 	use common_hh
 	use common_cmuv
@@ -2825,7 +2825,7 @@ module hcal_m
 		real(8), dimension(nx,ny) :: usta
 
 		!---------------------------------------------------------
-		! ‰Šú‰»‚¨‚æ‚ÑŒvZ€”õ
+		! åˆæœŸåŒ–ãŠã‚ˆã³è¨ˆç®—æº–å‚™
 		!---------------------------------------------------------
 	!$omp do private(i,j)
 		do j=1,ny
@@ -2861,7 +2861,7 @@ module hcal_m
 						c_xi = -(alpha(1,i,j)*wu(i,j)**2 + alpha(2,i,j)*wu(i,j)*v_up+alpha(3,i,j)*v_up**2)
 
 						condition = soft_veg_condition(i,j)
-						! compute_vegetation_resistance‚ÌŒÄ‚Ño‚µ
+						! compute_vegetation_resistanceã®å‘¼ã³å‡ºã—
 						call compute_vegetation_resistance(vv_up, vv_vp, usta(i,j), soft_veg_shear_values(i,j), condition)
 
 						c_xi_shear = g * sn_up(i,j)**2 / hs_up**1.33333d0
@@ -3032,21 +3032,22 @@ module hcal_m
 
 	end subroutine hcal
 
-	subroutine compute_vegetation_resistance(vv_up, vv_vp, usta, soft_veg_shear, condition)
-		implicit none
-		double precision, intent(in) :: vv_up, vv_vp, usta
-		integer, intent(in) :: condition
-		double precision, intent(out) :: soft_veg_shear
-		double precision :: pi, g, rho, C_D, C_DL, A_1, l, d, C_SL, soft_veg_num
-		double precision :: soft_veg_theta, soft_veg_FD, soft_veg_k
+    subroutine compute_vegetation_resistance(vv_up, vv_vp, usta, soft_veg_shear, condition)
+        implicit none
+        double precision, intent(in) :: vv_up, vv_vp, usta
+        integer, intent(in) :: condition
+        double precision, intent(out) :: soft_veg_shear
+        double precision :: pi, g, rho, C_D, C_DL, A_1, l, d, C_SL
+        integer :: soft_veg_num
+        double precision :: soft_veg_theta, F_D_value, soft_veg_k_value
 
-		! condition‚ª0‚Ìê‡Asoft_veg_shear‚ğ0‚Éİ’è‚µAˆ—‚ğI—¹
-		if (condition == 0) then
-			soft_veg_shear = 0.0d0
-			return
-		end if
+        ! conditionãŒ0ã®å ´åˆã€soft_veg_shearã‚’0ã«è¨­å®šã—ã€å‡¦ç†ã‚’çµ‚äº†
+        if (condition == 0) then
+            soft_veg_shear = 0.0d0
+            return
+        end if
 
-	        ! •¨—’è”‚Ì‹¤’Ê’è‹`
+        ! ç‰©ç†å®šæ•°ã®å…±é€šå®šç¾©
         pi = 3.141592653589793d0
         g = 9.8d0
         rho = 1000d0
@@ -3055,60 +3056,61 @@ module hcal_m
         C_SL = 0.015d0
 
         if (condition == 1) then
-            ! ƒcƒ‹ƒˆƒV‘a‚Ì’è”‚ğİ’è
+            ! ãƒ„ãƒ«ãƒ¨ã‚·ç–ã®å®šæ•°ã‚’è¨­å®š
             A_1 = 0.070d0
             l = 0.3d0
             d = 0.01d0
-            soft_veg_num = 95d0
+            soft_veg_num = 95
         else if (condition == 2) then
-            ! ƒcƒ‹ƒˆƒV–§‚Ì’è”‚ğİ’è
+            ! ãƒ„ãƒ«ãƒ¨ã‚·å¯†ã®å®šæ•°ã‚’è¨­å®š
             A_1 = 0.096d0
             l = 0.3d0
             d = 0.006d0
-            soft_veg_num = 50d0
+            soft_veg_num = 50
         end if
 
-		! soft_veg_theta‚ÌŒvZ
-		call soft_veg_theta(usta, soft_veg_theta)
+        ! soft_veg_thetaã®è¨ˆç®—
+        soft_veg_theta = calculate_soft_veg_theta(usta)
 
-		! soft_veg_FD‚ÌŒvZ
-		call soft_veg_FD(rho, C_D, C_DL, A_1, l, d, vv_up, vv_vp, soft_veg_theta, C_SL, soft_veg_FD)
+        ! soft_veg_FDã‚’é–¢æ•°ã¨ã—ã¦å‘¼ã³å‡ºã™
+        F_D_value = calculate_soft_veg_FD(rho, C_D, C_DL, A_1, l, d, vv_up, vv_vp, soft_veg_theta, C_SL)
 
-		! soft_veg_k‚ÌŒvZ
-		call soft_veg_k(g, rho, vv_up, vv_vp, soft_veg_num, soft_veg_FD, soft_veg_k)
+        ! soft_veg_kã®è¨ˆç®—ã«F_D_valueã‚’ä½¿ç”¨
+        soft_veg_k_value = calculate_soft_veg_k(g, rho, vv_up, vv_vp, soft_veg_num, F_D_value)
 
-		! soft_veg_shear‚ÌŒvZ
-		call soft_veg_shear_force(g, vv_up, vv_vp, soft_veg_k, soft_veg_shear)
+        ! soft_veg_shearã®è¨ˆç®—
+        call soft_veg_shear_force(g, vv_up, vv_vp, soft_veg_k_value, soft_veg_shear)
 
-	end subroutine compute_vegetation_resistance
+    end subroutine compute_vegetation_resistance
 
-	subroutine soft_veg_theta(u, theta)
-		double precision, intent(in) :: u
-		double precision, intent(out) :: theta
-		double precision, parameter :: pi = 3.141592653589793d0
-		theta = ((pi / 2) - asin(0.2d0)) * ((u - 0.12d0)**2)
-		if (theta >= ((pi / 2) - asin(0.2d0))) then
-			theta = ((pi / 2) - asin(0.2d0))
-		elseif (u <= 0.12d0) then
-			theta = 0.0d0
-		end if
-	end subroutine soft_veg_theta
+    ! é–¢æ•°ã‚’å®šç¾©ã™ã‚‹
+    function calculate_soft_veg_theta(u) result(theta)
+        double precision, intent(in) :: u
+        double precision :: theta
+        double precision, parameter :: pi = 3.141592653589793d0
+        theta = ((pi / 2) - asin(0.2d0)) * ((u - 0.12d0)**2)
+        if (theta >= ((pi / 2) - asin(0.2d0))) then
+            theta = ((pi / 2) - asin(0.2d0))
+        elseif (u <= 0.12d0) then
+            theta = 0.0d0
+        end if
+    end function calculate_soft_veg_theta
 
-	subroutine soft_veg_FD(rho, C_D, C_DL, A_1, l, d, u, v, theta, C_SL, F_D_value)
-		double precision, intent(in) :: rho, C_D, C_DL, A_1, l, d, u, v, theta, C_SL
-		double precision, intent(out) :: F_D_value
-		F_D_value = 0.5d0 * rho * (C_D + C_DL * A_1 / (2d0 * l * d)) * (u**2 + v**2) * cos(theta)**2 &
-					+ 0.5d0 * rho * C_SL * A_1 * (u**2 + v**2) / cos(theta)
-	end subroutine soft_veg_FD
+    function calculate_soft_veg_FD(rho, C_D, C_DL, A_1, l, d, u, v, theta, C_SL) result(F_D_value)
+        double precision, intent(in) :: rho, C_D, C_DL, A_1, l, d, u, v, theta, C_SL
+        double precision :: F_D_value
+        F_D_value = 0.5d0 * rho * (C_D + C_DL * A_1 / (2d0 * l * d)) * (u**2 + v**2) * cos(theta)**2 &
+                    + 0.5d0 * rho * C_SL * A_1 * (u**2 + v**2) / cos(theta)
+    end function calculate_soft_veg_FD
 
-	subroutine soft_veg_k(g, rho, u, v, N, F_D, k)
-		double precision, intent(in) :: g, rho, u, v, F_D
-		integer, intent(in) :: N
-		double precision, intent(out) :: k
-		k = (g * rho * (u**2 + v**2) / (N * F_D))**0.5
-	end subroutine soft_veg_k
-
-	subroutine soft_veg_shear_force(g, u, v, k, value)
+    function calculate_soft_veg_k(g, rho, u, v, N, F_D) result(k)
+        double precision, intent(in) :: g, rho, u, v, F_D
+        integer, intent(in) :: N
+        double precision :: k
+        k = (g * rho * (u**2 + v**2) / (N * F_D))**0.5
+    end function calculate_soft_veg_k
+    
+    subroutine soft_veg_shear_force(g, u, v, k, value)
 		double precision, intent(in) :: g, u, v, k
 		double precision, intent(out) :: value
 		if (k**2 * (u**2 + v**2)**0.5 /= 0d0) then
@@ -3264,7 +3266,7 @@ contains
           yun(nx-1,j) = yun(   2,j)
        end do
 
-!!$omp do		! ‚¨‚©‚µ‚¢
+!!$omp do		! ãŠã‹ã—ã„
 !$omp single
        do j=1,ny-1
           yvn(   1,j) = yvn(nx-2,j)
@@ -6400,7 +6402,7 @@ contains
     !
     do n=0,nq
        !
-       ! ã—¬’[…ˆÊ‚ÌŒvZ
+       ! ä¸Šæµç«¯æ°´ä½ã®è¨ˆç®—
        !
        if(q_ups(n) <= 1e-6) then
           !  h_ups(n) = h(1,j)
@@ -6438,7 +6440,7 @@ contains
 100    continue
        h_ups(n) = hh
        !				!h101019 conf
-       ! ã—¬’[…ˆÊ‚ÌŒvZixì‘¤j
+       ! ä¸Šæµç«¯æ°´ä½ã®è¨ˆç®—ï¼ˆæ”¯å·å´ï¼‰
        !
        if(j_conf.eq.1) then
           if(q_ups_t(n).le.1e-6) then
@@ -6503,7 +6505,7 @@ contains
        end if
        !				!h101019 conf
        !
-       ! ‰º—¬’[…ˆÊ‚ÌŒvZ
+       ! ä¸‹æµç«¯æ°´ä½ã®è¨ˆç®—
        !
        if( j_wl == 1 .or. j_wl == 3) then
           jss1=1				!h101019 conf
@@ -6605,7 +6607,7 @@ contains
 			hsmax2_t2 = (snmm(nnxm,j_t2+js2)*qmax_t/(chb_t2(j_t2)*dsqrt(slope_up_t)))**0.6d0*100.d0
 		end if
 !
-	! ã—¬’[…ˆÊ‚ÌŒvZ
+	! ä¸Šæµç«¯æ°´ä½ã®è¨ˆç®—
 
 		if( j_conf==0 ) then
 			jss1 = 1
@@ -6655,7 +6657,7 @@ contains
 
 		end if
 !
-	! ã—¬’[…ˆÊ‚ÌŒvZixì‘¤j
+	! ä¸Šæµç«¯æ°´ä½ã®è¨ˆç®—ï¼ˆæ”¯å·å´ï¼‰
 !
 		if( j_conf==1 ) then
 
@@ -7803,14 +7805,14 @@ module cell2grid_m
     real(8),dimension(0:im,0:jm),intent(out)    :: f_g
     integer :: i,j
     !
-			!	—Ìˆæ‚ÌŠp‚Ìê‡
+			!	é ˜åŸŸã®è§’ã®å ´åˆ
 
 		f_g( 0, 0) = f_c( 1, 1)
 		f_g(nx, 0) = f_c(nx, 1)
 		f_g( 0,ny) = f_c( 1,ny)
 		f_g(nx,ny) = f_c(nx,ny)
 
-			!	—Ìˆæ‚Ì•Ó‚Ìê‡
+			!	é ˜åŸŸã®è¾ºã®å ´åˆ
 !$omp do private(i)
 		do i=1,nx-1
 			f_g(i, 0) = (f_c(i, 1)+f_c(i+1, 1))*0.5d0
@@ -7823,7 +7825,7 @@ module cell2grid_m
 			f_g(nx,j) = (f_c(nx,j)+f_c(nx,j+1))*0.5d0
 		end do
 
-			!	—Ìˆæ“à•”‚Ìê‡
+			!	é ˜åŸŸå†…éƒ¨ã®å ´åˆ
 !$omp do private(i,j)
 		do j=1,ny-1
 			do i=1,nx-1
@@ -8793,7 +8795,7 @@ contains
    ! -------------------------------------------------------------
    !
    ! ----- cal. of bed elevation changes -----
-   !       ‰Í°‚‚Ì•ÏX‚ÌŒvZ
+   !       æ²³åºŠé«˜ã®å¤‰æ›´ã®è¨ˆç®—
    !
 
 !!$omp single
@@ -8919,7 +8921,7 @@ contains
 		end do
    !
    ! ------ cal. of sediment fraction changes in exchange layer ------
-   !        ‰Í°‚‚Æ‰Í°Ş—¿—±“x•ª•z‚ÌŒvZ
+   !        æ²³åºŠé«˜ã¨æ²³åºŠææ–™ç²’åº¦åˆ†å¸ƒã®è¨ˆç®—
    !
 
 		nbmin =  9999
@@ -9049,7 +9051,7 @@ contains
    ! -------------------------------------------------------------
    !
    ! ----- cal. of bed elevation changes -----
-   !       ‰Í°‚‚Ì•ÏX‚ÌŒvZ
+   !       æ²³åºŠé«˜ã®å¤‰æ›´ã®è¨ˆç®—
    !
 
 !!$omp single
@@ -9182,7 +9184,7 @@ contains
 		end do
    !
    ! ------ cal. of sediment fraction changes in exchange layer ------
-   !        ‰Í°‚‚Æ‰Í°Ş—¿—±“x•ª•z‚ÌŒvZ
+   !        æ²³åºŠé«˜ã¨æ²³åºŠææ–™ç²’åº¦åˆ†å¸ƒã®è¨ˆç®—
    !
 
 		nbmin =  9999
@@ -9293,7 +9295,7 @@ contains
 		integer :: k
 !		double precision :: p_tot
 
-		!‘ÍÏ
+		!å †ç©
 		if( dex(i,j)>0.d0 ) then
 			if( e_t(i,j)+dex(i,j)<e_d ) then
 				e_t_new = e_t(i,j)+dex(i,j)
@@ -9313,7 +9315,7 @@ contains
 				end do
 			end if
 
-		!’á‰º
+		!ä½ä¸‹
 		else
 			if( e_t(i,j)+dex(i,j)>0.d0 ) then
 				e_t_new = e_t(i,j)+dex(i,j)
@@ -9329,8 +9331,8 @@ contains
 					nb_new = 0
 					do k=1,nk
 						p_m_new(k) = p_m(i,j,k)+e_t(i,j)/e_m*p_t(i,j,k)+dex_mix(i,j,k)/e_m
-						p_t_new(k) = p_d(i,j,nb(i,j),k)		! ƒ_ƒ~[
-						p_d_new(k) = p_t_new(k)					! ƒ_ƒ~[
+						p_t_new(k) = p_d(i,j,nb(i,j),k)		! ãƒ€ãƒŸãƒ¼
+						p_d_new(k) = p_t_new(k)					! ãƒ€ãƒŸãƒ¼
 					end do
 				else
 					e_t_new = e_t(i,j)+dex(i,j)+e_d
@@ -9347,7 +9349,7 @@ contains
 		end if
 
 		if( nb_new<0 ) then
-			write(*,*) 'Error !'		!‚±‚ÌğŒ‚É‚Í“ü‚ç‚È‚¢‚Í‚¸
+			write(*,*) 'Error !'		!ã“ã®æ¡ä»¶ã«ã¯å…¥ã‚‰ãªã„ã¯ãš
 			write(*,*) 'The number of deposited layer is less than 0 at i=',i,'j=',j
 			write(*,*) 'Please change the thickness of deposited layer, &
           			thickness of movable bed layer or the maximum number of deposited layer.'
@@ -9419,23 +9421,23 @@ contains
 			do k=1,nk
 				p_m_new(k) = p_m(i,j,k)*(emb(i,j)-e_t_new)/emb_new+dex_mix(i,j,k)/emb_new
 				p_t_new(k) = p_m(i,j,k)
-				p_d_new(k) = p_t_new(k)		! ƒ_ƒ~[
+				p_d_new(k) = p_t_new(k)		! ãƒ€ãƒŸãƒ¼
 			end do
 		else if( emb_new<=0.d0 ) then
 			e_t_new = 0.d0
 
 			do k=1,nk
 				p_m_new(k) = 0.d0
-				p_t_new(k) = p_m_new(k)		! ƒ_ƒ~[
-				p_d_new(k) = p_t_new(k)		! ƒ_ƒ~[
+				p_t_new(k) = p_m_new(k)		! ãƒ€ãƒŸãƒ¼
+				p_d_new(k) = p_t_new(k)		! ãƒ€ãƒŸãƒ¼
 			end do
 		else
 			e_t_new = 0.d0
 
 			do k=1,nk
 				p_m_new(k) = (emb(i,j)*p_m(i,j,k)+dex_mix(i,j,k))/emb_new
-				p_t_new(k) = p_m_new(k)		! ƒ_ƒ~[
-				p_d_new(k) = p_t_new(k)		! ƒ_ƒ~[
+				p_t_new(k) = p_m_new(k)		! ãƒ€ãƒŸãƒ¼
+				p_d_new(k) = p_t_new(k)		! ãƒ€ãƒŸãƒ¼
 			end do
 		end if
 
@@ -9692,16 +9694,16 @@ module ebank_m
 
 		dzx = 0.;
 !
-! --- ‰¡’f•ûŒü‚Ìƒ`ƒFƒbƒN ---
+! --- æ¨ªæ–­æ–¹å‘ã®ãƒã‚§ãƒƒã‚¯ ---
 !
 		do i=1,nx
 			do j=1,ny-1
 				dedn(i,j) = (eta(i,j+1)-eta(i,j))/dnx(i,j)
 			end do
 			do j=ny-1,1,-1
-				if( ijo_in(i,j)==0 .and. ijo_in(i,j+1)==0 ) then		! ‚Ç‚¿‚ç‚Æ‚à\‘¢•¨‚Å‚Í‚È‚¢
-					if( hs(i,j)>hmin .or. hs(i,j+1)>hmin ) then			! …’†‚©…Û‚Ì
-						if( phi(i,j+1)==1.d0 ) then							! •ö‚ê‚é‚Ù‚¤‚ÉŒğŠ·‘wˆÈã‚Ì»‚ª‚ ‚é
+				if( ijo_in(i,j)==0 .and. ijo_in(i,j+1)==0 ) then		! ã©ã¡ã‚‰ã¨ã‚‚æ§‹é€ ç‰©ã§ã¯ãªã„
+					if( hs(i,j)>hmin .or. hs(i,j+1)>hmin ) then			! æ°´ä¸­ã‹æ°´éš›ã®æ™‚
+						if( phi(i,j+1)==1.d0 ) then							! å´©ã‚Œã‚‹ã»ã†ã«äº¤æ›å±¤ä»¥ä¸Šã®ç ‚ãŒã‚ã‚‹
 							if( dedn(i,j)>tantc ) then
 								dz1 = (eta(i,j+1)-eta(i,j)-tantc*dnx(i,j))/(1.d0+sj(i,j+1)/sj(i,j))
 								dz2 = -sj(i,j+1)/sj(i,j)*dz1
@@ -9737,7 +9739,7 @@ module ebank_m
 			end do
 		end do
 !
-! --- c’f•ûŒü‚Ìƒ`ƒFƒbƒN ---
+! --- ç¸¦æ–­æ–¹å‘ã®ãƒã‚§ãƒƒã‚¯ ---
 !
 		do j=1,ny
 			do i=1,nx-1
@@ -9850,16 +9852,16 @@ module ebank_m
 			end do
 		end do
 !
-! --- ‰¡’f•ûŒü‚Ìƒ`ƒFƒbƒN ---
+! --- æ¨ªæ–­æ–¹å‘ã®ãƒã‚§ãƒƒã‚¯ ---
 !
 		do i=1,nx
 			do j=1,ny-1
 				dedn(i,j) = (eta(i,j+1)-eta(i,j))/dnx(i,j)
 			end do
 			do j=ny-1,1,-1
-				if( ijo_in(i,j)==0 .and. ijo_in(i,j+1)==0 ) then		! ‚Ç‚¿‚ç‚Æ‚à\‘¢•¨‚Å‚Í‚È‚¢
-					if( hs(i,j)>hmin .or. hs(i,j+1)>hmin ) then			! …’†‚©…Û‚Ì
-						if( phi(i,j+1)==1.d0 ) then							! •ö‚ê‚é‚Ù‚¤‚ÉŒğŠ·‘wˆÈã‚Ì»‚ª‚ ‚é
+				if( ijo_in(i,j)==0 .and. ijo_in(i,j+1)==0 ) then		! ã©ã¡ã‚‰ã¨ã‚‚æ§‹é€ ç‰©ã§ã¯ãªã„
+					if( hs(i,j)>hmin .or. hs(i,j+1)>hmin ) then			! æ°´ä¸­ã‹æ°´éš›ã®æ™‚
+						if( phi(i,j+1)==1.d0 ) then							! å´©ã‚Œã‚‹ã»ã†ã«äº¤æ›å±¤ä»¥ä¸Šã®ç ‚ãŒã‚ã‚‹
 							if( dedn(i,j)>tantc ) then
 								dz1 = (eta(i,j+1)-eta(i,j)-tantc*dnx(i,j))/(1.d0+sj(i,j+1)/sj(i,j))
 								dz2 = -sj(i,j+1)/sj(i,j)*dz1
@@ -9903,7 +9905,7 @@ module ebank_m
 			end do
 		end do
 !
-! --- c’f•ûŒü‚Ìƒ`ƒFƒbƒN ---
+! --- ç¸¦æ–­æ–¹å‘ã®ãƒã‚§ãƒƒã‚¯ ---
 !
 		do j=1,ny
 			do i=1,nx-1
@@ -10195,7 +10197,7 @@ end module cross_sectional_output
 		end do
 !$omp end single
 
-					!	—Ìˆæ‚Ì•Ó‚Ìê‡
+					!	é ˜åŸŸã®è¾ºã®å ´åˆ
 
 !$omp do private(i,k)
 		do i=1,nx-1
@@ -10213,7 +10215,7 @@ end module cross_sectional_output
 			end do
 		end do
 
-					!	—Ìˆæ“à•”‚Ìê‡
+					!	é ˜åŸŸå†…éƒ¨ã®å ´åˆ
 
 !$omp do private(i,j,k)
 		do j=1,ny-1
@@ -10368,7 +10370,7 @@ Program Shimizu
   !
   !ccccccccccccccccccccccccccccccccccccccccccccccccccccccc
   !
-  integer(4), dimension(:,:), pointer :: obst4, soft_veg_condition, fm4, mix_cell
+  integer(4), dimension(:,:), pointer :: obst4, fm4, mix_cell
   real(8)   , dimension(:,:), pointer :: x8, y8, z8, hs8, zb8
   real(8)   , dimension(:,:), pointer :: vege4, roughness4, vegeh
   integer(4) ni4,nj4,iobst4
@@ -10420,7 +10422,7 @@ Program Shimizu
 
      CALL cg_iric_open(condFile, IRIC_MODE_MODIFY, FID, IER)
 
-!     ! gui‚Écgnsƒtƒ@ƒCƒ‹‚ğ“Ç‚İ‚Å‚ ‚é‚±‚Æ‚ğ’m‚ç‚¹‚éƒtƒ@ƒCƒ‹‚ğ¶¬
+!     ! guiã«cgnsãƒ•ã‚¡ã‚¤ãƒ«ã‚’èª­è¾¼ã¿ã§ã‚ã‚‹ã“ã¨ã‚’çŸ¥ã‚‰ã›ã‚‹ãƒ•ã‚¡ã‚¤ãƒ«ã‚’ç”Ÿæˆ
 !     call iric_initoption(IRIC_OPTION_CANCEL, ier)
 
      call cg_iRIC_Read_Grid2d_Str_Size(fid,ni4, nj4, ier)
@@ -10458,12 +10460,12 @@ Program Shimizu
 
      CALL CG_IRIC_READ_INTEGER(fid,'j_conf', j_conf, ier)
    !
-   !  j_conf = 0 ‡—¬“_–³‚µ
-   !  j_conf = 1 ‡—¬“_‚ ‚è(ƒ^ƒCƒvA•ªŠò‡—¬)
-   !  j_conf = 2 ‡—¬“_‚ ‚è(ƒ^ƒCƒvB‰¡—¬“ü‡—¬A¶Šİ‚©‚ç)
-   !  j_conf = 3 ‡—¬“_‚ ‚è(ƒ^ƒCƒvB‰¡—¬“ü‡—¬A‰EŠİ‚©‚ç)
-   !  –{ì j_m1--j_m2
-   !  xì j_t1--j_t2
+   !  j_conf = 0 åˆæµç‚¹ç„¡ã—
+   !  j_conf = 1 åˆæµç‚¹ã‚ã‚Š(ã‚¿ã‚¤ãƒ—Aåˆ†å²åˆæµ)
+   !  j_conf = 2 åˆæµç‚¹ã‚ã‚Š(ã‚¿ã‚¤ãƒ—Bæ¨ªæµå…¥åˆæµã€å·¦å²¸ã‹ã‚‰)
+   !  j_conf = 3 åˆæµç‚¹ã‚ã‚Š(ã‚¿ã‚¤ãƒ—Bæ¨ªæµå…¥åˆæµã€å³å²¸ã‹ã‚‰)
+   !  æœ¬å· j_m1--j_m2
+   !  æ”¯å· j_t1--j_t2
      !
      if(j_conf.eq.1) then
         write(*,*) 'Confluence TYPE-A'
@@ -10504,71 +10506,71 @@ Program Shimizu
    !
      CALL CG_IRIC_READ_INTEGER(fid,'j_wl', j_wl, ier)
    !
-   !   j_wl = 0 ...‰º—¬’[…ˆÊˆê’è’l‚ğ—^‚¦‚é(h_down)
-   !   j_wl = 1 ...‰º—¬’[…ˆÊ‚Í“™—¬ŒvZ‚Å‹‚ß‚é
-   !   j_wl = 2 ...‰º—¬’[…ˆÊ‚Íƒtƒ@ƒCƒ‹‚©‚ç“Ç‚İ‚Ş
-	!   j_wl = 3 ...‰º—¬’[…ˆÊ‚Í©—R—¬o
+   !   j_wl = 0 ...ä¸‹æµç«¯æ°´ä½ä¸€å®šå€¤ã‚’ä¸ãˆã‚‹(h_down)
+   !   j_wl = 1 ...ä¸‹æµç«¯æ°´ä½ã¯ç­‰æµè¨ˆç®—ã§æ±‚ã‚ã‚‹
+   !   j_wl = 2 ...ä¸‹æµç«¯æ°´ä½ã¯ãƒ•ã‚¡ã‚¤ãƒ«ã‹ã‚‰èª­ã¿è¾¼ã‚€
+	!   j_wl = 3 ...ä¸‹æµç«¯æ°´ä½ã¯è‡ªç”±æµå‡º
 
      CALL cg_iric_read_real(fid,'h_down', h_down, ier)
    !
-   !   h_dwown = ‰º—¬’[…ˆÊ‚Ì’l(ã‹Lj_wl=0‚Ì‚Ì‚İ—LŒø)
+   !   h_dwown = ä¸‹æµç«¯æ°´ä½ã®å€¤(ä¸Šè¨˜j_wl=0ã®æ™‚ã®ã¿æœ‰åŠ¹)
 
      CALL CG_IRIC_READ_INTEGER(fid,'j_slope', j_slope, ier)
    !
-   !   ã‹Lj_wl=1‚Ì“™—¬ŒvZ‚É—p‚¢‚éŒù”z‚ğ
-   !   j_slope=0.... ‰Í°ƒf[ƒ^‚©‚ç©“®“I‚ÉŒvZ‚·‚é
-   !   j_slope=1.... —^‚¦‚é¨‚±‚Ì‚Í—^‚¦‚é’l‚ÍŸ‚Ìbh_slope‚Ì’l
+   !   ä¸Šè¨˜j_wl=1ã®æ™‚ç­‰æµè¨ˆç®—ã«ç”¨ã„ã‚‹å‹¾é…ã‚’
+   !   j_slope=0.... æ²³åºŠãƒ‡ãƒ¼ã‚¿ã‹ã‚‰è‡ªå‹•çš„ã«è¨ˆç®—ã™ã‚‹
+   !   j_slope=1.... ä¸ãˆã‚‹â†’ã“ã®æ™‚ã¯ä¸ãˆã‚‹å€¤ã¯æ¬¡ã®bh_slopeã®å€¤
 
      CALL cg_iric_read_real(fid,'bh_slope', bh_slope, ier)
    !
-   !   ã‹Lj_wl=1‚Åj_slope=1‚Ìê‡‚É—^‚¦‚éŒù”z = bh_slope
+   !   ä¸Šè¨˜j_wl=1ã§j_slope=1ã®å ´åˆã«ä¸ãˆã‚‹å‹¾é… = bh_slope
    !
    ! ------ Parameters for Upstream Boundary ------
    !
      CALL CG_IRIC_READ_INTEGER(fid,'j_upv', j_upv, ier)
    !
-   !  j_upv =1 ã—¬’[‚Ì—¬‘¬‚ğ“™—¬ŒvZ‚Å—^‚¦‚é
-   !  j_upv =2 ã—¬’[‚Ì—¬‘¬‚ğAã—¬’[‚Ì…[‚ğg‚Á‚Ä—¬—Ê‚©‚ç‹tZ‚·‚é
+   !  j_upv =1 ä¸Šæµç«¯ã®æµé€Ÿã‚’ç­‰æµè¨ˆç®—ã§ä¸ãˆã‚‹
+   !  j_upv =2 ä¸Šæµç«¯ã®æµé€Ÿã‚’ã€ä¸Šæµç«¯ã®æ°´æ·±ã‚’ä½¿ã£ã¦æµé‡ã‹ã‚‰é€†ç®—ã™ã‚‹
    !
      CALL CG_IRIC_READ_INTEGER(fid,'j_upv_slope', j_upv_slope, ier)
    !
-   !  ã‹Lj_upv=1‚Ì‚Æ‚«‚Ì“™—¬ŒvZ‚Ég—p‚·‚éŒù”z‚Ì—^‚¦•û
+   !  ä¸Šè¨˜j_upv=1ã®ã¨ãã®ç­‰æµè¨ˆç®—ã«ä½¿ç”¨ã™ã‚‹å‹¾é…ã®ä¸ãˆæ–¹
    !
-   !    j_upv_slope=0 .... ‰Í°ƒf[ƒ^‚©‚ç©“®“I‚ÉŒvZ
-   !    j_upv_slope=1 .... ’l‚ğ—^‚¦‚é¨‚±‚Ìê‡‚ÍŸ‚Ì€–Ú‚Ìuvp_slope
+   !    j_upv_slope=0 .... æ²³åºŠãƒ‡ãƒ¼ã‚¿ã‹ã‚‰è‡ªå‹•çš„ã«è¨ˆç®—
+   !    j_upv_slope=1 .... å€¤ã‚’ä¸ãˆã‚‹â†’ã“ã®å ´åˆã¯æ¬¡ã®é …ç›®ã®uvp_slope
    !
      CALL cg_iric_read_real(fid,'upv_slope', upv_slope, ier)
      CALL cg_iric_read_real(fid,'upv_slope_t', upv_slope_t, ier)
    !
-   !   ã‹Lj_upv=1‚Åj_upv_slope=1‚Ìê‡‚É—^‚¦‚éŒù”z = upv_slope
-   !   xì‘¤‚ÌŒù”z = upv_slope_t
+   !   ä¸Šè¨˜j_upv=1ã§j_upv_slope=1ã®å ´åˆã«ä¸ãˆã‚‹å‹¾é… = upv_slope
+   !   æ”¯å·å´ã®å‹¾é… = upv_slope_t
    !
    ! ---- Parameters for Initial Water Surface Profile-----
    !
      CALL CG_IRIC_READ_INTEGER(fid,'i_flow', i_flow, ier)
    !
-   !   i_flow=0 ‰Šú…–ÊŒ`‚Í’¼ü(ˆê’èŒù”z)
-   !   i_flow=1 ‰Šú…–ÊŒ`‚ÍÜü(‚PÜ“_‚Æ‚Q’¼ü)
-   !   i_flow=2 ‰Šú…–ÊŒ`‚Í“™—¬ŒvZ
-   !   i_flow=3 ‰Šú…–ÊŒ`‚Í•s“™—¬ŒvZ
+   !   i_flow=0 åˆæœŸæ°´é¢å½¢ã¯ç›´ç·š(ä¸€å®šå‹¾é…)
+   !   i_flow=1 åˆæœŸæ°´é¢å½¢ã¯æŠ˜ç·š(ï¼‘æŠ˜ç‚¹ã¨ï¼’ç›´ç·š)
+   !   i_flow=2 åˆæœŸæ°´é¢å½¢ã¯ç­‰æµè¨ˆç®—
+   !   i_flow=3 åˆæœŸæ°´é¢å½¢ã¯ä¸ç­‰æµè¨ˆç®—
 
      CALL cg_iric_read_real(fid,'h_slope', h_slope, ier)
      CALL cg_iric_read_real(fid,'h_slope_t', h_slope_t, ier)
    !
-   !  ã‹Li_flow=0‚Ì‚Æ‚«‚Ì‰Šú…–ÊŒù”z
-   !  ã‹Li_flow=0‚Ì‚Æ‚«‚Ìxì‚Ì‰Šú…–ÊŒù”z
+   !  ä¸Šè¨˜i_flow=0ã®ã¨ãã®åˆæœŸæ°´é¢å‹¾é…
+   !  ä¸Šè¨˜i_flow=0ã®ã¨ãã®æ”¯å·ã®åˆæœŸæ°´é¢å‹¾é…
 
      CALL cg_iric_read_real(fid,'x_bk', x_bk, ier)
    !
-   !  ã‹Li_flow=1‚Ì‚Æ‚«‚ÌŒù”z•Ï‰»“_‚Ì‰º—¬‚©‚ç‚Ì‹——£ x_bk
+   !  ä¸Šè¨˜i_flow=1ã®ã¨ãã®å‹¾é…å¤‰åŒ–ç‚¹ã®ä¸‹æµã‹ã‚‰ã®è·é›¢ x_bk
    !
      CALL cg_iric_read_real(fid,'h_slope_1', h_slope_1, ier)
      CALL cg_iric_read_real(fid,'h_slope_2', h_slope_2, ier)
      CALL cg_iric_read_real(fid,'h_slope_12t', h_slope_12t, ier)
    !
-   !  ã‹Li_flow=1‚Ì‚Æ‚«‚Ì‰Šú…–ÊŒù”z(‰º—¬‘¤)h_slope_1
-   !  ã‹Li_flow=1‚Ì‚Æ‚«‚Ì‰Šú…–ÊŒù”z(ã—¬‘¤)h_slope_2
-   !  ã‹Li_flow=1‚Ì‚Æ‚«‚Ì‰Šú…–ÊŒù”z(ã—¬‘¤xì)h_slope_12t
+   !  ä¸Šè¨˜i_flow=1ã®ã¨ãã®åˆæœŸæ°´é¢å‹¾é…(ä¸‹æµå´)h_slope_1
+   !  ä¸Šè¨˜i_flow=1ã®ã¨ãã®åˆæœŸæ°´é¢å‹¾é…(ä¸Šæµå´)h_slope_2
+   !  ä¸Šè¨˜i_flow=1ã®ã¨ãã®åˆæœŸæ°´é¢å‹¾é…(ä¸Šæµå´æ”¯å·)h_slope_12t
    !
    ! ---- Parameters for Bed Material  -----
    !
@@ -10752,7 +10754,7 @@ Program Shimizu
      end if
 
      if( j_mix==0 ) then
-     	e_m = diam			! ‚Æ‚è‚ ‚¦‚¸
+     	e_m = diam			! ã¨ã‚Šã‚ãˆãš
      end if
 
      if( j_mix==1 ) then
@@ -11228,7 +11230,7 @@ Program Shimizu
     !
     ! ----- set bed friction parameter -----
     !
-    do j = 0, ny              !•s—v‚¾‚ª”O‚Ì‚½‚ß
+    do j = 0, ny              !ä¸è¦ã ãŒå¿µã®ãŸã‚
        do i = 0, nx
           snmm( i,j) = sn_g
        end do
@@ -11365,7 +11367,7 @@ Program Shimizu
 
     if( j_wl /= 0 ) h_down = - 999.
   !
-  !    slope “™—¬ŒvZ‚ğ‚·‚é‚½‚ß‚ÌŒù”z
+  !    slope ç­‰æµè¨ˆç®—ã‚’ã™ã‚‹ãŸã‚ã®å‹¾é…
   !
     if(j_slope == 1.or.calculated_slope <= 0.) then
        slope = bh_slope
@@ -11637,8 +11639,8 @@ Program Shimizu
 
 !$omp end single
 
-!      if ( icount == 1.or.mod(icount-1,kmod) == 0 ) then		!h time=0‚ào—Í
-      if ( icount == 0.or.mod(icount,kmod) == 0 ) then		!h time=0‚ào—Í
+!      if ( icount == 1.or.mod(icount-1,kmod) == 0 ) then		!h time=0ã‚‚å‡ºåŠ›
+      if ( icount == 0.or.mod(icount,kmod) == 0 ) then		!h time=0ã‚‚å‡ºåŠ›
          if( iofrg == 0 ) then
             iofrg = 1
             if( i_re_flag_i == 0 ) then
@@ -11780,14 +11782,14 @@ Program Shimizu
      !
 !$omp single
 
-        ! ƒ†[ƒU‚ªGUIã‚Å "STOP" ƒ{ƒ^ƒ“‚ğ‰Ÿ‚µ‚ÄÀs‚ğƒLƒƒƒ“ƒZƒ‹‚µ‚½‚©Šm”F
+        ! ãƒ¦ãƒ¼ã‚¶ãŒGUIä¸Šã§ "STOP" ãƒœã‚¿ãƒ³ã‚’æŠ¼ã—ã¦å®Ÿè¡Œã‚’ã‚­ãƒ£ãƒ³ã‚»ãƒ«ã—ãŸã‹ç¢ºèª
      call iric_check_cancel(ier)
      if(ier == 1) then
         write(*,*) "Solver is stopped because the STOP button was clicked."
         stop
      end if
 
-! iRIC GUI‚ÅÄ“Ç‚İ‚İƒ{ƒ^ƒ“‚ª‰Ÿ‚³‚ê‚½‚©ƒ`ƒFƒbƒN
+! iRIC GUIã§å†èª­ã¿è¾¼ã¿ãƒœã‚¿ãƒ³ãŒæŠ¼ã•ã‚ŒãŸã‹ãƒã‚§ãƒƒã‚¯
      call cg_iric_check_update(fid, ier)
 
      if(i_re_flag_o == 1 .and. time > opt_tmp(i_tmp_count)) then
