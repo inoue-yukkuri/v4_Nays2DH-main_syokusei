@@ -173,6 +173,7 @@ module common_cmcf
 	implicit none
 		! cf: 河床抵抗係数、re: レイノルズ数、vege_el: 植生の高さ
 	real(8),dimension(:,:),allocatable :: cf, re, cd_veg, vege_el, vege_h
+    integer, dimension(:,:), allocatable :: soft_veg_condition
 end module common_cmcf
 
 !--------------------------------------------------
@@ -394,7 +395,7 @@ contains
 		allocate( xi_x0(0:i,0:j), xi_y0(0:i,0:j),et_x0(0:i,0:j), et_y0(0:i,0:j),	 sj0(0:i,0:j), hsxx(0:i,0:j) )
 		allocate( yk(0:i,0:j),ykn(0:i,0:j), yep(0:i,0:j),yepn(0:i,0:j), gkx(0:i,0:j), gky(0:i,0:j), gex(0:i,0:j),gey(0:i,0:j) )
 		allocate( ph(0:i,0:j),pkv(0:i,0:j),pev(0:i,0:j),strain(0:i,0:j) )
-		allocate( cf(0:i,0:j), re(0:i,0:j), cd_veg(0:i,0:j), vege_el(0:i,0:j), vege_h(0:i,0:j) )
+		allocate( cf(0:i,0:j), re(0:i,0:j), cd_veg(0:i,0:j), vege_el(0:i,0:j), soft_veg_condition(0:i,0:j), vege_h(0:i,0:j) )
 		allocate( y_dis(0:i,0:j), y_plus(0:i,0:j) )
 		allocate( snu(0:i,0:j), snu_x(0:i,0:j),	snu0(0:i,0:j), snu0_x(0:i,0:j),	snuk(0:i,0:j),snuk_x(0:i,0:j) )
 		allocate( a_chunk(2,0:i), sk_chunk(2,0:i) )
@@ -2802,8 +2803,6 @@ module hcal_m
 	use uxuycal_m
 	use bound_m
 	use taustacal_m
-	integer, dimension(:,:), allocatable :: soft_veg_condition
-	integer :: condition
 
   contains
 	!---------------------------------------------------------
@@ -2859,17 +2858,19 @@ module hcal_m
 						uy_up = ( uy(i,j) + uy(i+1,j) ) * 0.5d0
 						vv_up = dsqrt( ux_up**2 + uy_up**2 )
 						c_xi = -(alpha(1,i,j)*wu(i,j)**2 + alpha(2,i,j)*wu(i,j)*v_up+alpha(3,i,j)*v_up**2)
-
-						condition = soft_veg_condition(i,j)
 						! compute_vegetation_resistanceの呼び出し
-						call compute_vegetation_resistance(vv_up, vv_vp, usta(i,j), soft_veg_shear_values(i,j), condition)
+						call compute_vegetation_resistance(ux_up, uy_up, usta(i,j), soft_veg_shear_values(i,j), soft_veg_condition(i,j))
 
 						c_xi_shear = g * sn_up(i,j)**2 / hs_up**1.33333d0
+                        print *, 'c_xi_shear1:', c_xi_shear
 						c_veg = ( cd_veg(i,j) + cd_veg(i+1,j) ) * 0.5d0
 						h_veg = ( vege_h(i,j)+vege_h(i+1,j) )*0.5d0
 						h_veg = min( h_veg, hs_up )
 
 						c_xi_shear = c_xi_shear + c_veg*h_veg/hs_up + soft_veg_shear_values(i,j)
+                        print *, 'soft_veg_shear_values(i,j):', soft_veg_shear_values(i,j) 
+                        print *, 'c_xi_shear2:', c_xi_shear
+                        print *, 'c_veg*h_veg/hs_up):', c_veg*h_veg/hs_up
 
 						f_xi = - c_xi_shear * vv_up
 
@@ -3101,6 +3102,10 @@ module hcal_m
         double precision :: F_D_value
         F_D_value = 0.5d0 * rho * (C_D + C_DL * A_1 / (2d0 * l * d)) * (u**2 + v**2) * cos(theta)**2 &
                     + 0.5d0 * rho * C_SL * A_1 * (u**2 + v**2) / cos(theta)
+        ! NaN チェック
+        if (F_D_value /= F_D_value) then
+            F_D_value = 0.0d0
+        end if
     end function calculate_soft_veg_FD
 
     function calculate_soft_veg_k(g, rho, u, v, N, F_D) result(k)
@@ -3108,6 +3113,10 @@ module hcal_m
         integer, intent(in) :: N
         double precision :: k
         k = (g * rho * (u**2 + v**2) / (N * F_D))**0.5
+         ! NaN チェック
+        if (k /= k) then
+            k = 0.0d0
+        end if
     end function calculate_soft_veg_k
     
     subroutine soft_veg_shear_force(g, u, v, k, value)
@@ -3117,7 +3126,11 @@ module hcal_m
 			value = g / (k**2 * (u**2 + v**2)**0.5)
 		else
 			value = 0d0
-		end if
+        end if
+        ! NaN チェック
+        if (value /= value) then
+            value = 0d0
+        end if
 	end subroutine soft_veg_shear_force
 
 end module hcal_m
@@ -10244,7 +10257,7 @@ end module cross_sectional_output
 			end do
 		end do
 
-	end subroutine vegetation_height
+    end subroutine vegetation_height
 
 !--------------------------------------------------------------------------------
 !main routine
@@ -10370,7 +10383,7 @@ Program Shimizu
   !
   !ccccccccccccccccccccccccccccccccccccccccccccccccccccccc
   !
-  integer(4), dimension(:,:), pointer :: obst4, fm4, mix_cell
+  integer(4), dimension(:,:), pointer :: obst4, fm4, mix_cell, soft_veg_condition0
   real(8)   , dimension(:,:), pointer :: x8, y8, z8, hs8, zb8
   real(8)   , dimension(:,:), pointer :: vege4, roughness4, vegeh
   integer(4) ni4,nj4,iobst4
@@ -10434,7 +10447,7 @@ Program Shimizu
      allocate (hs8(ni4,nj4))
 
      allocate (obst4(     ni4-1, nj4-1))
-     allocate (soft_veg_condition(     ni4-1, nj4-1))
+     allocate (soft_veg_condition0(     ni4-1, nj4-1))
      allocate (fm4(       ni4-1, nj4-1))
      allocate (vege4(     ni4-1, nj4-1))
      allocate (roughness4(ni4-1, nj4-1))
@@ -10444,7 +10457,7 @@ Program Shimizu
      call cg_iric_read_grid_real_node(fid,'Elevation', z8, ier)
      call cg_iric_read_grid_real_node(fid,'Elevation_zb', zb8, ier)
      call cg_iric_read_grid_integer_cell(fid,'Obstacle', obst4, ier)
-     call cg_iric_read_grid_integer_cell(fid,'soft_veg_poligon', soft_veg_condition, ier)
+     call cg_iric_read_grid_integer_cell(fid,'soft_veg_poligon', soft_veg_condition0, ier)
      call cg_iric_read_grid_integer_cell(fid,'Fix_movable', fm4, ier)
      call cg_iric_read_grid_real_cell(fid,'vege_density', vege4, ier)
      call cg_iric_read_grid_real_cell(fid,'vege_height', vegeh, ier)
@@ -11338,6 +11351,14 @@ Program Shimizu
    		end if
    	end do
    end do
+
+
+   do j=1,ny
+   	do i=1,nx
+        soft_veg_condition(i,j) = soft_veg_condition0(i,j)
+   	end do
+   end do
+   
 
     !  --- calculate the elevation of fixed bed at cell center --- !
 
